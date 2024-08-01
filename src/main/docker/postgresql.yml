@@ -7,8 +7,7 @@ services:
     #   - ~/volumes/jhipster/hr/postgresql/:/var/lib/postgresql/data/
     environment:
       - POSTGRES_USER=hr
-      - POSTGRES_PASSWORD=
-      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_PASSWORD=hr
     healthcheck:
       test: ['CMD-SHELL', 'pg_isready -U $${POSTGRES_USER}']
       interval: 5s
@@ -17,4 +16,4 @@ services:
     # If you want to expose these ports outside your dev PC,
     # remove the "127.0.0.1:" prefix
     ports:
-      - 127.0.0.1:5432:5432
+      - 5432:5432
