@@ -9,6 +9,8 @@ import getStore from 'app/config/store';
 
 import entitiesReducers from './reducers';
 
+import JobPosting from './job-posting';
+import Resume from './resume';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 export default () => {
@@ -18,6 +20,8 @@ export default () => {
     <div>
       <ErrorBoundaryRoutes>
         {/* prettier-ignore */}
+        <Route path="job-posting/*" element={<JobPosting />} />
+        <Route path="resume/*" element={<Resume />} />
         {/* jhipster-needle-add-route-path - JHipster will add routes here */}
       </ErrorBoundaryRoutes>
     </div>

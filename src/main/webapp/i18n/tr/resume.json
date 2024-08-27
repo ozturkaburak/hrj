@@ -1,0 +1,27 @@
+{
+  "hrApp": {
+    "resume": {
+      "home": {
+        "title": "Resumes",
+        "refreshListLabel": "Listeyi yenile",
+        "createLabel": "Yeni Resume ekle",
+        "createOrEditLabel": "Yeni Resume ekle veya guncelle",
+        "notFound": "Resumes kaydi bulunamadi"
+      },
+      "created": "{{ param }} ID ile bir Resume eklendi",
+      "updated": "{{ param }} nolu Resume guncellendi",
+      "deleted": "{{ param }} nolu Resume silindi",
+      "delete": {
+        "question": "{{ id }} nolu Resume silinecek. Devem etmek istiyor musunuz?"
+      },
+      "detail": {
+        "title": "Resume"
+      },
+      "id": "ID",
+      "file": "File",
+      "fileType": "File Type",
+      "uploadDate": "Upload Date",
+      "user": "User"
+    }
+  }
+}

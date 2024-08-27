@@ -1,0 +1,30 @@
+{
+  "hrApp": {
+    "jobPosting": {
+      "home": {
+        "title": "Job Postings",
+        "refreshListLabel": "Listeyi yenile",
+        "createLabel": "Yeni Job Posting ekle",
+        "createOrEditLabel": "Yeni Job Posting ekle veya guncelle",
+        "notFound": "Job Postings kaydi bulunamadi"
+      },
+      "created": "{{ param }} ID ile bir Job Posting eklendi",
+      "updated": "{{ param }} nolu Job Posting guncellendi",
+      "deleted": "{{ param }} nolu Job Posting silindi",
+      "delete": {
+        "question": "{{ id }} nolu Job Posting silinecek. Devem etmek istiyor musunuz?"
+      },
+      "detail": {
+        "title": "Job Posting"
+      },
+      "id": "ID",
+      "title": "Title",
+      "description": "Description",
+      "location": "Location",
+      "department": "Department",
+      "status": "Status",
+      "createdDate": "Created Date",
+      "expireDate": "Expire Date"
+    }
+  }
+}

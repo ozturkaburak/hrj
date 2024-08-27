@@ -1,0 +1,54 @@
+// Define Entities
+
+entity JobPosting {
+  title String required,
+  description String required,
+  location String,
+  department String,
+  status JobStatus,
+  createdDate Instant,
+  expireDate Instant
+}
+
+entity Resume {
+  file Blob required,
+  fileType String required,
+  uploadDate Instant required  
+}
+
+// Define Enums
+
+enum JobStatus {
+  OPEN, CLOSED, FILLED
+}
+
+enum ApplicationStatus {
+  PENDING, ACCEPTED, REJECTED
+}
+
+enum NotificationType {
+  SYSTEM, USER
+}
+
+enum LeaveStatus {
+  PENDING, APPROVED, REJECTED
+}
+
+enum AttendanceStatus {
+  PRESENT, ABSENT, LATE, ON_LEAVE
+}
+
+// Define Relationships
+
+relationship OneToOne {
+  Resume{user} to User with builtInEntity
+}
+
+// DTOs and Services
+
+dto * with mapstruct
+service all with serviceClass
+
+// Pagination
+
+paginate * with pagination

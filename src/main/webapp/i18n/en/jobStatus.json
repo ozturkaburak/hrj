@@ -1,0 +1,10 @@
+{
+  "hrApp": {
+    "JobStatus": {
+      "null": "",
+      "OPEN": "OPEN",
+      "CLOSED": "CLOSED",
+      "FILLED": "FILLED"
+    }
+  }
+}
