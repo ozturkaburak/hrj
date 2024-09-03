@@ -1,0 +1,30 @@
+{
+  "hrApp": {
+    "userLanguage": {
+      "home": {
+        "title": "User Languages",
+        "refreshListLabel": "Listeyi yenile",
+        "createLabel": "Yeni User Language ekle",
+        "createOrEditLabel": "Yeni User Language ekle veya guncelle",
+        "notFound": "User Languages kaydi bulunamadi"
+      },
+      "created": "{{ param }} ID ile bir User Language eklendi",
+      "updated": "{{ param }} nolu User Language guncellendi",
+      "deleted": "{{ param }} nolu User Language silindi",
+      "delete": {
+        "question": "{{ id }} nolu User Language silinecek. Devem etmek istiyor musunuz?"
+      },
+      "detail": {
+        "title": "User Language"
+      },
+      "id": "ID",
+      "level": "Level",
+      "nativeLanguage": "Native Language",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "deletedAt": "Deleted At",
+      "user": "User",
+      "language": "Language"
+    }
+  }
+}

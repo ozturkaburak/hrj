@@ -1,0 +1,35 @@
+{
+  "hrApp": {
+    "education": {
+      "home": {
+        "title": "Educations",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Education",
+        "createOrEditLabel": "Create or edit a Education",
+        "notFound": "No Educations found"
+      },
+      "created": "A new Education is created with identifier {{ param }}",
+      "updated": "A Education is updated with identifier {{ param }}",
+      "deleted": "A Education is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Education {{ id }}?"
+      },
+      "detail": {
+        "title": "Education"
+      },
+      "id": "ID",
+      "schoolName": "School Name",
+      "department": "Department",
+      "degree": "Degree",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "description": "Description",
+      "activities": "Activities",
+      "clubs": "Clubs",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "deletedAt": "Deleted At",
+      "userProfile": "User Profile"
+    }
+  }
+}

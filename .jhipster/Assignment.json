@@ -1,0 +1,50 @@
+{
+  "annotations": {
+    "changelogDate": "20240903095011"
+  },
+  "applications": "*",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "type",
+      "fieldType": "AssignmentType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "TECHNICAL,NONTECHNICAL"
+    },
+    {
+      "fieldName": "visible",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "hashtags",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdAt",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "updatedAt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "deletedAt",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "Assignment",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "question",
+      "relationshipName": "questions",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

@@ -1,0 +1,47 @@
+{
+  "annotations": {
+    "changelogDate": "20240903095012"
+  },
+  "applications": "*",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "content",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "options",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "QuestionType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "MULTIPLE_CHOICE,TEXT,VIDEO"
+    },
+    {
+      "fieldName": "correctAnswer",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdAt",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "updatedAt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "deletedAt",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "Question",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

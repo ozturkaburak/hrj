@@ -1,0 +1,36 @@
+{
+  "hrApp": {
+    "experience": {
+      "home": {
+        "title": "Experiences",
+        "refreshListLabel": "Listeyi yenile",
+        "createLabel": "Yeni Experience ekle",
+        "createOrEditLabel": "Yeni Experience ekle veya guncelle",
+        "notFound": "Experiences kaydi bulunamadi"
+      },
+      "created": "{{ param }} ID ile bir Experience eklendi",
+      "updated": "{{ param }} nolu Experience guncellendi",
+      "deleted": "{{ param }} nolu Experience silindi",
+      "delete": {
+        "question": "{{ id }} nolu Experience silinecek. Devem etmek istiyor musunuz?"
+      },
+      "detail": {
+        "title": "Experience"
+      },
+      "id": "ID",
+      "title": "Title",
+      "companyName": "Company Name",
+      "workType": "Work Type",
+      "contractType": "Contract Type",
+      "officeLocation": "Office Location",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "description": "Description",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "deletedAt": "Deleted At",
+      "skills": "Skills",
+      "userProfile": "User Profile"
+    }
+  }
+}

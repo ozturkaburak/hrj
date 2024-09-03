@@ -1,0 +1,27 @@
+{
+  "hrApp": {
+    "upload": {
+      "home": {
+        "title": "Uploads",
+        "refreshListLabel": "Listeyi yenile",
+        "createLabel": "Yeni Upload ekle",
+        "createOrEditLabel": "Yeni Upload ekle veya guncelle",
+        "notFound": "Uploads kaydi bulunamadi"
+      },
+      "created": "{{ param }} ID ile bir Upload eklendi",
+      "updated": "{{ param }} nolu Upload guncellendi",
+      "deleted": "{{ param }} nolu Upload silindi",
+      "delete": {
+        "question": "{{ id }} nolu Upload silinecek. Devem etmek istiyor musunuz?"
+      },
+      "detail": {
+        "title": "Upload"
+      },
+      "id": "ID",
+      "file": "File",
+      "fileType": "File Type",
+      "uploadDate": "Upload Date",
+      "userProfile": "User Profile"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "hrApp": {
+    "AssignmentType": {
+      "null": "",
+      "TECHNICAL": "TECHNICAL",
+      "NONTECHNICAL": "NONTECHNICAL"
+    }
+  }
+}

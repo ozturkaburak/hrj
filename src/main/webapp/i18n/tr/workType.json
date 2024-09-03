@@ -1,0 +1,10 @@
+{
+  "hrApp": {
+    "WorkType": {
+      "null": "",
+      "HYBRID": "HYBRID",
+      "REMOTE": "REMOTE",
+      "ON_SITE": "ON_SITE"
+    }
+  }
+}

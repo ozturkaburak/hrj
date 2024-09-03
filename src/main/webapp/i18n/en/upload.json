@@ -1,0 +1,27 @@
+{
+  "hrApp": {
+    "upload": {
+      "home": {
+        "title": "Uploads",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Upload",
+        "createOrEditLabel": "Create or edit a Upload",
+        "notFound": "No Uploads found"
+      },
+      "created": "A new Upload is created with identifier {{ param }}",
+      "updated": "A Upload is updated with identifier {{ param }}",
+      "deleted": "A Upload is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Upload {{ id }}?"
+      },
+      "detail": {
+        "title": "Upload"
+      },
+      "id": "ID",
+      "file": "File",
+      "fileType": "File Type",
+      "uploadDate": "Upload Date",
+      "userProfile": "User Profile"
+    }
+  }
+}

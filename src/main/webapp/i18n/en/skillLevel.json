@@ -1,0 +1,9 @@
+{
+  "hrApp": {
+    "SkillLevel": {
+      "null": "",
+      "EXPERT": "EXPERT",
+      "BEGINNER": "BEGINNER"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "hrApp": {
+    "education": {
+      "home": {
+        "title": "Educations",
+        "refreshListLabel": "Listeyi yenile",
+        "createLabel": "Yeni Education ekle",
+        "createOrEditLabel": "Yeni Education ekle veya guncelle",
+        "notFound": "Educations kaydi bulunamadi"
+      },
+      "created": "{{ param }} ID ile bir Education eklendi",
+      "updated": "{{ param }} nolu Education guncellendi",
+      "deleted": "{{ param }} nolu Education silindi",
+      "delete": {
+        "question": "{{ id }} nolu Education silinecek. Devem etmek istiyor musunuz?"
+      },
+      "detail": {
+        "title": "Education"
+      },
+      "id": "ID",
+      "schoolName": "School Name",
+      "department": "Department",
+      "degree": "Degree",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "description": "Description",
+      "activities": "Activities",
+      "clubs": "Clubs",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "deletedAt": "Deleted At",
+      "userProfile": "User Profile"
+    }
+  }
+}

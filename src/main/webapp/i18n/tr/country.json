@@ -1,0 +1,27 @@
+{
+  "hrApp": {
+    "country": {
+      "home": {
+        "title": "Countries",
+        "refreshListLabel": "Listeyi yenile",
+        "createLabel": "Yeni Country ekle",
+        "createOrEditLabel": "Yeni Country ekle veya guncelle",
+        "notFound": "Countries kaydi bulunamadi"
+      },
+      "created": "{{ param }} ID ile bir Country eklendi",
+      "updated": "{{ param }} nolu Country guncellendi",
+      "deleted": "{{ param }} nolu Country silindi",
+      "delete": {
+        "question": "{{ id }} nolu Country silinecek. Devem etmek istiyor musunuz?"
+      },
+      "detail": {
+        "title": "Country"
+      },
+      "id": "ID",
+      "name": "Name",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "deletedAt": "Deleted At"
+    }
+  }
+}

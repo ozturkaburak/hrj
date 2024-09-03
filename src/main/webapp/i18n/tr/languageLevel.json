@@ -1,0 +1,11 @@
+{
+  "hrApp": {
+    "LanguageLevel": {
+      "null": "",
+      "BEGINNER": "BEGINNER",
+      "INTERMEDIATE": "INTERMEDIATE",
+      "ADVANCED": "ADVANCED",
+      "NATIVE": "NATIVE"
+    }
+  }
+}

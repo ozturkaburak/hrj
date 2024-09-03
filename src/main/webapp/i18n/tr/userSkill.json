@@ -1,0 +1,30 @@
+{
+  "hrApp": {
+    "userSkill": {
+      "home": {
+        "title": "User Skills",
+        "refreshListLabel": "Listeyi yenile",
+        "createLabel": "Yeni User Skill ekle",
+        "createOrEditLabel": "Yeni User Skill ekle veya guncelle",
+        "notFound": "User Skills kaydi bulunamadi"
+      },
+      "created": "{{ param }} ID ile bir User Skill eklendi",
+      "updated": "{{ param }} nolu User Skill guncellendi",
+      "deleted": "{{ param }} nolu User Skill silindi",
+      "delete": {
+        "question": "{{ id }} nolu User Skill silinecek. Devem etmek istiyor musunuz?"
+      },
+      "detail": {
+        "title": "User Skill"
+      },
+      "id": "ID",
+      "year": "Year",
+      "level": "Level",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "deletedAt": "Deleted At",
+      "skill": "Skill",
+      "user": "User"
+    }
+  }
+}

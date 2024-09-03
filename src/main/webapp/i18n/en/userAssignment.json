@@ -1,0 +1,28 @@
+{
+  "hrApp": {
+    "userAssignment": {
+      "home": {
+        "title": "User Assignments",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new User Assignment",
+        "createOrEditLabel": "Create or edit a User Assignment",
+        "notFound": "No User Assignments found"
+      },
+      "created": "A new User Assignment is created with identifier {{ param }}",
+      "updated": "A User Assignment is updated with identifier {{ param }}",
+      "deleted": "A User Assignment is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete User Assignment {{ id }}?"
+      },
+      "detail": {
+        "title": "User Assignment"
+      },
+      "id": "ID",
+      "assignedAt": "Assigned At",
+      "joinedAt": "Joined At",
+      "finishedAt": "Finished At",
+      "user": "User",
+      "assignment": "Assignment"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "hrApp": {
+    "aboutMe": {
+      "home": {
+        "title": "About Mes",
+        "refreshListLabel": "Listeyi yenile",
+        "createLabel": "Yeni About Me ekle",
+        "createOrEditLabel": "Yeni About Me ekle veya guncelle",
+        "notFound": "About Mes kaydi bulunamadi"
+      },
+      "created": "{{ param }} ID ile bir About Me eklendi",
+      "updated": "{{ param }} nolu About Me guncellendi",
+      "deleted": "{{ param }} nolu About Me silindi",
+      "delete": {
+        "question": "{{ id }} nolu About Me silinecek. Devem etmek istiyor musunuz?"
+      },
+      "detail": {
+        "title": "About Me"
+      },
+      "id": "ID",
+      "socialMedia": "Social Media",
+      "url": "Url",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "deletedAt": "Deleted At",
+      "userProfile": "User Profile"
+    }
+  }
+}

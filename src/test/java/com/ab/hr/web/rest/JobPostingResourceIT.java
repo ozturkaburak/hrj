@@ -418,12 +418,7 @@ class JobPostingResourceIT {
         JobPosting partialUpdatedJobPosting = new JobPosting();
         partialUpdatedJobPosting.setId(jobPosting.getId());
 
-        partialUpdatedJobPosting
-            .title(UPDATED_TITLE)
-            .description(UPDATED_DESCRIPTION)
-            .location(UPDATED_LOCATION)
-            .department(UPDATED_DEPARTMENT)
-            .status(UPDATED_STATUS);
+        partialUpdatedJobPosting.title(UPDATED_TITLE).description(UPDATED_DESCRIPTION).location(UPDATED_LOCATION);
 
         webTestClient
             .patch()
