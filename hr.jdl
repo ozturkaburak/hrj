@@ -10,11 +10,201 @@ entity JobPosting {
   expireDate Instant
 }
 
-entity Resume {
+entity UserProfile{
+  createdAt Instant required,
+  updatedAt Instant,
+  deletedAt Instant
+}
+
+entity Upload {
   file Blob required,
   fileType String required,
   uploadDate Instant required  
 }
+
+entity Experience {
+    title String required,
+    companyName String required,
+    workType WorkType required, // hybrid/remote/on-site
+    contractType ContractType required, // Full time, part time, B2B, freelancer, intern
+    officeLocation String,
+    startDate Instant required,
+    endDate Instant,
+    description String,
+    createdAt Instant required,
+    updatedAt Instant,
+    deletedAt Instant
+}
+
+entity Education {
+    schoolName String required,
+    department String,
+    degree String,
+    startDate Instant required,
+    endDate Instant,
+    description String,
+    activities String, // JSONB or String
+    clubs String, // JSONB or String
+    createdAt Instant required,
+    updatedAt Instant,
+    deletedAt Instant
+}
+
+entity Certificate {
+    name String required,
+    startDate Instant,
+    endDate Instant,
+    description String,
+    createdAt Instant required,
+    updatedAt Instant,
+    deletedAt Instant
+}
+
+entity AboutMe {
+    socialMedia SocialMediaType, // INSTAGRAM, FACEBOOK, TWITTER, GITHUB, GITLAB
+    url String required,
+    createdAt Instant required,
+    updatedAt Instant,
+    deletedAt Instant
+}
+
+// end of UserProfile
+
+entity UserSkill {
+    year Integer,
+    level SkillLevel required, // expert/beginner
+    createdAt Instant required,
+    updatedAt Instant,
+    deletedAt Instant
+}
+
+entity Skill {
+    name String required,
+    createdAt Instant required,
+    updatedAt Instant,
+    deletedAt Instant
+}
+
+entity Contact {
+    secondaryEmail String,
+    phoneNumber String,
+    createdAt Instant required,
+    updatedAt Instant,
+    deletedAt Instant
+}
+
+entity City {
+    name String required,
+    createdAt Instant required,
+    updatedAt Instant,
+    deletedAt Instant
+}
+entity Country {
+    name String required,
+    createdAt Instant required,
+    updatedAt Instant,
+    deletedAt Instant
+}
+
+// end of contact
+
+entity UserLanguage {
+    level LanguageLevel required, // Beginner, Intermediate, Advanced, Native
+    nativeLanguage Boolean,
+    createdAt Instant required,
+    updatedAt Instant,
+    deletedAt Instant
+}
+
+entity Language {
+    name String required,
+    createdAt Instant required,
+    updatedAt Instant,
+    deletedAt Instant
+}
+
+
+// Assignment and Question Entities
+
+entity UserAssignment {
+    assignedAt Instant required,
+    joinedAt Instant,
+    finishedAt Instant
+}
+
+entity Assignment {
+    type AssignmentType required,
+    visible Boolean required, // For ROLE_USER, PAID roles should see everything
+    hashtags String,
+    createdAt Instant required,
+    updatedAt Instant,
+    deletedAt Instant
+}
+
+entity Question {
+    content String required,
+    options String, // Adjust to JSONB in the entity class
+    type QuestionType required, // Multiple Choice, Text, Video
+    correctAnswer String, // Adjust to JSONB in the entity class 
+    createdAt Instant required,
+    updatedAt Instant,
+    deletedAt Instant
+}
+
+entity Answer {
+    content String, // Adjust to JSONB in the entity class
+    answeredAt Instant required
+}
+
+
+
+// Define Relationships
+
+relationship OneToOne {
+    UserProfile{user} to User with builtInEntity
+    
+    UserLanguage{user} to User with builtInEntity
+    UserLanguage{language} to Language
+    
+    UserSkill{skill} to Skill
+    UserSkill{user} to User with builtInEntity
+
+    //City to Contact
+    Contact{user} to User with builtInEntity
+    Contact{city} to City
+
+    UserAssignment{user} to User with builtInEntity
+    UserAssignment{assignment} to Assignment
+     
+    Answer{question} to Question
+    Answer{user} to User with builtInEntity // Answer knows about User, but User doesn't know about Answer
+}
+
+relationship OneToMany {
+    UserProfile{experiences} to Experience
+    UserProfile{educations} to Education
+    UserProfile{certificates} to Certificate
+    UserProfile{aboutMe} to AboutMe
+    UserProfile{uploads} to Upload
+    Experience{skills} to Skill
+}
+
+relationship ManyToMany {
+    Assignment{questions} to Question
+}
+
+relationship ManyToOne {
+    City{country} to Country
+}
+
+// DTOs and Services
+
+dto * with mapstruct
+service all with serviceClass
+
+// Pagination
+
+paginate * with pagination
 
 // Define Enums
 
@@ -38,17 +228,30 @@ enum AttendanceStatus {
   PRESENT, ABSENT, LATE, ON_LEAVE
 }
 
-// Define Relationships
-
-relationship OneToOne {
-  Resume{user} to User with builtInEntity
+enum WorkType {
+    HYBRID, REMOTE, ON_SITE
 }
 
-// DTOs and Services
+enum ContractType {
+    FULL_TIME, PART_TIME, B2B, FREELANCER, INTERN
+}
 
-dto * with mapstruct
-service all with serviceClass
+enum SkillLevel {
+    EXPERT, BEGINNER
+}
 
-// Pagination
+enum LanguageLevel {
+    BEGINNER, INTERMEDIATE, ADVANCED, NATIVE
+}
 
-paginate * with pagination
+enum SocialMediaType {
+    INSTAGRAM, FACEBOOK, TWITTER, GITHUB, GITLAB
+}
+
+enum QuestionType {
+    MULTIPLE_CHOICE, TEXT, VIDEO
+}
+
+enum AssignmentType {
+    TECHNICAL, NONTECHNICAL
+}

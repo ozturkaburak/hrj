@@ -1,0 +1,32 @@
+{
+  "hrApp": {
+    "userProfile": {
+      "home": {
+        "title": "User Profiles",
+        "refreshListLabel": "Listeyi yenile",
+        "createLabel": "Yeni User Profile ekle",
+        "createOrEditLabel": "Yeni User Profile ekle veya guncelle",
+        "notFound": "User Profiles kaydi bulunamadi"
+      },
+      "created": "{{ param }} ID ile bir User Profile eklendi",
+      "updated": "{{ param }} nolu User Profile guncellendi",
+      "deleted": "{{ param }} nolu User Profile silindi",
+      "delete": {
+        "question": "{{ id }} nolu User Profile silinecek. Devem etmek istiyor musunuz?"
+      },
+      "detail": {
+        "title": "User Profile"
+      },
+      "id": "ID",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "deletedAt": "Deleted At",
+      "user": "User",
+      "experiences": "Experiences",
+      "educations": "Educations",
+      "certificates": "Certificates",
+      "aboutMe": "About Me",
+      "uploads": "Uploads"
+    }
+  }
+}

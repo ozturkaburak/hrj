@@ -1,0 +1,31 @@
+{
+  "hrApp": {
+    "certificate": {
+      "home": {
+        "title": "Certificates",
+        "refreshListLabel": "Listeyi yenile",
+        "createLabel": "Yeni Certificate ekle",
+        "createOrEditLabel": "Yeni Certificate ekle veya guncelle",
+        "notFound": "Certificates kaydi bulunamadi"
+      },
+      "created": "{{ param }} ID ile bir Certificate eklendi",
+      "updated": "{{ param }} nolu Certificate guncellendi",
+      "deleted": "{{ param }} nolu Certificate silindi",
+      "delete": {
+        "question": "{{ id }} nolu Certificate silinecek. Devem etmek istiyor musunuz?"
+      },
+      "detail": {
+        "title": "Certificate"
+      },
+      "id": "ID",
+      "name": "Name",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "description": "Description",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "deletedAt": "Deleted At",
+      "userProfile": "User Profile"
+    }
+  }
+}

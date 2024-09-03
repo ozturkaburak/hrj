@@ -1,0 +1,28 @@
+{
+  "hrApp": {
+    "userAssignment": {
+      "home": {
+        "title": "User Assignments",
+        "refreshListLabel": "Listeyi yenile",
+        "createLabel": "Yeni User Assignment ekle",
+        "createOrEditLabel": "Yeni User Assignment ekle veya guncelle",
+        "notFound": "User Assignments kaydi bulunamadi"
+      },
+      "created": "{{ param }} ID ile bir User Assignment eklendi",
+      "updated": "{{ param }} nolu User Assignment guncellendi",
+      "deleted": "{{ param }} nolu User Assignment silindi",
+      "delete": {
+        "question": "{{ id }} nolu User Assignment silinecek. Devem etmek istiyor musunuz?"
+      },
+      "detail": {
+        "title": "User Assignment"
+      },
+      "id": "ID",
+      "assignedAt": "Assigned At",
+      "joinedAt": "Joined At",
+      "finishedAt": "Finished At",
+      "user": "User",
+      "assignment": "Assignment"
+    }
+  }
+}

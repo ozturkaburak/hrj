@@ -1,0 +1,31 @@
+{
+  "hrApp": {
+    "certificate": {
+      "home": {
+        "title": "Certificates",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Certificate",
+        "createOrEditLabel": "Create or edit a Certificate",
+        "notFound": "No Certificates found"
+      },
+      "created": "A new Certificate is created with identifier {{ param }}",
+      "updated": "A Certificate is updated with identifier {{ param }}",
+      "deleted": "A Certificate is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Certificate {{ id }}?"
+      },
+      "detail": {
+        "title": "Certificate"
+      },
+      "id": "ID",
+      "name": "Name",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "description": "Description",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "deletedAt": "Deleted At",
+      "userProfile": "User Profile"
+    }
+  }
+}

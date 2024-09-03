@@ -1,0 +1,29 @@
+{
+  "hrApp": {
+    "aboutMe": {
+      "home": {
+        "title": "About Mes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new About Me",
+        "createOrEditLabel": "Create or edit a About Me",
+        "notFound": "No About Mes found"
+      },
+      "created": "A new About Me is created with identifier {{ param }}",
+      "updated": "A About Me is updated with identifier {{ param }}",
+      "deleted": "A About Me is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete About Me {{ id }}?"
+      },
+      "detail": {
+        "title": "About Me"
+      },
+      "id": "ID",
+      "socialMedia": "Social Media",
+      "url": "Url",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "deletedAt": "Deleted At",
+      "userProfile": "User Profile"
+    }
+  }
+}

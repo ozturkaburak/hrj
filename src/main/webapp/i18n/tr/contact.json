@@ -1,0 +1,30 @@
+{
+  "hrApp": {
+    "contact": {
+      "home": {
+        "title": "Contacts",
+        "refreshListLabel": "Listeyi yenile",
+        "createLabel": "Yeni Contact ekle",
+        "createOrEditLabel": "Yeni Contact ekle veya guncelle",
+        "notFound": "Contacts kaydi bulunamadi"
+      },
+      "created": "{{ param }} ID ile bir Contact eklendi",
+      "updated": "{{ param }} nolu Contact guncellendi",
+      "deleted": "{{ param }} nolu Contact silindi",
+      "delete": {
+        "question": "{{ id }} nolu Contact silinecek. Devem etmek istiyor musunuz?"
+      },
+      "detail": {
+        "title": "Contact"
+      },
+      "id": "ID",
+      "secondaryEmail": "Secondary Email",
+      "phoneNumber": "Phone Number",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "deletedAt": "Deleted At",
+      "user": "User",
+      "city": "City"
+    }
+  }
+}

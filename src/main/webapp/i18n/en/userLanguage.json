@@ -1,0 +1,30 @@
+{
+  "hrApp": {
+    "userLanguage": {
+      "home": {
+        "title": "User Languages",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new User Language",
+        "createOrEditLabel": "Create or edit a User Language",
+        "notFound": "No User Languages found"
+      },
+      "created": "A new User Language is created with identifier {{ param }}",
+      "updated": "A User Language is updated with identifier {{ param }}",
+      "deleted": "A User Language is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete User Language {{ id }}?"
+      },
+      "detail": {
+        "title": "User Language"
+      },
+      "id": "ID",
+      "level": "Level",
+      "nativeLanguage": "Native Language",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "deletedAt": "Deleted At",
+      "user": "User",
+      "language": "Language"
+    }
+  }
+}

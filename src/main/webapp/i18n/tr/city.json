@@ -1,0 +1,29 @@
+{
+  "hrApp": {
+    "city": {
+      "home": {
+        "title": "Cities",
+        "refreshListLabel": "Listeyi yenile",
+        "createLabel": "Yeni City ekle",
+        "createOrEditLabel": "Yeni City ekle veya guncelle",
+        "notFound": "Cities kaydi bulunamadi"
+      },
+      "created": "{{ param }} ID ile bir City eklendi",
+      "updated": "{{ param }} nolu City guncellendi",
+      "deleted": "{{ param }} nolu City silindi",
+      "delete": {
+        "question": "{{ id }} nolu City silinecek. Devem etmek istiyor musunuz?"
+      },
+      "detail": {
+        "title": "City"
+      },
+      "id": "ID",
+      "name": "Name",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "deletedAt": "Deleted At",
+      "country": "Country",
+      "contact": "Contact"
+    }
+  }
+}

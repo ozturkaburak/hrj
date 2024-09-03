@@ -1,0 +1,28 @@
+{
+  "hrApp": {
+    "language": {
+      "home": {
+        "title": "Languages",
+        "refreshListLabel": "Listeyi yenile",
+        "createLabel": "Yeni Language ekle",
+        "createOrEditLabel": "Yeni Language ekle veya guncelle",
+        "notFound": "Languages kaydi bulunamadi"
+      },
+      "created": "{{ param }} ID ile bir Language eklendi",
+      "updated": "{{ param }} nolu Language guncellendi",
+      "deleted": "{{ param }} nolu Language silindi",
+      "delete": {
+        "question": "{{ id }} nolu Language silinecek. Devem etmek istiyor musunuz?"
+      },
+      "detail": {
+        "title": "Language"
+      },
+      "id": "ID",
+      "name": "Name",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "deletedAt": "Deleted At",
+      "userLanguage": "User Language"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "hrApp": {
+    "assignment": {
+      "home": {
+        "title": "Assignments",
+        "refreshListLabel": "Listeyi yenile",
+        "createLabel": "Yeni Assignment ekle",
+        "createOrEditLabel": "Yeni Assignment ekle veya guncelle",
+        "notFound": "Assignments kaydi bulunamadi"
+      },
+      "created": "{{ param }} ID ile bir Assignment eklendi",
+      "updated": "{{ param }} nolu Assignment guncellendi",
+      "deleted": "{{ param }} nolu Assignment silindi",
+      "delete": {
+        "question": "{{ id }} nolu Assignment silinecek. Devem etmek istiyor musunuz?"
+      },
+      "detail": {
+        "title": "Assignment"
+      },
+      "id": "ID",
+      "type": "Type",
+      "visible": "Visible",
+      "hashtags": "Hashtags",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "deletedAt": "Deleted At",
+      "questions": "Questions",
+      "userAssignment": "User Assignment"
+    }
+  }
+}

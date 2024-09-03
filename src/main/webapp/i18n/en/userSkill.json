@@ -1,0 +1,30 @@
+{
+  "hrApp": {
+    "userSkill": {
+      "home": {
+        "title": "User Skills",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new User Skill",
+        "createOrEditLabel": "Create or edit a User Skill",
+        "notFound": "No User Skills found"
+      },
+      "created": "A new User Skill is created with identifier {{ param }}",
+      "updated": "A User Skill is updated with identifier {{ param }}",
+      "deleted": "A User Skill is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete User Skill {{ id }}?"
+      },
+      "detail": {
+        "title": "User Skill"
+      },
+      "id": "ID",
+      "year": "Year",
+      "level": "Level",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "deletedAt": "Deleted At",
+      "skill": "Skill",
+      "user": "User"
+    }
+  }
+}
