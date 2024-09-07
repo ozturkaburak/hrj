@@ -9,4 +9,12 @@ public enum SocialMediaType {
     TWITTER,
     GITHUB,
     GITLAB,
+    LINKEDIN,
+    YOUTUBE,
+    WHATSAPP,
+    TIKTOK,
+    DISCORD,
+    REDDIT,
+    MEDIUM,
+    PINTEREST,
 }

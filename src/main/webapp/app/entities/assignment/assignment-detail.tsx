@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Button, Row, Col } from 'reactstrap';
+import { Button, UncontrolledTooltip, Row, Col } from 'reactstrap';
 import { Translate, TextFormat } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -42,12 +42,27 @@ export const AssignmentDetail = () => {
             <span id="visible">
               <Translate contentKey="hrApp.assignment.visible">Visible</Translate>
             </span>
+            <UncontrolledTooltip target="visible">
+              <Translate contentKey="hrApp.assignment.help.visible" />
+            </UncontrolledTooltip>
           </dt>
           <dd>{assignmentEntity.visible ? 'true' : 'false'}</dd>
+          <dt>
+            <span id="totalDurationInMins">
+              <Translate contentKey="hrApp.assignment.totalDurationInMins">Total Duration In Mins</Translate>
+            </span>
+            <UncontrolledTooltip target="totalDurationInMins">
+              <Translate contentKey="hrApp.assignment.help.totalDurationInMins" />
+            </UncontrolledTooltip>
+          </dt>
+          <dd>{assignmentEntity.totalDurationInMins}</dd>
           <dt>
             <span id="hashtags">
               <Translate contentKey="hrApp.assignment.hashtags">Hashtags</Translate>
             </span>
+            <UncontrolledTooltip target="hashtags">
+              <Translate contentKey="hrApp.assignment.help.hashtags" />
+            </UncontrolledTooltip>
           </dt>
           <dd>{assignmentEntity.hashtags}</dd>
           <dt>

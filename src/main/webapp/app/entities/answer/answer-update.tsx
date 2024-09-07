@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { Button, Row, Col, FormText } from 'reactstrap';
+import { Button, Row, Col, FormText, UncontrolledTooltip } from 'reactstrap';
 import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -109,7 +109,19 @@ export const AnswerUpdate = () => {
                   validate={{ required: true }}
                 />
               ) : null}
-              <ValidatedField label={translate('hrApp.answer.content')} id="answer-content" name="content" data-cy="content" type="text" />
+              <ValidatedField
+                label={translate('hrApp.answer.content')}
+                id="answer-content"
+                name="content"
+                data-cy="content"
+                type="text"
+                validate={{
+                  required: { value: true, message: translate('entity.validation.required') },
+                }}
+              />
+              <UncontrolledTooltip target="contentLabel">
+                <Translate contentKey="hrApp.answer.help.content" />
+              </UncontrolledTooltip>
               <ValidatedField
                 label={translate('hrApp.answer.answeredAt')}
                 id="answer-answeredAt"

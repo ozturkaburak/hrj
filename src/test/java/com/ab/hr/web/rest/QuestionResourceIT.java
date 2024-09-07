@@ -41,8 +41,8 @@ class QuestionResourceIT {
     private static final String DEFAULT_OPTIONS = "AAAAAAAAAA";
     private static final String UPDATED_OPTIONS = "BBBBBBBBBB";
 
-    private static final QuestionType DEFAULT_TYPE = QuestionType.MULTIPLE_CHOICE;
-    private static final QuestionType UPDATED_TYPE = QuestionType.TEXT;
+    private static final QuestionType DEFAULT_TYPE = QuestionType.SINGLE_CHOICE;
+    private static final QuestionType UPDATED_TYPE = QuestionType.MULTIPLE_CHOICE;
 
     private static final String DEFAULT_CORRECT_ANSWER = "AAAAAAAAAA";
     private static final String UPDATED_CORRECT_ANSWER = "BBBBBBBBBB";
@@ -439,7 +439,7 @@ class QuestionResourceIT {
         Question partialUpdatedQuestion = new Question();
         partialUpdatedQuestion.setId(question.getId());
 
-        partialUpdatedQuestion.updatedAt(UPDATED_UPDATED_AT);
+        partialUpdatedQuestion.type(UPDATED_TYPE).deletedAt(UPDATED_DELETED_AT);
 
         webTestClient
             .patch()

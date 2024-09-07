@@ -18,11 +18,22 @@
         "title": "User Assignment"
       },
       "id": "ID",
+      "orderOfQuestions": "Order Of Questions",
+      "totalDurationInMins": "Total Duration In Mins",
+      "accessUrl": "Access Url",
+      "accessExpiryDate": "Access Expiry Date",
+      "userAssignmentStatus": "User Assignment Status",
       "assignedAt": "Assigned At",
       "joinedAt": "Joined At",
       "finishedAt": "Finished At",
       "user": "User",
-      "assignment": "Assignment"
+      "assignment": "Assignment",
+      "help": {
+        "orderOfQuestions": "Questions will be shown in order by their ids. 102, 300, 200",
+        "totalDurationInMins": "overwritten value of duration. if it&#39;s not provided default value will be used",
+        "accessUrl": "this will be provided by the system when the assignment is assigned to a user. And will be sent to the user by Email, SMS, PN",
+        "accessExpiryDate": "Expiry date for the access URL, after which the link is no longer valid"
+      }
     }
   }
 }

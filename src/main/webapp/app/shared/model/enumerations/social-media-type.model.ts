@@ -8,4 +8,20 @@ export enum SocialMediaType {
   GITHUB = 'GITHUB',
 
   GITLAB = 'GITLAB',
+
+  LINKEDIN = 'LINKEDIN',
+
+  YOUTUBE = 'YOUTUBE',
+
+  WHATSAPP = 'WHATSAPP',
+
+  TIKTOK = 'TIKTOK',
+
+  DISCORD = 'DISCORD',
+
+  REDDIT = 'REDDIT',
+
+  MEDIUM = 'MEDIUM',
+
+  PINTEREST = 'PINTEREST',
 }

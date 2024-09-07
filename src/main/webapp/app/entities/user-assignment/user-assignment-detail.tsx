@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Button, Row, Col } from 'reactstrap';
+import { Button, UncontrolledTooltip, Row, Col } from 'reactstrap';
 import { Translate, TextFormat } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -32,6 +32,52 @@ export const UserAssignmentDetail = () => {
             </span>
           </dt>
           <dd>{userAssignmentEntity.id}</dd>
+          <dt>
+            <span id="orderOfQuestions">
+              <Translate contentKey="hrApp.userAssignment.orderOfQuestions">Order Of Questions</Translate>
+            </span>
+            <UncontrolledTooltip target="orderOfQuestions">
+              <Translate contentKey="hrApp.userAssignment.help.orderOfQuestions" />
+            </UncontrolledTooltip>
+          </dt>
+          <dd>{userAssignmentEntity.orderOfQuestions}</dd>
+          <dt>
+            <span id="totalDurationInMins">
+              <Translate contentKey="hrApp.userAssignment.totalDurationInMins">Total Duration In Mins</Translate>
+            </span>
+            <UncontrolledTooltip target="totalDurationInMins">
+              <Translate contentKey="hrApp.userAssignment.help.totalDurationInMins" />
+            </UncontrolledTooltip>
+          </dt>
+          <dd>{userAssignmentEntity.totalDurationInMins}</dd>
+          <dt>
+            <span id="accessUrl">
+              <Translate contentKey="hrApp.userAssignment.accessUrl">Access Url</Translate>
+            </span>
+            <UncontrolledTooltip target="accessUrl">
+              <Translate contentKey="hrApp.userAssignment.help.accessUrl" />
+            </UncontrolledTooltip>
+          </dt>
+          <dd>{userAssignmentEntity.accessUrl}</dd>
+          <dt>
+            <span id="accessExpiryDate">
+              <Translate contentKey="hrApp.userAssignment.accessExpiryDate">Access Expiry Date</Translate>
+            </span>
+            <UncontrolledTooltip target="accessExpiryDate">
+              <Translate contentKey="hrApp.userAssignment.help.accessExpiryDate" />
+            </UncontrolledTooltip>
+          </dt>
+          <dd>
+            {userAssignmentEntity.accessExpiryDate ? (
+              <TextFormat value={userAssignmentEntity.accessExpiryDate} type="date" format={APP_DATE_FORMAT} />
+            ) : null}
+          </dd>
+          <dt>
+            <span id="userAssignmentStatus">
+              <Translate contentKey="hrApp.userAssignment.userAssignmentStatus">User Assignment Status</Translate>
+            </span>
+          </dt>
+          <dd>{userAssignmentEntity.userAssignmentStatus}</dd>
           <dt>
             <span id="assignedAt">
               <Translate contentKey="hrApp.userAssignment.assignedAt">Assigned At</Translate>

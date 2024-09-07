@@ -359,8 +359,6 @@ class UserProfileResourceIT {
         UserProfile partialUpdatedUserProfile = new UserProfile();
         partialUpdatedUserProfile.setId(userProfile.getId());
 
-        partialUpdatedUserProfile.createdAt(UPDATED_CREATED_AT).updatedAt(UPDATED_UPDATED_AT).deletedAt(UPDATED_DELETED_AT);
-
         webTestClient
             .patch()
             .uri(ENTITY_API_URL_ID, partialUpdatedUserProfile.getId())

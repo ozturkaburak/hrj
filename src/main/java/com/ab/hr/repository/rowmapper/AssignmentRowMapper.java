@@ -29,6 +29,7 @@ public class AssignmentRowMapper implements BiFunction<Row, String, Assignment> 
         entity.setId(converter.fromRow(row, prefix + "_id", Long.class));
         entity.setType(converter.fromRow(row, prefix + "_type", AssignmentType.class));
         entity.setVisible(converter.fromRow(row, prefix + "_visible", Boolean.class));
+        entity.setTotalDurationInMins(converter.fromRow(row, prefix + "_total_duration_in_mins", Integer.class));
         entity.setHashtags(converter.fromRow(row, prefix + "_hashtags", String.class));
         entity.setCreatedAt(converter.fromRow(row, prefix + "_created_at", Instant.class));
         entity.setUpdatedAt(converter.fromRow(row, prefix + "_updated_at", Instant.class));

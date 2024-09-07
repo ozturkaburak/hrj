@@ -8,6 +8,8 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
+import { ICompany } from 'app/shared/model/company.model';
+import { getEntities as getCompanies } from 'app/entities/company/company.reducer';
 import { IUserProfile } from 'app/shared/model/user-profile.model';
 import { getEntities as getUserProfiles } from 'app/entities/user-profile/user-profile.reducer';
 import { IExperience } from 'app/shared/model/experience.model';
@@ -23,6 +25,7 @@ export const ExperienceUpdate = () => {
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
 
+  const companies = useAppSelector(state => state.hr.company.entities);
   const userProfiles = useAppSelector(state => state.hr.userProfile.entities);
   const experienceEntity = useAppSelector(state => state.hr.experience.entity);
   const loading = useAppSelector(state => state.hr.experience.loading);
@@ -42,6 +45,7 @@ export const ExperienceUpdate = () => {
       dispatch(getEntity(id));
     }
 
+    dispatch(getCompanies({}));
     dispatch(getUserProfiles({}));
   }, []);
 
@@ -56,8 +60,6 @@ export const ExperienceUpdate = () => {
     if (values.id !== undefined && typeof values.id !== 'number') {
       values.id = Number(values.id);
     }
-    values.startDate = convertDateTimeToServer(values.startDate);
-    values.endDate = convertDateTimeToServer(values.endDate);
     values.createdAt = convertDateTimeToServer(values.createdAt);
     values.updatedAt = convertDateTimeToServer(values.updatedAt);
     values.deletedAt = convertDateTimeToServer(values.deletedAt);
@@ -65,6 +67,7 @@ export const ExperienceUpdate = () => {
     const entity = {
       ...experienceEntity,
       ...values,
+      company: companies.find(it => it.id.toString() === values.company?.toString()),
       userProfile: userProfiles.find(it => it.id.toString() === values.userProfile?.toString()),
     };
 
@@ -78,21 +81,18 @@ export const ExperienceUpdate = () => {
   const defaultValues = () =>
     isNew
       ? {
-          startDate: displayDefaultDateTime(),
-          endDate: displayDefaultDateTime(),
           createdAt: displayDefaultDateTime(),
           updatedAt: displayDefaultDateTime(),
           deletedAt: displayDefaultDateTime(),
         }
       : {
           workType: 'HYBRID',
-          contractType: 'FULL_TIME',
+          contractType: 'CONTRACTOR',
           ...experienceEntity,
-          startDate: convertDateTimeFromServer(experienceEntity.startDate),
-          endDate: convertDateTimeFromServer(experienceEntity.endDate),
           createdAt: convertDateTimeFromServer(experienceEntity.createdAt),
           updatedAt: convertDateTimeFromServer(experienceEntity.updatedAt),
           deletedAt: convertDateTimeFromServer(experienceEntity.deletedAt),
+          company: experienceEntity?.company?.id,
           userProfile: experienceEntity?.userProfile?.id,
         };
 
@@ -132,16 +132,6 @@ export const ExperienceUpdate = () => {
                 }}
               />
               <ValidatedField
-                label={translate('hrApp.experience.companyName')}
-                id="experience-companyName"
-                name="companyName"
-                data-cy="companyName"
-                type="text"
-                validate={{
-                  required: { value: true, message: translate('entity.validation.required') },
-                }}
-              />
-              <ValidatedField
                 label={translate('hrApp.experience.workType')}
                 id="experience-workType"
                 name="workType"
@@ -168,30 +158,18 @@ export const ExperienceUpdate = () => {
                 ))}
               </ValidatedField>
               <ValidatedField
-                label={translate('hrApp.experience.officeLocation')}
-                id="experience-officeLocation"
-                name="officeLocation"
-                data-cy="officeLocation"
-                type="text"
-              />
-              <ValidatedField
                 label={translate('hrApp.experience.startDate')}
                 id="experience-startDate"
                 name="startDate"
                 data-cy="startDate"
-                type="datetime-local"
-                placeholder="YYYY-MM-DD HH:mm"
-                validate={{
-                  required: { value: true, message: translate('entity.validation.required') },
-                }}
+                type="date"
               />
               <ValidatedField
                 label={translate('hrApp.experience.endDate')}
                 id="experience-endDate"
                 name="endDate"
                 data-cy="endDate"
-                type="datetime-local"
-                placeholder="YYYY-MM-DD HH:mm"
+                type="date"
               />
               <ValidatedField
                 label={translate('hrApp.experience.description')}
@@ -227,6 +205,22 @@ export const ExperienceUpdate = () => {
                 type="datetime-local"
                 placeholder="YYYY-MM-DD HH:mm"
               />
+              <ValidatedField
+                id="experience-company"
+                name="company"
+                data-cy="company"
+                label={translate('hrApp.experience.company')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {companies
+                  ? companies.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
               <ValidatedField
                 id="experience-userProfile"
                 name="userProfile"

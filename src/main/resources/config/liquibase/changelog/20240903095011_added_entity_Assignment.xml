@@ -17,10 +17,13 @@
             <column name="type" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="visible" type="boolean">
+            <column name="visible" type="boolean" remarks="For ROLE_USER, PAID roles should see everything">
                 <constraints nullable="false" />
             </column>
-            <column name="hashtags" type="varchar(255)">
+            <column name="total_duration_in_mins" type="integer" remarks="default value of duration. It can be overriden by Userassignemnt">
+                <constraints nullable="true" />
+            </column>
+            <column name="hashtags" type="varchar(255)" remarks="seperated by delimeter">
                 <constraints nullable="true" />
             </column>
             <column name="created_at" type="${datetimeType}">
@@ -72,6 +75,7 @@
             <column name="id" type="numeric"/>
             <column name="type" type="string"/>
             <column name="visible" type="boolean"/>
+            <column name="total_duration_in_mins" type="numeric"/>
             <column name="hashtags" type="string"/>
             <column name="created_at" type="date"/>
             <column name="updated_at" type="date"/>

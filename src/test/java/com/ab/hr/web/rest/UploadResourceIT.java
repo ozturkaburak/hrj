@@ -8,6 +8,8 @@ import static org.hamcrest.Matchers.is;
 
 import com.ab.hr.IntegrationTest;
 import com.ab.hr.domain.Upload;
+import com.ab.hr.domain.enumeration.FileExtention;
+import com.ab.hr.domain.enumeration.FileType;
 import com.ab.hr.repository.EntityManager;
 import com.ab.hr.repository.UploadRepository;
 import com.ab.hr.service.dto.UploadDTO;
@@ -15,7 +17,6 @@ import com.ab.hr.service.mapper.UploadMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.Base64;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.AfterEach;
@@ -35,13 +36,14 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 @WithMockUser
 class UploadResourceIT {
 
-    private static final byte[] DEFAULT_FILE = TestUtil.createByteArray(1, "0");
-    private static final byte[] UPDATED_FILE = TestUtil.createByteArray(1, "1");
-    private static final String DEFAULT_FILE_CONTENT_TYPE = "image/jpg";
-    private static final String UPDATED_FILE_CONTENT_TYPE = "image/png";
+    private static final String DEFAULT_URL = "AAAAAAAAAA";
+    private static final String UPDATED_URL = "BBBBBBBBBB";
 
-    private static final String DEFAULT_FILE_TYPE = "AAAAAAAAAA";
-    private static final String UPDATED_FILE_TYPE = "BBBBBBBBBB";
+    private static final FileType DEFAULT_TYPE = FileType.CV;
+    private static final FileType UPDATED_TYPE = FileType.COVER_LETTER;
+
+    private static final FileExtention DEFAULT_EXTENSION = FileExtention.PDF;
+    private static final FileExtention UPDATED_EXTENSION = FileExtention.DOC;
 
     private static final Instant DEFAULT_UPLOAD_DATE = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_UPLOAD_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
@@ -78,11 +80,7 @@ class UploadResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Upload createEntity(EntityManager em) {
-        Upload upload = new Upload()
-            .file(DEFAULT_FILE)
-            .fileContentType(DEFAULT_FILE_CONTENT_TYPE)
-            .fileType(DEFAULT_FILE_TYPE)
-            .uploadDate(DEFAULT_UPLOAD_DATE);
+        Upload upload = new Upload().url(DEFAULT_URL).type(DEFAULT_TYPE).extension(DEFAULT_EXTENSION).uploadDate(DEFAULT_UPLOAD_DATE);
         return upload;
     }
 
@@ -93,11 +91,7 @@ class UploadResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Upload createUpdatedEntity(EntityManager em) {
-        Upload upload = new Upload()
-            .file(UPDATED_FILE)
-            .fileContentType(UPDATED_FILE_CONTENT_TYPE)
-            .fileType(UPDATED_FILE_TYPE)
-            .uploadDate(UPDATED_UPLOAD_DATE);
+        Upload upload = new Upload().url(UPDATED_URL).type(UPDATED_TYPE).extension(UPDATED_EXTENSION).uploadDate(UPDATED_UPLOAD_DATE);
         return upload;
     }
 
@@ -171,10 +165,52 @@ class UploadResourceIT {
     }
 
     @Test
-    void checkFileTypeIsRequired() throws Exception {
+    void checkUrlIsRequired() throws Exception {
         long databaseSizeBeforeTest = getRepositoryCount();
         // set the field null
-        upload.setFileType(null);
+        upload.setUrl(null);
+
+        // Create the Upload, which fails.
+        UploadDTO uploadDTO = uploadMapper.toDto(upload);
+
+        webTestClient
+            .post()
+            .uri(ENTITY_API_URL)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(om.writeValueAsBytes(uploadDTO))
+            .exchange()
+            .expectStatus()
+            .isBadRequest();
+
+        assertSameRepositoryCount(databaseSizeBeforeTest);
+    }
+
+    @Test
+    void checkTypeIsRequired() throws Exception {
+        long databaseSizeBeforeTest = getRepositoryCount();
+        // set the field null
+        upload.setType(null);
+
+        // Create the Upload, which fails.
+        UploadDTO uploadDTO = uploadMapper.toDto(upload);
+
+        webTestClient
+            .post()
+            .uri(ENTITY_API_URL)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(om.writeValueAsBytes(uploadDTO))
+            .exchange()
+            .expectStatus()
+            .isBadRequest();
+
+        assertSameRepositoryCount(databaseSizeBeforeTest);
+    }
+
+    @Test
+    void checkExtensionIsRequired() throws Exception {
+        long databaseSizeBeforeTest = getRepositoryCount();
+        // set the field null
+        upload.setExtension(null);
 
         // Create the Upload, which fails.
         UploadDTO uploadDTO = uploadMapper.toDto(upload);
@@ -230,12 +266,12 @@ class UploadResourceIT {
             .expectBody()
             .jsonPath("$.[*].id")
             .value(hasItem(upload.getId().intValue()))
-            .jsonPath("$.[*].fileContentType")
-            .value(hasItem(DEFAULT_FILE_CONTENT_TYPE))
-            .jsonPath("$.[*].file")
-            .value(hasItem(Base64.getEncoder().encodeToString(DEFAULT_FILE)))
-            .jsonPath("$.[*].fileType")
-            .value(hasItem(DEFAULT_FILE_TYPE))
+            .jsonPath("$.[*].url")
+            .value(hasItem(DEFAULT_URL))
+            .jsonPath("$.[*].type")
+            .value(hasItem(DEFAULT_TYPE.toString()))
+            .jsonPath("$.[*].extension")
+            .value(hasItem(DEFAULT_EXTENSION.toString()))
             .jsonPath("$.[*].uploadDate")
             .value(hasItem(DEFAULT_UPLOAD_DATE.toString()));
     }
@@ -258,12 +294,12 @@ class UploadResourceIT {
             .expectBody()
             .jsonPath("$.id")
             .value(is(upload.getId().intValue()))
-            .jsonPath("$.fileContentType")
-            .value(is(DEFAULT_FILE_CONTENT_TYPE))
-            .jsonPath("$.file")
-            .value(is(Base64.getEncoder().encodeToString(DEFAULT_FILE)))
-            .jsonPath("$.fileType")
-            .value(is(DEFAULT_FILE_TYPE))
+            .jsonPath("$.url")
+            .value(is(DEFAULT_URL))
+            .jsonPath("$.type")
+            .value(is(DEFAULT_TYPE.toString()))
+            .jsonPath("$.extension")
+            .value(is(DEFAULT_EXTENSION.toString()))
             .jsonPath("$.uploadDate")
             .value(is(DEFAULT_UPLOAD_DATE.toString()));
     }
@@ -289,11 +325,7 @@ class UploadResourceIT {
 
         // Update the upload
         Upload updatedUpload = uploadRepository.findById(upload.getId()).block();
-        updatedUpload
-            .file(UPDATED_FILE)
-            .fileContentType(UPDATED_FILE_CONTENT_TYPE)
-            .fileType(UPDATED_FILE_TYPE)
-            .uploadDate(UPDATED_UPLOAD_DATE);
+        updatedUpload.url(UPDATED_URL).type(UPDATED_TYPE).extension(UPDATED_EXTENSION).uploadDate(UPDATED_UPLOAD_DATE);
         UploadDTO uploadDTO = uploadMapper.toDto(updatedUpload);
 
         webTestClient
@@ -387,7 +419,7 @@ class UploadResourceIT {
         Upload partialUpdatedUpload = new Upload();
         partialUpdatedUpload.setId(upload.getId());
 
-        partialUpdatedUpload.file(UPDATED_FILE).fileContentType(UPDATED_FILE_CONTENT_TYPE).uploadDate(UPDATED_UPLOAD_DATE);
+        partialUpdatedUpload.uploadDate(UPDATED_UPLOAD_DATE);
 
         webTestClient
             .patch()
@@ -415,11 +447,7 @@ class UploadResourceIT {
         Upload partialUpdatedUpload = new Upload();
         partialUpdatedUpload.setId(upload.getId());
 
-        partialUpdatedUpload
-            .file(UPDATED_FILE)
-            .fileContentType(UPDATED_FILE_CONTENT_TYPE)
-            .fileType(UPDATED_FILE_TYPE)
-            .uploadDate(UPDATED_UPLOAD_DATE);
+        partialUpdatedUpload.url(UPDATED_URL).type(UPDATED_TYPE).extension(UPDATED_EXTENSION).uploadDate(UPDATED_UPLOAD_DATE);
 
         webTestClient
             .patch()

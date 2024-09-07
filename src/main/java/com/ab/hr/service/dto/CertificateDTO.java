@@ -3,6 +3,7 @@ package com.ab.hr.service.dto;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -16,9 +17,9 @@ public class CertificateDTO implements Serializable {
     @NotNull(message = "must not be null")
     private String name;
 
-    private Instant startDate;
+    private LocalDate startDate;
 
-    private Instant endDate;
+    private LocalDate endDate;
 
     private String description;
 
@@ -47,19 +48,19 @@ public class CertificateDTO implements Serializable {
         this.name = name;
     }
 
-    public Instant getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Instant startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Instant getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Instant endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

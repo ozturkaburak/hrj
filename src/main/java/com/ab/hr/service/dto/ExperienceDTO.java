@@ -5,6 +5,7 @@ import com.ab.hr.domain.enumeration.WorkType;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -19,20 +20,14 @@ public class ExperienceDTO implements Serializable {
     private String title;
 
     @NotNull(message = "must not be null")
-    private String companyName;
-
-    @NotNull(message = "must not be null")
     private WorkType workType;
 
     @NotNull(message = "must not be null")
     private ContractType contractType;
 
-    private String officeLocation;
+    private LocalDate startDate;
 
-    @NotNull(message = "must not be null")
-    private Instant startDate;
-
-    private Instant endDate;
+    private LocalDate endDate;
 
     private String description;
 
@@ -42,6 +37,8 @@ public class ExperienceDTO implements Serializable {
     private Instant updatedAt;
 
     private Instant deletedAt;
+
+    private CompanyDTO company;
 
     private UserProfileDTO userProfile;
 
@@ -61,14 +58,6 @@ public class ExperienceDTO implements Serializable {
         this.title = title;
     }
 
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
     public WorkType getWorkType() {
         return workType;
     }
@@ -85,27 +74,19 @@ public class ExperienceDTO implements Serializable {
         this.contractType = contractType;
     }
 
-    public String getOfficeLocation() {
-        return officeLocation;
-    }
-
-    public void setOfficeLocation(String officeLocation) {
-        this.officeLocation = officeLocation;
-    }
-
-    public Instant getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Instant startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Instant getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Instant endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
@@ -139,6 +120,14 @@ public class ExperienceDTO implements Serializable {
 
     public void setDeletedAt(Instant deletedAt) {
         this.deletedAt = deletedAt;
+    }
+
+    public CompanyDTO getCompany() {
+        return company;
+    }
+
+    public void setCompany(CompanyDTO company) {
+        this.company = company;
     }
 
     public UserProfileDTO getUserProfile() {
@@ -176,16 +165,15 @@ public class ExperienceDTO implements Serializable {
         return "ExperienceDTO{" +
             "id=" + getId() +
             ", title='" + getTitle() + "'" +
-            ", companyName='" + getCompanyName() + "'" +
             ", workType='" + getWorkType() + "'" +
             ", contractType='" + getContractType() + "'" +
-            ", officeLocation='" + getOfficeLocation() + "'" +
             ", startDate='" + getStartDate() + "'" +
             ", endDate='" + getEndDate() + "'" +
             ", description='" + getDescription() + "'" +
             ", createdAt='" + getCreatedAt() + "'" +
             ", updatedAt='" + getUpdatedAt() + "'" +
             ", deletedAt='" + getDeletedAt() + "'" +
+            ", company=" + getCompany() +
             ", userProfile=" + getUserProfile() +
             "}";
     }

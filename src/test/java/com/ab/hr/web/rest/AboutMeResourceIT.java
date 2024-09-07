@@ -398,12 +398,7 @@ class AboutMeResourceIT {
         AboutMe partialUpdatedAboutMe = new AboutMe();
         partialUpdatedAboutMe.setId(aboutMe.getId());
 
-        partialUpdatedAboutMe
-            .socialMedia(UPDATED_SOCIAL_MEDIA)
-            .url(UPDATED_URL)
-            .createdAt(UPDATED_CREATED_AT)
-            .updatedAt(UPDATED_UPDATED_AT)
-            .deletedAt(UPDATED_DELETED_AT);
+        partialUpdatedAboutMe.createdAt(UPDATED_CREATED_AT).deletedAt(UPDATED_DELETED_AT);
 
         webTestClient
             .patch()

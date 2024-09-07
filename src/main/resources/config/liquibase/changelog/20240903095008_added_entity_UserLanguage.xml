@@ -17,9 +17,6 @@
             <column name="level" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="native_language" type="boolean">
-                <constraints nullable="true" />
-            </column>
             <column name="created_at" type="${datetimeType}">
                 <constraints nullable="false" />
             </column>
@@ -60,7 +57,6 @@
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="level" type="string"/>
-            <column name="native_language" type="boolean"/>
             <column name="created_at" type="date"/>
             <column name="updated_at" type="date"/>
             <column name="deleted_at" type="date"/>

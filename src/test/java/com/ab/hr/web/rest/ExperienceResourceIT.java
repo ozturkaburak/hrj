@@ -16,6 +16,8 @@ import com.ab.hr.service.dto.ExperienceDTO;
 import com.ab.hr.service.mapper.ExperienceMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
@@ -39,23 +41,17 @@ class ExperienceResourceIT {
     private static final String DEFAULT_TITLE = "AAAAAAAAAA";
     private static final String UPDATED_TITLE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_COMPANY_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_COMPANY_NAME = "BBBBBBBBBB";
-
     private static final WorkType DEFAULT_WORK_TYPE = WorkType.HYBRID;
     private static final WorkType UPDATED_WORK_TYPE = WorkType.REMOTE;
 
-    private static final ContractType DEFAULT_CONTRACT_TYPE = ContractType.FULL_TIME;
-    private static final ContractType UPDATED_CONTRACT_TYPE = ContractType.PART_TIME;
+    private static final ContractType DEFAULT_CONTRACT_TYPE = ContractType.CONTRACTOR;
+    private static final ContractType UPDATED_CONTRACT_TYPE = ContractType.VOLUNTEER;
 
-    private static final String DEFAULT_OFFICE_LOCATION = "AAAAAAAAAA";
-    private static final String UPDATED_OFFICE_LOCATION = "BBBBBBBBBB";
+    private static final LocalDate DEFAULT_START_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_START_DATE = LocalDate.now(ZoneId.systemDefault());
 
-    private static final Instant DEFAULT_START_DATE = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_START_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-
-    private static final Instant DEFAULT_END_DATE = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_END_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final LocalDate DEFAULT_END_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_END_DATE = LocalDate.now(ZoneId.systemDefault());
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
@@ -103,10 +99,8 @@ class ExperienceResourceIT {
     public static Experience createEntity(EntityManager em) {
         Experience experience = new Experience()
             .title(DEFAULT_TITLE)
-            .companyName(DEFAULT_COMPANY_NAME)
             .workType(DEFAULT_WORK_TYPE)
             .contractType(DEFAULT_CONTRACT_TYPE)
-            .officeLocation(DEFAULT_OFFICE_LOCATION)
             .startDate(DEFAULT_START_DATE)
             .endDate(DEFAULT_END_DATE)
             .description(DEFAULT_DESCRIPTION)
@@ -125,10 +119,8 @@ class ExperienceResourceIT {
     public static Experience createUpdatedEntity(EntityManager em) {
         Experience experience = new Experience()
             .title(UPDATED_TITLE)
-            .companyName(UPDATED_COMPANY_NAME)
             .workType(UPDATED_WORK_TYPE)
             .contractType(UPDATED_CONTRACT_TYPE)
-            .officeLocation(UPDATED_OFFICE_LOCATION)
             .startDate(UPDATED_START_DATE)
             .endDate(UPDATED_END_DATE)
             .description(UPDATED_DESCRIPTION)
@@ -229,27 +221,6 @@ class ExperienceResourceIT {
     }
 
     @Test
-    void checkCompanyNameIsRequired() throws Exception {
-        long databaseSizeBeforeTest = getRepositoryCount();
-        // set the field null
-        experience.setCompanyName(null);
-
-        // Create the Experience, which fails.
-        ExperienceDTO experienceDTO = experienceMapper.toDto(experience);
-
-        webTestClient
-            .post()
-            .uri(ENTITY_API_URL)
-            .contentType(MediaType.APPLICATION_JSON)
-            .bodyValue(om.writeValueAsBytes(experienceDTO))
-            .exchange()
-            .expectStatus()
-            .isBadRequest();
-
-        assertSameRepositoryCount(databaseSizeBeforeTest);
-    }
-
-    @Test
     void checkWorkTypeIsRequired() throws Exception {
         long databaseSizeBeforeTest = getRepositoryCount();
         // set the field null
@@ -275,27 +246,6 @@ class ExperienceResourceIT {
         long databaseSizeBeforeTest = getRepositoryCount();
         // set the field null
         experience.setContractType(null);
-
-        // Create the Experience, which fails.
-        ExperienceDTO experienceDTO = experienceMapper.toDto(experience);
-
-        webTestClient
-            .post()
-            .uri(ENTITY_API_URL)
-            .contentType(MediaType.APPLICATION_JSON)
-            .bodyValue(om.writeValueAsBytes(experienceDTO))
-            .exchange()
-            .expectStatus()
-            .isBadRequest();
-
-        assertSameRepositoryCount(databaseSizeBeforeTest);
-    }
-
-    @Test
-    void checkStartDateIsRequired() throws Exception {
-        long databaseSizeBeforeTest = getRepositoryCount();
-        // set the field null
-        experience.setStartDate(null);
 
         // Create the Experience, which fails.
         ExperienceDTO experienceDTO = experienceMapper.toDto(experience);
@@ -353,14 +303,10 @@ class ExperienceResourceIT {
             .value(hasItem(experience.getId().intValue()))
             .jsonPath("$.[*].title")
             .value(hasItem(DEFAULT_TITLE))
-            .jsonPath("$.[*].companyName")
-            .value(hasItem(DEFAULT_COMPANY_NAME))
             .jsonPath("$.[*].workType")
             .value(hasItem(DEFAULT_WORK_TYPE.toString()))
             .jsonPath("$.[*].contractType")
             .value(hasItem(DEFAULT_CONTRACT_TYPE.toString()))
-            .jsonPath("$.[*].officeLocation")
-            .value(hasItem(DEFAULT_OFFICE_LOCATION))
             .jsonPath("$.[*].startDate")
             .value(hasItem(DEFAULT_START_DATE.toString()))
             .jsonPath("$.[*].endDate")
@@ -395,14 +341,10 @@ class ExperienceResourceIT {
             .value(is(experience.getId().intValue()))
             .jsonPath("$.title")
             .value(is(DEFAULT_TITLE))
-            .jsonPath("$.companyName")
-            .value(is(DEFAULT_COMPANY_NAME))
             .jsonPath("$.workType")
             .value(is(DEFAULT_WORK_TYPE.toString()))
             .jsonPath("$.contractType")
             .value(is(DEFAULT_CONTRACT_TYPE.toString()))
-            .jsonPath("$.officeLocation")
-            .value(is(DEFAULT_OFFICE_LOCATION))
             .jsonPath("$.startDate")
             .value(is(DEFAULT_START_DATE.toString()))
             .jsonPath("$.endDate")
@@ -440,10 +382,8 @@ class ExperienceResourceIT {
         Experience updatedExperience = experienceRepository.findById(experience.getId()).block();
         updatedExperience
             .title(UPDATED_TITLE)
-            .companyName(UPDATED_COMPANY_NAME)
             .workType(UPDATED_WORK_TYPE)
             .contractType(UPDATED_CONTRACT_TYPE)
-            .officeLocation(UPDATED_OFFICE_LOCATION)
             .startDate(UPDATED_START_DATE)
             .endDate(UPDATED_END_DATE)
             .description(UPDATED_DESCRIPTION)
@@ -545,9 +485,8 @@ class ExperienceResourceIT {
 
         partialUpdatedExperience
             .title(UPDATED_TITLE)
-            .officeLocation(UPDATED_OFFICE_LOCATION)
+            .contractType(UPDATED_CONTRACT_TYPE)
             .description(UPDATED_DESCRIPTION)
-            .createdAt(UPDATED_CREATED_AT)
             .updatedAt(UPDATED_UPDATED_AT);
 
         webTestClient
@@ -581,10 +520,8 @@ class ExperienceResourceIT {
 
         partialUpdatedExperience
             .title(UPDATED_TITLE)
-            .companyName(UPDATED_COMPANY_NAME)
             .workType(UPDATED_WORK_TYPE)
             .contractType(UPDATED_CONTRACT_TYPE)
-            .officeLocation(UPDATED_OFFICE_LOCATION)
             .startDate(UPDATED_START_DATE)
             .endDate(UPDATED_END_DATE)
             .description(UPDATED_DESCRIPTION)

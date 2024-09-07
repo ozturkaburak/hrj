@@ -1,6 +1,8 @@
 package com.ab.hr.repository.rowmapper;
 
 import com.ab.hr.domain.Upload;
+import com.ab.hr.domain.enumeration.FileExtention;
+import com.ab.hr.domain.enumeration.FileType;
 import io.r2dbc.spi.Row;
 import java.time.Instant;
 import java.util.function.BiFunction;
@@ -26,9 +28,9 @@ public class UploadRowMapper implements BiFunction<Row, String, Upload> {
     public Upload apply(Row row, String prefix) {
         Upload entity = new Upload();
         entity.setId(converter.fromRow(row, prefix + "_id", Long.class));
-        entity.setFileContentType(converter.fromRow(row, prefix + "_file_content_type", String.class));
-        entity.setFile(converter.fromRow(row, prefix + "_file", byte[].class));
-        entity.setFileType(converter.fromRow(row, prefix + "_file_type", String.class));
+        entity.setUrl(converter.fromRow(row, prefix + "_url", String.class));
+        entity.setType(converter.fromRow(row, prefix + "_type", FileType.class));
+        entity.setExtension(converter.fromRow(row, prefix + "_extension", FileExtention.class));
         entity.setUploadDate(converter.fromRow(row, prefix + "_upload_date", Instant.class));
         entity.setUserProfileId(converter.fromRow(row, prefix + "_user_profile_id", Long.class));
         return entity;

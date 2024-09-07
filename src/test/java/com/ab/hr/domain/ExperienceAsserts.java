@@ -48,10 +48,8 @@ public class ExperienceAsserts {
         assertThat(expected)
             .as("Verify Experience relevant properties")
             .satisfies(e -> assertThat(e.getTitle()).as("check title").isEqualTo(actual.getTitle()))
-            .satisfies(e -> assertThat(e.getCompanyName()).as("check companyName").isEqualTo(actual.getCompanyName()))
             .satisfies(e -> assertThat(e.getWorkType()).as("check workType").isEqualTo(actual.getWorkType()))
             .satisfies(e -> assertThat(e.getContractType()).as("check contractType").isEqualTo(actual.getContractType()))
-            .satisfies(e -> assertThat(e.getOfficeLocation()).as("check officeLocation").isEqualTo(actual.getOfficeLocation()))
             .satisfies(e -> assertThat(e.getStartDate()).as("check startDate").isEqualTo(actual.getStartDate()))
             .satisfies(e -> assertThat(e.getEndDate()).as("check endDate").isEqualTo(actual.getEndDate()))
             .satisfies(e -> assertThat(e.getDescription()).as("check description").isEqualTo(actual.getDescription()))
@@ -69,6 +67,7 @@ public class ExperienceAsserts {
     public static void assertExperienceUpdatableRelationshipsEquals(Experience expected, Experience actual) {
         assertThat(expected)
             .as("Verify Experience relationships")
+            .satisfies(e -> assertThat(e.getCompany()).as("check company").isEqualTo(actual.getCompany()))
             .satisfies(e -> assertThat(e.getUserProfile()).as("check userProfile").isEqualTo(actual.getUserProfile()));
     }
 }

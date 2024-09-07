@@ -1,6 +1,7 @@
 package com.ab.hr.repository;
 
 import com.ab.hr.domain.Experience;
+import com.ab.hr.repository.rowmapper.CompanyRowMapper;
 import com.ab.hr.repository.rowmapper.ExperienceRowMapper;
 import com.ab.hr.repository.rowmapper.UserProfileRowMapper;
 import io.r2dbc.spi.Row;
@@ -35,15 +36,18 @@ class ExperienceRepositoryInternalImpl extends SimpleR2dbcRepository<Experience,
     private final R2dbcEntityTemplate r2dbcEntityTemplate;
     private final EntityManager entityManager;
 
+    private final CompanyRowMapper companyMapper;
     private final UserProfileRowMapper userprofileMapper;
     private final ExperienceRowMapper experienceMapper;
 
     private static final Table entityTable = Table.aliased("experience", EntityManager.ENTITY_ALIAS);
+    private static final Table companyTable = Table.aliased("company", "company");
     private static final Table userProfileTable = Table.aliased("user_profile", "userProfile");
 
     public ExperienceRepositoryInternalImpl(
         R2dbcEntityTemplate template,
         EntityManager entityManager,
+        CompanyRowMapper companyMapper,
         UserProfileRowMapper userprofileMapper,
         ExperienceRowMapper experienceMapper,
         R2dbcEntityOperations entityOperations,
@@ -57,6 +61,7 @@ class ExperienceRepositoryInternalImpl extends SimpleR2dbcRepository<Experience,
         this.db = template.getDatabaseClient();
         this.r2dbcEntityTemplate = template;
         this.entityManager = entityManager;
+        this.companyMapper = companyMapper;
         this.userprofileMapper = userprofileMapper;
         this.experienceMapper = experienceMapper;
     }
@@ -68,10 +73,14 @@ class ExperienceRepositoryInternalImpl extends SimpleR2dbcRepository<Experience,
 
     RowsFetchSpec<Experience> createQuery(Pageable pageable, Condition whereClause) {
         List<Expression> columns = ExperienceSqlHelper.getColumns(entityTable, EntityManager.ENTITY_ALIAS);
+        columns.addAll(CompanySqlHelper.getColumns(companyTable, "company"));
         columns.addAll(UserProfileSqlHelper.getColumns(userProfileTable, "userProfile"));
         SelectFromAndJoinCondition selectFrom = Select.builder()
             .select(columns)
             .from(entityTable)
+            .leftOuterJoin(companyTable)
+            .on(Column.create("company_id", entityTable))
+            .equals(Column.create("id", companyTable))
             .leftOuterJoin(userProfileTable)
             .on(Column.create("user_profile_id", entityTable))
             .equals(Column.create("id", userProfileTable));
@@ -93,6 +102,7 @@ class ExperienceRepositoryInternalImpl extends SimpleR2dbcRepository<Experience,
 
     private Experience process(Row row, RowMetadata metadata) {
         Experience entity = experienceMapper.apply(row, "e");
+        entity.setCompany(companyMapper.apply(row, "company"));
         entity.setUserProfile(userprofileMapper.apply(row, "userProfile"));
         return entity;
     }

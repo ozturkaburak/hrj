@@ -17,22 +17,16 @@
             <column name="title" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="company_name" type="varchar(255)">
-                <constraints nullable="false" />
-            </column>
             <column name="work_type" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
             <column name="contract_type" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="office_location" type="varchar(255)">
+            <column name="start_date" type="date">
                 <constraints nullable="true" />
             </column>
-            <column name="start_date" type="${datetimeType}">
-                <constraints nullable="false" />
-            </column>
-            <column name="end_date" type="${datetimeType}">
+            <column name="end_date" type="date">
                 <constraints nullable="true" />
             </column>
             <column name="description" type="varchar(255)">
@@ -47,13 +41,14 @@
             <column name="deleted_at" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
+            <column name="company_id" type="bigint">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_experience__company_id" />
+            </column>
             <column name="user_profile_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
-        <dropDefaultValue tableName="experience" columnName="start_date" columnDataType="${datetimeType}"/>
-        <dropDefaultValue tableName="experience" columnName="end_date" columnDataType="${datetimeType}"/>
         <dropDefaultValue tableName="experience" columnName="created_at" columnDataType="${datetimeType}"/>
         <dropDefaultValue tableName="experience" columnName="updated_at" columnDataType="${datetimeType}"/>
         <dropDefaultValue tableName="experience" columnName="deleted_at" columnDataType="${datetimeType}"/>
@@ -77,10 +72,8 @@
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="title" type="string"/>
-            <column name="company_name" type="string"/>
             <column name="work_type" type="string"/>
             <column name="contract_type" type="string"/>
-            <column name="office_location" type="string"/>
             <column name="start_date" type="date"/>
             <column name="end_date" type="date"/>
             <column name="description" type="string"/>

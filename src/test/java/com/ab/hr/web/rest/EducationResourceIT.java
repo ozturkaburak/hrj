@@ -8,12 +8,15 @@ import static org.hamcrest.Matchers.is;
 
 import com.ab.hr.IntegrationTest;
 import com.ab.hr.domain.Education;
+import com.ab.hr.domain.enumeration.EducationLevel;
 import com.ab.hr.repository.EducationRepository;
 import com.ab.hr.repository.EntityManager;
 import com.ab.hr.service.dto.EducationDTO;
 import com.ab.hr.service.mapper.EducationMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
@@ -34,23 +37,23 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 @WithMockUser
 class EducationResourceIT {
 
-    private static final String DEFAULT_SCHOOL_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_SCHOOL_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_DEPARTMENT = "AAAAAAAAAA";
-    private static final String UPDATED_DEPARTMENT = "BBBBBBBBBB";
+    private static final String DEFAULT_FACULTY = "AAAAAAAAAA";
+    private static final String UPDATED_FACULTY = "BBBBBBBBBB";
+
+    private static final EducationLevel DEFAULT_LEVEL = EducationLevel.HIGH_SCHOOL;
+    private static final EducationLevel UPDATED_LEVEL = EducationLevel.BACHELOR;
 
     private static final String DEFAULT_DEGREE = "AAAAAAAAAA";
     private static final String UPDATED_DEGREE = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_START_DATE = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_START_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final LocalDate DEFAULT_START_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_START_DATE = LocalDate.now(ZoneId.systemDefault());
 
     private static final Instant DEFAULT_END_DATE = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_END_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-
-    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
-    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
     private static final String DEFAULT_ACTIVITIES = "AAAAAAAAAA";
     private static final String UPDATED_ACTIVITIES = "BBBBBBBBBB";
@@ -100,12 +103,12 @@ class EducationResourceIT {
      */
     public static Education createEntity(EntityManager em) {
         Education education = new Education()
-            .schoolName(DEFAULT_SCHOOL_NAME)
-            .department(DEFAULT_DEPARTMENT)
+            .name(DEFAULT_NAME)
+            .faculty(DEFAULT_FACULTY)
+            .level(DEFAULT_LEVEL)
             .degree(DEFAULT_DEGREE)
             .startDate(DEFAULT_START_DATE)
             .endDate(DEFAULT_END_DATE)
-            .description(DEFAULT_DESCRIPTION)
             .activities(DEFAULT_ACTIVITIES)
             .clubs(DEFAULT_CLUBS)
             .createdAt(DEFAULT_CREATED_AT)
@@ -122,12 +125,12 @@ class EducationResourceIT {
      */
     public static Education createUpdatedEntity(EntityManager em) {
         Education education = new Education()
-            .schoolName(UPDATED_SCHOOL_NAME)
-            .department(UPDATED_DEPARTMENT)
+            .name(UPDATED_NAME)
+            .faculty(UPDATED_FACULTY)
+            .level(UPDATED_LEVEL)
             .degree(UPDATED_DEGREE)
             .startDate(UPDATED_START_DATE)
             .endDate(UPDATED_END_DATE)
-            .description(UPDATED_DESCRIPTION)
             .activities(UPDATED_ACTIVITIES)
             .clubs(UPDATED_CLUBS)
             .createdAt(UPDATED_CREATED_AT)
@@ -206,10 +209,10 @@ class EducationResourceIT {
     }
 
     @Test
-    void checkSchoolNameIsRequired() throws Exception {
+    void checkNameIsRequired() throws Exception {
         long databaseSizeBeforeTest = getRepositoryCount();
         // set the field null
-        education.setSchoolName(null);
+        education.setName(null);
 
         // Create the Education, which fails.
         EducationDTO educationDTO = educationMapper.toDto(education);
@@ -286,18 +289,18 @@ class EducationResourceIT {
             .expectBody()
             .jsonPath("$.[*].id")
             .value(hasItem(education.getId().intValue()))
-            .jsonPath("$.[*].schoolName")
-            .value(hasItem(DEFAULT_SCHOOL_NAME))
-            .jsonPath("$.[*].department")
-            .value(hasItem(DEFAULT_DEPARTMENT))
+            .jsonPath("$.[*].name")
+            .value(hasItem(DEFAULT_NAME))
+            .jsonPath("$.[*].faculty")
+            .value(hasItem(DEFAULT_FACULTY))
+            .jsonPath("$.[*].level")
+            .value(hasItem(DEFAULT_LEVEL.toString()))
             .jsonPath("$.[*].degree")
             .value(hasItem(DEFAULT_DEGREE))
             .jsonPath("$.[*].startDate")
             .value(hasItem(DEFAULT_START_DATE.toString()))
             .jsonPath("$.[*].endDate")
             .value(hasItem(DEFAULT_END_DATE.toString()))
-            .jsonPath("$.[*].description")
-            .value(hasItem(DEFAULT_DESCRIPTION))
             .jsonPath("$.[*].activities")
             .value(hasItem(DEFAULT_ACTIVITIES))
             .jsonPath("$.[*].clubs")
@@ -328,18 +331,18 @@ class EducationResourceIT {
             .expectBody()
             .jsonPath("$.id")
             .value(is(education.getId().intValue()))
-            .jsonPath("$.schoolName")
-            .value(is(DEFAULT_SCHOOL_NAME))
-            .jsonPath("$.department")
-            .value(is(DEFAULT_DEPARTMENT))
+            .jsonPath("$.name")
+            .value(is(DEFAULT_NAME))
+            .jsonPath("$.faculty")
+            .value(is(DEFAULT_FACULTY))
+            .jsonPath("$.level")
+            .value(is(DEFAULT_LEVEL.toString()))
             .jsonPath("$.degree")
             .value(is(DEFAULT_DEGREE))
             .jsonPath("$.startDate")
             .value(is(DEFAULT_START_DATE.toString()))
             .jsonPath("$.endDate")
             .value(is(DEFAULT_END_DATE.toString()))
-            .jsonPath("$.description")
-            .value(is(DEFAULT_DESCRIPTION))
             .jsonPath("$.activities")
             .value(is(DEFAULT_ACTIVITIES))
             .jsonPath("$.clubs")
@@ -374,12 +377,12 @@ class EducationResourceIT {
         // Update the education
         Education updatedEducation = educationRepository.findById(education.getId()).block();
         updatedEducation
-            .schoolName(UPDATED_SCHOOL_NAME)
-            .department(UPDATED_DEPARTMENT)
+            .name(UPDATED_NAME)
+            .faculty(UPDATED_FACULTY)
+            .level(UPDATED_LEVEL)
             .degree(UPDATED_DEGREE)
             .startDate(UPDATED_START_DATE)
             .endDate(UPDATED_END_DATE)
-            .description(UPDATED_DESCRIPTION)
             .activities(UPDATED_ACTIVITIES)
             .clubs(UPDATED_CLUBS)
             .createdAt(UPDATED_CREATED_AT)
@@ -478,14 +481,7 @@ class EducationResourceIT {
         Education partialUpdatedEducation = new Education();
         partialUpdatedEducation.setId(education.getId());
 
-        partialUpdatedEducation
-            .schoolName(UPDATED_SCHOOL_NAME)
-            .degree(UPDATED_DEGREE)
-            .startDate(UPDATED_START_DATE)
-            .endDate(UPDATED_END_DATE)
-            .description(UPDATED_DESCRIPTION)
-            .clubs(UPDATED_CLUBS)
-            .deletedAt(UPDATED_DELETED_AT);
+        partialUpdatedEducation.name(UPDATED_NAME).faculty(UPDATED_FACULTY).deletedAt(UPDATED_DELETED_AT);
 
         webTestClient
             .patch()
@@ -517,12 +513,12 @@ class EducationResourceIT {
         partialUpdatedEducation.setId(education.getId());
 
         partialUpdatedEducation
-            .schoolName(UPDATED_SCHOOL_NAME)
-            .department(UPDATED_DEPARTMENT)
+            .name(UPDATED_NAME)
+            .faculty(UPDATED_FACULTY)
+            .level(UPDATED_LEVEL)
             .degree(UPDATED_DEGREE)
             .startDate(UPDATED_START_DATE)
             .endDate(UPDATED_END_DATE)
-            .description(UPDATED_DESCRIPTION)
             .activities(UPDATED_ACTIVITIES)
             .clubs(UPDATED_CLUBS)
             .createdAt(UPDATED_CREATED_AT)

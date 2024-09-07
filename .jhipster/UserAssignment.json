@@ -7,17 +7,51 @@
   "dto": "mapstruct",
   "fields": [
     {
+      "documentation": "Questions will be shown in order by their ids. 102, 300, 200",
+      "fieldName": "orderOfQuestions",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "documentation": "overwritten value of duration. if it's not provided default value will be used",
+      "fieldName": "totalDurationInMins",
+      "fieldType": "Integer"
+    },
+    {
+      "documentation": "this will be provided by the system when the assignment is assigned to a user. And will be sent to the user by Email, SMS, PN",
+      "fieldName": "accessUrl",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "documentation": "Expiry date for the access URL, after which the link is no longer valid",
+      "fieldName": "accessExpiryDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "userAssignmentStatus",
+      "fieldType": "UserAssignmentStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "NOT_STARTED,IN_PROGRESS,COMPLETED,OVERDUE",
+      "fieldValuesJavadocs": {
+        "COMPLETED": "\n     * COMPLETED: The user has successfully completed the assignment.\n",
+        "IN_PROGRESS": "\n     * IN_PROGRESS: The user has started working on the assignment but has not completed it.\n",
+        "NOT_STARTED": "\n     * NOT_STARTED: The user has been assigned the task but has not yet begun it.\n",
+        "OVERDUE": "\n     * OVERDUE: The assignment has passed its due date without being completed.\n"
+      }
+    },
+    {
       "fieldName": "assignedAt",
       "fieldType": "Instant",
       "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "joinedAt",
-      "fieldType": "Instant"
+      "fieldType": "ZonedDateTime"
     },
     {
       "fieldName": "finishedAt",
-      "fieldType": "Instant"
+      "fieldType": "ZonedDateTime"
     }
   ],
   "name": "UserAssignment",

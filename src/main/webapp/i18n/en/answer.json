@@ -21,7 +21,10 @@
       "content": "Content",
       "answeredAt": "Answered At",
       "question": "Question",
-      "user": "User"
+      "user": "User",
+      "help": {
+        "content": "given answer by a user. It can be either multiple/signle option(s), a text or URL of a video uploaded"
+      }
     }
   }
 }

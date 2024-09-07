@@ -12,34 +12,37 @@
       "fieldValidateRules": ["required"]
     },
     {
-      "fieldName": "companyName",
-      "fieldType": "String",
-      "fieldValidateRules": ["required"]
-    },
-    {
       "fieldName": "workType",
       "fieldType": "WorkType",
       "fieldValidateRules": ["required"],
-      "fieldValues": "HYBRID,REMOTE,ON_SITE"
+      "fieldValues": "HYBRID,REMOTE,ON_SITE",
+      "fieldValuesJavadocs": {
+        "HYBRID": "\n     * HYBRID: A combination of remote and on-site work.\n",
+        "ON_SITE": "\n     * ON_SITE: Work is done at a designated location, such as an office or workplace.\n",
+        "REMOTE": "\n     * REMOTE: Work is done entirely off-site, typically from home or another location.\n"
+      }
     },
     {
       "fieldName": "contractType",
       "fieldType": "ContractType",
       "fieldValidateRules": ["required"],
-      "fieldValues": "FULL_TIME,PART_TIME,B2B,FREELANCER,INTERN"
-    },
-    {
-      "fieldName": "officeLocation",
-      "fieldType": "String"
+      "fieldValues": "CONTRACTOR,VOLUNTEER,FULL_TIME,PART_TIME,FREELANCER,INTERN",
+      "fieldValuesJavadocs": {
+        "CONTRACTOR": "\n     * CONTRACTOR: A person hired for a specific project or task, not a permanent employee.\n",
+        "FREELANCER": "\n     * FREELANCER: Self-employed, working on a project basis for various clients.\n",
+        "FULL_TIME": "\n     * FULL_TIME: Works the standard number of hours, typically 35-40 hours per week.\n",
+        "INTERN": "\n     * INTERN: Temporary role, usually for students or recent graduates to gain experience.\n",
+        "PART_TIME": "\n     * PART_TIME: Works fewer hours than full-time, often under 30 hours per week.\n",
+        "VOLUNTEER": "\n     * VOLUNTEER: A person working without pay, usually for a charity or nonprofit.\n"
+      }
     },
     {
       "fieldName": "startDate",
-      "fieldType": "Instant",
-      "fieldValidateRules": ["required"]
+      "fieldType": "LocalDate"
     },
     {
       "fieldName": "endDate",
-      "fieldType": "Instant"
+      "fieldType": "LocalDate"
     },
     {
       "fieldName": "description",
@@ -62,6 +65,12 @@
   "name": "Experience",
   "pagination": "pagination",
   "relationships": [
+    {
+      "otherEntityName": "company",
+      "relationshipName": "company",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
     {
       "otherEntityName": "skill",
       "relationshipName": "skills",

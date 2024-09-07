@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import org.springframework.data.annotation.Id;
@@ -31,10 +32,6 @@ public class Experience implements Serializable {
     private String title;
 
     @NotNull(message = "must not be null")
-    @Column("company_name")
-    private String companyName;
-
-    @NotNull(message = "must not be null")
     @Column("work_type")
     private WorkType workType;
 
@@ -42,15 +39,11 @@ public class Experience implements Serializable {
     @Column("contract_type")
     private ContractType contractType;
 
-    @Column("office_location")
-    private String officeLocation;
-
-    @NotNull(message = "must not be null")
     @Column("start_date")
-    private Instant startDate;
+    private LocalDate startDate;
 
     @Column("end_date")
-    private Instant endDate;
+    private LocalDate endDate;
 
     @Column("description")
     private String description;
@@ -66,12 +59,18 @@ public class Experience implements Serializable {
     private Instant deletedAt;
 
     @Transient
+    private Company company;
+
+    @Transient
     @JsonIgnoreProperties(value = { "experience", "userSkill" }, allowSetters = true)
     private Set<Skill> skills = new HashSet<>();
 
     @Transient
     @JsonIgnoreProperties(value = { "user", "experiences", "educations", "certificates", "aboutMes", "uploads" }, allowSetters = true)
     private UserProfile userProfile;
+
+    @Column("company_id")
+    private Long companyId;
 
     @Column("user_profile_id")
     private Long userProfileId;
@@ -104,19 +103,6 @@ public class Experience implements Serializable {
         this.title = title;
     }
 
-    public String getCompanyName() {
-        return this.companyName;
-    }
-
-    public Experience companyName(String companyName) {
-        this.setCompanyName(companyName);
-        return this;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
     public WorkType getWorkType() {
         return this.workType;
     }
@@ -143,42 +129,29 @@ public class Experience implements Serializable {
         this.contractType = contractType;
     }
 
-    public String getOfficeLocation() {
-        return this.officeLocation;
-    }
-
-    public Experience officeLocation(String officeLocation) {
-        this.setOfficeLocation(officeLocation);
-        return this;
-    }
-
-    public void setOfficeLocation(String officeLocation) {
-        this.officeLocation = officeLocation;
-    }
-
-    public Instant getStartDate() {
+    public LocalDate getStartDate() {
         return this.startDate;
     }
 
-    public Experience startDate(Instant startDate) {
+    public Experience startDate(LocalDate startDate) {
         this.setStartDate(startDate);
         return this;
     }
 
-    public void setStartDate(Instant startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Instant getEndDate() {
+    public LocalDate getEndDate() {
         return this.endDate;
     }
 
-    public Experience endDate(Instant endDate) {
+    public Experience endDate(LocalDate endDate) {
         this.setEndDate(endDate);
         return this;
     }
 
-    public void setEndDate(Instant endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
@@ -234,6 +207,20 @@ public class Experience implements Serializable {
         this.deletedAt = deletedAt;
     }
 
+    public Company getCompany() {
+        return this.company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+        this.companyId = company != null ? company.getId() : null;
+    }
+
+    public Experience company(Company company) {
+        this.setCompany(company);
+        return this;
+    }
+
     public Set<Skill> getSkills() {
         return this.skills;
     }
@@ -279,6 +266,14 @@ public class Experience implements Serializable {
         return this;
     }
 
+    public Long getCompanyId() {
+        return this.companyId;
+    }
+
+    public void setCompanyId(Long company) {
+        this.companyId = company;
+    }
+
     public Long getUserProfileId() {
         return this.userProfileId;
     }
@@ -312,10 +307,8 @@ public class Experience implements Serializable {
         return "Experience{" +
             "id=" + getId() +
             ", title='" + getTitle() + "'" +
-            ", companyName='" + getCompanyName() + "'" +
             ", workType='" + getWorkType() + "'" +
             ", contractType='" + getContractType() + "'" +
-            ", officeLocation='" + getOfficeLocation() + "'" +
             ", startDate='" + getStartDate() + "'" +
             ", endDate='" + getEndDate() + "'" +
             ", description='" + getDescription() + "'" +

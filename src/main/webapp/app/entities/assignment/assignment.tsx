@@ -121,6 +121,10 @@ export const Assignment = () => {
                   <Translate contentKey="hrApp.assignment.visible">Visible</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('visible')} />
                 </th>
+                <th className="hand" onClick={sort('totalDurationInMins')}>
+                  <Translate contentKey="hrApp.assignment.totalDurationInMins">Total Duration In Mins</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('totalDurationInMins')} />
+                </th>
                 <th className="hand" onClick={sort('hashtags')}>
                   <Translate contentKey="hrApp.assignment.hashtags">Hashtags</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('hashtags')} />
@@ -152,6 +156,7 @@ export const Assignment = () => {
                     <Translate contentKey={`hrApp.AssignmentType.${assignment.type}`} />
                   </td>
                   <td>{assignment.visible ? 'true' : 'false'}</td>
+                  <td>{assignment.totalDurationInMins}</td>
                   <td>{assignment.hashtags}</td>
                   <td>{assignment.createdAt ? <TextFormat type="date" value={assignment.createdAt} format={APP_DATE_FORMAT} /> : null}</td>
                   <td>{assignment.updatedAt ? <TextFormat type="date" value={assignment.updatedAt} format={APP_DATE_FORMAT} /> : null}</td>

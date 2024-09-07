@@ -10,11 +10,13 @@
       "fieldName": "level",
       "fieldType": "LanguageLevel",
       "fieldValidateRules": ["required"],
-      "fieldValues": "BEGINNER,INTERMEDIATE,ADVANCED,NATIVE"
-    },
-    {
-      "fieldName": "nativeLanguage",
-      "fieldType": "Boolean"
+      "fieldValues": "BEGINNER,INTERMEDIATE,ADVANCED,NATIVE",
+      "fieldValuesJavadocs": {
+        "ADVANCED": "\n     * ADVANCED: Fluent in the language, can handle complex discussions.\n",
+        "BEGINNER": "\n     * BEGINNER: Basic understanding, limited ability to communicate.\n",
+        "INTERMEDIATE": "\n     * INTERMEDIATE: Can hold conversations and manage daily communication.\n",
+        "NATIVE": "\n     * NATIVE: Full mastery of the language, like a native speaker.\n"
+      }
     },
     {
       "fieldName": "createdAt",

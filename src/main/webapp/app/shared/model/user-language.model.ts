@@ -6,7 +6,6 @@ import { LanguageLevel } from 'app/shared/model/enumerations/language-level.mode
 export interface IUserLanguage {
   id?: number;
   level?: keyof typeof LanguageLevel;
-  nativeLanguage?: boolean | null;
   createdAt?: dayjs.Dayjs;
   updatedAt?: dayjs.Dayjs | null;
   deletedAt?: dayjs.Dayjs | null;
@@ -14,6 +13,4 @@ export interface IUserLanguage {
   language?: ILanguage | null;
 }
 
-export const defaultValue: Readonly<IUserLanguage> = {
-  nativeLanguage: false,
-};
+export const defaultValue: Readonly<IUserLanguage> = {};

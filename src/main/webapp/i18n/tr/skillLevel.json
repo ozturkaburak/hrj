@@ -2,8 +2,11 @@
   "hrApp": {
     "SkillLevel": {
       "null": "",
-      "EXPERT": "EXPERT",
-      "BEGINNER": "BEGINNER"
+      "NOVICE": "NOVICE",
+      "BEGINNER": "BEGINNER",
+      "INTERMEDIATE": "INTERMEDIATE",
+      "ADVANCED": "ADVANCED",
+      "EXPERT": "EXPERT"
     }
   }
 }

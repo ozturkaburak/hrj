@@ -17,8 +17,6 @@ public class UserLanguageDTO implements Serializable {
     @NotNull(message = "must not be null")
     private LanguageLevel level;
 
-    private Boolean nativeLanguage;
-
     @NotNull(message = "must not be null")
     private Instant createdAt;
 
@@ -44,14 +42,6 @@ public class UserLanguageDTO implements Serializable {
 
     public void setLevel(LanguageLevel level) {
         this.level = level;
-    }
-
-    public Boolean getNativeLanguage() {
-        return nativeLanguage;
-    }
-
-    public void setNativeLanguage(Boolean nativeLanguage) {
-        this.nativeLanguage = nativeLanguage;
     }
 
     public Instant getCreatedAt() {
@@ -121,7 +111,6 @@ public class UserLanguageDTO implements Serializable {
         return "UserLanguageDTO{" +
             "id=" + getId() +
             ", level='" + getLevel() + "'" +
-            ", nativeLanguage='" + getNativeLanguage() + "'" +
             ", createdAt='" + getCreatedAt() + "'" +
             ", updatedAt='" + getUpdatedAt() + "'" +
             ", deletedAt='" + getDeletedAt() + "'" +

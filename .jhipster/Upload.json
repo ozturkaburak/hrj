@@ -7,15 +7,30 @@
   "dto": "mapstruct",
   "fields": [
     {
-      "fieldName": "file",
-      "fieldType": "byte[]",
-      "fieldTypeBlobContent": "any",
+      "fieldName": "url",
+      "fieldType": "String",
       "fieldValidateRules": ["required"]
     },
     {
-      "fieldName": "fileType",
-      "fieldType": "String",
-      "fieldValidateRules": ["required"]
+      "fieldName": "type",
+      "fieldType": "FileType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "CV,COVER_LETTER,PORTFOLIO,CERTIFICATE,TRANSCRIPT,RECOMMENDATION_LETTER,OTHER",
+      "fieldValuesJavadocs": {
+        "CERTIFICATE": "\n     * CERTIFICATE: A file representing certifications or qualifications.\n",
+        "COVER_LETTER": "\n     * COVER_LETTER: Cover letter accompanying a job application.\n",
+        "CV": "\n     * CV: Curriculum Vitae or Resume file.\n",
+        "OTHER": "\n     * OTHER: Any other supporting documents that don't fall into the predefined categories.\n",
+        "PORTFOLIO": "\n     * PORTFOLIO: A file containing work samples, typically for creative fields.\n",
+        "RECOMMENDATION_LETTER": "\n     * RECOMMENDATION_LETTER: A letter of recommendation supporting the application.\n",
+        "TRANSCRIPT": "\n     * TRANSCRIPT: An academic transcript file showing grades and courses.\n"
+      }
+    },
+    {
+      "fieldName": "extension",
+      "fieldType": "FileExtention",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PDF,DOC,DOCX"
     },
     {
       "fieldName": "uploadDate",

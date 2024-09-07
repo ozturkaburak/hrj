@@ -87,7 +87,7 @@ export const UserSkillUpdate = () => {
           deletedAt: displayDefaultDateTime(),
         }
       : {
-          level: 'EXPERT',
+          level: 'NOVICE',
           ...userSkillEntity,
           createdAt: convertDateTimeFromServer(userSkillEntity.createdAt),
           updatedAt: convertDateTimeFromServer(userSkillEntity.updatedAt),

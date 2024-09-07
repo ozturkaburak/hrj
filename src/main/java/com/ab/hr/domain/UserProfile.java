@@ -38,7 +38,7 @@ public class UserProfile implements Serializable {
     private User user;
 
     @Transient
-    @JsonIgnoreProperties(value = { "skills", "userProfile" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "company", "skills", "userProfile" }, allowSetters = true)
     private Set<Experience> experiences = new HashSet<>();
 
     @Transient

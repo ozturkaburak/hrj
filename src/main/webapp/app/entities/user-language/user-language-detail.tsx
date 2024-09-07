@@ -39,12 +39,6 @@ export const UserLanguageDetail = () => {
           </dt>
           <dd>{userLanguageEntity.level}</dd>
           <dt>
-            <span id="nativeLanguage">
-              <Translate contentKey="hrApp.userLanguage.nativeLanguage">Native Language</Translate>
-            </span>
-          </dt>
-          <dd>{userLanguageEntity.nativeLanguage ? 'true' : 'false'}</dd>
-          <dt>
             <span id="createdAt">
               <Translate contentKey="hrApp.userLanguage.createdAt">Created At</Translate>
             </span>

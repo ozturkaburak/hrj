@@ -7,12 +7,14 @@
   "dto": "mapstruct",
   "fields": [
     {
+      "documentation": "given answer by a user. It can be either multiple/signle option(s), a text or URL of a video uploaded",
       "fieldName": "content",
-      "fieldType": "String"
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "answeredAt",
-      "fieldType": "Instant",
+      "fieldType": "ZonedDateTime",
       "fieldValidateRules": ["required"]
     }
   ],

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Column;
@@ -27,10 +28,10 @@ public class Certificate implements Serializable {
     private String name;
 
     @Column("start_date")
-    private Instant startDate;
+    private LocalDate startDate;
 
     @Column("end_date")
-    private Instant endDate;
+    private LocalDate endDate;
 
     @Column("description")
     private String description;
@@ -80,29 +81,29 @@ public class Certificate implements Serializable {
         this.name = name;
     }
 
-    public Instant getStartDate() {
+    public LocalDate getStartDate() {
         return this.startDate;
     }
 
-    public Certificate startDate(Instant startDate) {
+    public Certificate startDate(LocalDate startDate) {
         this.setStartDate(startDate);
         return this;
     }
 
-    public void setStartDate(Instant startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Instant getEndDate() {
+    public LocalDate getEndDate() {
         return this.endDate;
     }
 
-    public Certificate endDate(Instant endDate) {
+    public Certificate endDate(LocalDate endDate) {
         this.setEndDate(endDate);
         return this;
     }
 
-    public void setEndDate(Instant endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

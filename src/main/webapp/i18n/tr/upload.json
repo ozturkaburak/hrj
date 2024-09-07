@@ -18,8 +18,9 @@
         "title": "Upload"
       },
       "id": "ID",
-      "file": "File",
-      "fileType": "File Type",
+      "url": "Url",
+      "type": "Type",
+      "extension": "Extension",
       "uploadDate": "Upload Date",
       "userProfile": "User Profile"
     }

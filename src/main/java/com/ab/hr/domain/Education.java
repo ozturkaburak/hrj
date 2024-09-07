@@ -1,9 +1,11 @@
 package com.ab.hr.domain;
 
+import com.ab.hr.domain.enumeration.EducationLevel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Column;
@@ -23,24 +25,24 @@ public class Education implements Serializable {
     private Long id;
 
     @NotNull(message = "must not be null")
-    @Column("school_name")
-    private String schoolName;
+    @Column("name")
+    private String name;
 
-    @Column("department")
-    private String department;
+    @Column("faculty")
+    private String faculty;
+
+    @Column("level")
+    private EducationLevel level;
 
     @Column("degree")
     private String degree;
 
     @NotNull(message = "must not be null")
     @Column("start_date")
-    private Instant startDate;
+    private LocalDate startDate;
 
     @Column("end_date")
     private Instant endDate;
-
-    @Column("description")
-    private String description;
 
     @Column("activities")
     private String activities;
@@ -80,30 +82,43 @@ public class Education implements Serializable {
         this.id = id;
     }
 
-    public String getSchoolName() {
-        return this.schoolName;
+    public String getName() {
+        return this.name;
     }
 
-    public Education schoolName(String schoolName) {
-        this.setSchoolName(schoolName);
+    public Education name(String name) {
+        this.setName(name);
         return this;
     }
 
-    public void setSchoolName(String schoolName) {
-        this.schoolName = schoolName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDepartment() {
-        return this.department;
+    public String getFaculty() {
+        return this.faculty;
     }
 
-    public Education department(String department) {
-        this.setDepartment(department);
+    public Education faculty(String faculty) {
+        this.setFaculty(faculty);
         return this;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
+    }
+
+    public EducationLevel getLevel() {
+        return this.level;
+    }
+
+    public Education level(EducationLevel level) {
+        this.setLevel(level);
+        return this;
+    }
+
+    public void setLevel(EducationLevel level) {
+        this.level = level;
     }
 
     public String getDegree() {
@@ -119,16 +134,16 @@ public class Education implements Serializable {
         this.degree = degree;
     }
 
-    public Instant getStartDate() {
+    public LocalDate getStartDate() {
         return this.startDate;
     }
 
-    public Education startDate(Instant startDate) {
+    public Education startDate(LocalDate startDate) {
         this.setStartDate(startDate);
         return this;
     }
 
-    public void setStartDate(Instant startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
@@ -143,19 +158,6 @@ public class Education implements Serializable {
 
     public void setEndDate(Instant endDate) {
         this.endDate = endDate;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    public Education description(String description) {
-        this.setDescription(description);
-        return this;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getActivities() {
@@ -269,12 +271,12 @@ public class Education implements Serializable {
     public String toString() {
         return "Education{" +
             "id=" + getId() +
-            ", schoolName='" + getSchoolName() + "'" +
-            ", department='" + getDepartment() + "'" +
+            ", name='" + getName() + "'" +
+            ", faculty='" + getFaculty() + "'" +
+            ", level='" + getLevel() + "'" +
             ", degree='" + getDegree() + "'" +
             ", startDate='" + getStartDate() + "'" +
             ", endDate='" + getEndDate() + "'" +
-            ", description='" + getDescription() + "'" +
             ", activities='" + getActivities() + "'" +
             ", clubs='" + getClubs() + "'" +
             ", createdAt='" + getCreatedAt() + "'" +

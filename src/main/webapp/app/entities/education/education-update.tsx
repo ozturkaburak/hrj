@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { IUserProfile } from 'app/shared/model/user-profile.model';
 import { getEntities as getUserProfiles } from 'app/entities/user-profile/user-profile.reducer';
 import { IEducation } from 'app/shared/model/education.model';
+import { EducationLevel } from 'app/shared/model/enumerations/education-level.model';
 import { getEntity, updateEntity, createEntity, reset } from './education.reducer';
 
 export const EducationUpdate = () => {
@@ -26,6 +27,7 @@ export const EducationUpdate = () => {
   const loading = useAppSelector(state => state.hr.education.loading);
   const updating = useAppSelector(state => state.hr.education.updating);
   const updateSuccess = useAppSelector(state => state.hr.education.updateSuccess);
+  const educationLevelValues = Object.keys(EducationLevel);
 
   const handleClose = () => {
     navigate('/education' + location.search);
@@ -52,7 +54,6 @@ export const EducationUpdate = () => {
     if (values.id !== undefined && typeof values.id !== 'number') {
       values.id = Number(values.id);
     }
-    values.startDate = convertDateTimeToServer(values.startDate);
     values.endDate = convertDateTimeToServer(values.endDate);
     values.createdAt = convertDateTimeToServer(values.createdAt);
     values.updatedAt = convertDateTimeToServer(values.updatedAt);
@@ -74,15 +75,14 @@ export const EducationUpdate = () => {
   const defaultValues = () =>
     isNew
       ? {
-          startDate: displayDefaultDateTime(),
           endDate: displayDefaultDateTime(),
           createdAt: displayDefaultDateTime(),
           updatedAt: displayDefaultDateTime(),
           deletedAt: displayDefaultDateTime(),
         }
       : {
+          level: 'HIGH_SCHOOL',
           ...educationEntity,
-          startDate: convertDateTimeFromServer(educationEntity.startDate),
           endDate: convertDateTimeFromServer(educationEntity.endDate),
           createdAt: convertDateTimeFromServer(educationEntity.createdAt),
           updatedAt: convertDateTimeFromServer(educationEntity.updatedAt),
@@ -116,22 +116,29 @@ export const EducationUpdate = () => {
                 />
               ) : null}
               <ValidatedField
-                label={translate('hrApp.education.schoolName')}
-                id="education-schoolName"
-                name="schoolName"
-                data-cy="schoolName"
+                label={translate('hrApp.education.name')}
+                id="education-name"
+                name="name"
+                data-cy="name"
                 type="text"
                 validate={{
                   required: { value: true, message: translate('entity.validation.required') },
                 }}
               />
               <ValidatedField
-                label={translate('hrApp.education.department')}
-                id="education-department"
-                name="department"
-                data-cy="department"
+                label={translate('hrApp.education.faculty')}
+                id="education-faculty"
+                name="faculty"
+                data-cy="faculty"
                 type="text"
               />
+              <ValidatedField label={translate('hrApp.education.level')} id="education-level" name="level" data-cy="level" type="select">
+                {educationLevelValues.map(educationLevel => (
+                  <option value={educationLevel} key={educationLevel}>
+                    {translate('hrApp.EducationLevel.' + educationLevel)}
+                  </option>
+                ))}
+              </ValidatedField>
               <ValidatedField
                 label={translate('hrApp.education.degree')}
                 id="education-degree"
@@ -144,8 +151,7 @@ export const EducationUpdate = () => {
                 id="education-startDate"
                 name="startDate"
                 data-cy="startDate"
-                type="datetime-local"
-                placeholder="YYYY-MM-DD HH:mm"
+                type="date"
                 validate={{
                   required: { value: true, message: translate('entity.validation.required') },
                 }}
@@ -157,13 +163,6 @@ export const EducationUpdate = () => {
                 data-cy="endDate"
                 type="datetime-local"
                 placeholder="YYYY-MM-DD HH:mm"
-              />
-              <ValidatedField
-                label={translate('hrApp.education.description')}
-                id="education-description"
-                name="description"
-                data-cy="description"
-                type="text"
               />
               <ValidatedField
                 label={translate('hrApp.education.activities')}

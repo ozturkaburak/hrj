@@ -5,6 +5,7 @@ import com.ab.hr.domain.enumeration.ContractType;
 import com.ab.hr.domain.enumeration.WorkType;
 import io.r2dbc.spi.Row;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.function.BiFunction;
 import org.springframework.stereotype.Service;
 
@@ -29,16 +30,15 @@ public class ExperienceRowMapper implements BiFunction<Row, String, Experience> 
         Experience entity = new Experience();
         entity.setId(converter.fromRow(row, prefix + "_id", Long.class));
         entity.setTitle(converter.fromRow(row, prefix + "_title", String.class));
-        entity.setCompanyName(converter.fromRow(row, prefix + "_company_name", String.class));
         entity.setWorkType(converter.fromRow(row, prefix + "_work_type", WorkType.class));
         entity.setContractType(converter.fromRow(row, prefix + "_contract_type", ContractType.class));
-        entity.setOfficeLocation(converter.fromRow(row, prefix + "_office_location", String.class));
-        entity.setStartDate(converter.fromRow(row, prefix + "_start_date", Instant.class));
-        entity.setEndDate(converter.fromRow(row, prefix + "_end_date", Instant.class));
+        entity.setStartDate(converter.fromRow(row, prefix + "_start_date", LocalDate.class));
+        entity.setEndDate(converter.fromRow(row, prefix + "_end_date", LocalDate.class));
         entity.setDescription(converter.fromRow(row, prefix + "_description", String.class));
         entity.setCreatedAt(converter.fromRow(row, prefix + "_created_at", Instant.class));
         entity.setUpdatedAt(converter.fromRow(row, prefix + "_updated_at", Instant.class));
         entity.setDeletedAt(converter.fromRow(row, prefix + "_deleted_at", Instant.class));
+        entity.setCompanyId(converter.fromRow(row, prefix + "_company_id", Long.class));
         entity.setUserProfileId(converter.fromRow(row, prefix + "_user_profile_id", Long.class));
         return entity;
     }

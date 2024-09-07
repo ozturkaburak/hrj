@@ -52,8 +52,6 @@ export const CertificateUpdate = () => {
     if (values.id !== undefined && typeof values.id !== 'number') {
       values.id = Number(values.id);
     }
-    values.startDate = convertDateTimeToServer(values.startDate);
-    values.endDate = convertDateTimeToServer(values.endDate);
     values.createdAt = convertDateTimeToServer(values.createdAt);
     values.updatedAt = convertDateTimeToServer(values.updatedAt);
     values.deletedAt = convertDateTimeToServer(values.deletedAt);
@@ -74,16 +72,12 @@ export const CertificateUpdate = () => {
   const defaultValues = () =>
     isNew
       ? {
-          startDate: displayDefaultDateTime(),
-          endDate: displayDefaultDateTime(),
           createdAt: displayDefaultDateTime(),
           updatedAt: displayDefaultDateTime(),
           deletedAt: displayDefaultDateTime(),
         }
       : {
           ...certificateEntity,
-          startDate: convertDateTimeFromServer(certificateEntity.startDate),
-          endDate: convertDateTimeFromServer(certificateEntity.endDate),
           createdAt: convertDateTimeFromServer(certificateEntity.createdAt),
           updatedAt: convertDateTimeFromServer(certificateEntity.updatedAt),
           deletedAt: convertDateTimeFromServer(certificateEntity.deletedAt),
@@ -130,16 +124,14 @@ export const CertificateUpdate = () => {
                 id="certificate-startDate"
                 name="startDate"
                 data-cy="startDate"
-                type="datetime-local"
-                placeholder="YYYY-MM-DD HH:mm"
+                type="date"
               />
               <ValidatedField
                 label={translate('hrApp.certificate.endDate')}
                 id="certificate-endDate"
                 name="endDate"
                 data-cy="endDate"
-                type="datetime-local"
-                placeholder="YYYY-MM-DD HH:mm"
+                type="date"
               />
               <ValidatedField
                 label={translate('hrApp.certificate.description')}

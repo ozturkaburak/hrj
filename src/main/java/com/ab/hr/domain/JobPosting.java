@@ -5,6 +5,7 @@ import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.Instant;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -29,20 +30,21 @@ public class JobPosting implements Serializable {
     @Column("description")
     private String description;
 
-    @Column("location")
-    private String location;
-
-    @Column("department")
-    private String department;
-
     @Column("status")
     private JobStatus status;
 
+    @NotNull(message = "must not be null")
     @Column("created_date")
     private Instant createdDate;
 
     @Column("expire_date")
     private Instant expireDate;
+
+    @Transient
+    private Company company;
+
+    @Column("company_id")
+    private Long companyId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -85,32 +87,6 @@ public class JobPosting implements Serializable {
         this.description = description;
     }
 
-    public String getLocation() {
-        return this.location;
-    }
-
-    public JobPosting location(String location) {
-        this.setLocation(location);
-        return this;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getDepartment() {
-        return this.department;
-    }
-
-    public JobPosting department(String department) {
-        this.setDepartment(department);
-        return this;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
     public JobStatus getStatus() {
         return this.status;
     }
@@ -150,6 +126,28 @@ public class JobPosting implements Serializable {
         this.expireDate = expireDate;
     }
 
+    public Company getCompany() {
+        return this.company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+        this.companyId = company != null ? company.getId() : null;
+    }
+
+    public JobPosting company(Company company) {
+        this.setCompany(company);
+        return this;
+    }
+
+    public Long getCompanyId() {
+        return this.companyId;
+    }
+
+    public void setCompanyId(Long company) {
+        this.companyId = company;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -176,8 +174,6 @@ public class JobPosting implements Serializable {
             "id=" + getId() +
             ", title='" + getTitle() + "'" +
             ", description='" + getDescription() + "'" +
-            ", location='" + getLocation() + "'" +
-            ", department='" + getDepartment() + "'" +
             ", status='" + getStatus() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +
             ", expireDate='" + getExpireDate() + "'" +

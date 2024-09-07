@@ -383,7 +383,7 @@ class CountryResourceIT {
         Country partialUpdatedCountry = new Country();
         partialUpdatedCountry.setId(country.getId());
 
-        partialUpdatedCountry.name(UPDATED_NAME).createdAt(UPDATED_CREATED_AT).deletedAt(UPDATED_DELETED_AT);
+        partialUpdatedCountry.updatedAt(UPDATED_UPDATED_AT).deletedAt(UPDATED_DELETED_AT);
 
         webTestClient
             .patch()

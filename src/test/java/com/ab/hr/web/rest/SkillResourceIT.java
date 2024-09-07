@@ -383,7 +383,7 @@ class SkillResourceIT {
         Skill partialUpdatedSkill = new Skill();
         partialUpdatedSkill.setId(skill.getId());
 
-        partialUpdatedSkill.name(UPDATED_NAME).createdAt(UPDATED_CREATED_AT).updatedAt(UPDATED_UPDATED_AT);
+        partialUpdatedSkill.createdAt(UPDATED_CREATED_AT).deletedAt(UPDATED_DELETED_AT);
 
         webTestClient
             .patch()

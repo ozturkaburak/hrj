@@ -1,5 +1,11 @@
 export enum SkillLevel {
-  EXPERT = 'EXPERT',
+  NOVICE = 'NOVICE',
 
   BEGINNER = 'BEGINNER',
+
+  INTERMEDIATE = 'INTERMEDIATE',
+
+  ADVANCED = 'ADVANCED',
+
+  EXPERT = 'EXPERT',
 }

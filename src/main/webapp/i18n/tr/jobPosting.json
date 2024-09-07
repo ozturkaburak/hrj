@@ -20,11 +20,10 @@
       "id": "ID",
       "title": "Title",
       "description": "Description",
-      "location": "Location",
-      "department": "Department",
       "status": "Status",
       "createdDate": "Created Date",
-      "expireDate": "Expire Date"
+      "expireDate": "Expire Date",
+      "company": "Company"
     }
   }
 }

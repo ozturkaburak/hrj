@@ -12,7 +12,6 @@ public class UserLanguageSqlHelper {
         List<Expression> columns = new ArrayList<>();
         columns.add(Column.aliased("id", table, columnPrefix + "_id"));
         columns.add(Column.aliased("level", table, columnPrefix + "_level"));
-        columns.add(Column.aliased("native_language", table, columnPrefix + "_native_language"));
         columns.add(Column.aliased("created_at", table, columnPrefix + "_created_at"));
         columns.add(Column.aliased("updated_at", table, columnPrefix + "_updated_at"));
         columns.add(Column.aliased("deleted_at", table, columnPrefix + "_deleted_at"));

@@ -41,6 +41,9 @@ public class City implements Serializable {
     @Transient
     private Contact contact;
 
+    @Transient
+    private Company company;
+
     @Column("country_id")
     private Long countryId;
 
@@ -141,6 +144,25 @@ public class City implements Serializable {
 
     public City contact(Contact contact) {
         this.setContact(contact);
+        return this;
+    }
+
+    public Company getCompany() {
+        return this.company;
+    }
+
+    public void setCompany(Company company) {
+        if (this.company != null) {
+            this.company.setCity(null);
+        }
+        if (company != null) {
+            company.setCity(this);
+        }
+        this.company = company;
+    }
+
+    public City company(Company company) {
+        this.setCompany(company);
         return this;
     }
 

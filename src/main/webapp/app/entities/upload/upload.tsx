@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button, Table } from 'reactstrap';
-import { openFile, byteSize, Translate, TextFormat, getPaginationState, JhiPagination, JhiItemCount } from 'react-jhipster';
+import { Translate, TextFormat, getPaginationState, JhiPagination, JhiItemCount } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSort, faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons';
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
@@ -114,12 +114,15 @@ export const Upload = () => {
                 <th className="hand" onClick={sort('id')}>
                   <Translate contentKey="hrApp.upload.id">ID</Translate> <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
-                <th className="hand" onClick={sort('file')}>
-                  <Translate contentKey="hrApp.upload.file">File</Translate> <FontAwesomeIcon icon={getSortIconByFieldName('file')} />
+                <th className="hand" onClick={sort('url')}>
+                  <Translate contentKey="hrApp.upload.url">Url</Translate> <FontAwesomeIcon icon={getSortIconByFieldName('url')} />
                 </th>
-                <th className="hand" onClick={sort('fileType')}>
-                  <Translate contentKey="hrApp.upload.fileType">File Type</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('fileType')} />
+                <th className="hand" onClick={sort('type')}>
+                  <Translate contentKey="hrApp.upload.type">Type</Translate> <FontAwesomeIcon icon={getSortIconByFieldName('type')} />
+                </th>
+                <th className="hand" onClick={sort('extension')}>
+                  <Translate contentKey="hrApp.upload.extension">Extension</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('extension')} />
                 </th>
                 <th className="hand" onClick={sort('uploadDate')}>
                   <Translate contentKey="hrApp.upload.uploadDate">Upload Date</Translate>{' '}
@@ -139,22 +142,13 @@ export const Upload = () => {
                       {upload.id}
                     </Button>
                   </td>
+                  <td>{upload.url}</td>
                   <td>
-                    {upload.file ? (
-                      <div>
-                        {upload.fileContentType ? (
-                          <a onClick={openFile(upload.fileContentType, upload.file)}>
-                            <Translate contentKey="entity.action.open">Open</Translate>
-                            &nbsp;
-                          </a>
-                        ) : null}
-                        <span>
-                          {upload.fileContentType}, {byteSize(upload.file)}
-                        </span>
-                      </div>
-                    ) : null}
+                    <Translate contentKey={`hrApp.FileType.${upload.type}`} />
                   </td>
-                  <td>{upload.fileType}</td>
+                  <td>
+                    <Translate contentKey={`hrApp.FileExtention.${upload.extension}`} />
+                  </td>
                   <td>{upload.uploadDate ? <TextFormat type="date" value={upload.uploadDate} format={APP_DATE_FORMAT} /> : null}</td>
                   <td>{upload.userProfile ? <Link to={`/user-profile/${upload.userProfile.id}`}>{upload.userProfile.id}</Link> : ''}</td>
                   <td className="text-end">

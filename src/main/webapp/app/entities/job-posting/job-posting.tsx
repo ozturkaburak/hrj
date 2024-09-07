@@ -122,14 +122,6 @@ export const JobPosting = () => {
                   <Translate contentKey="hrApp.jobPosting.description">Description</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('description')} />
                 </th>
-                <th className="hand" onClick={sort('location')}>
-                  <Translate contentKey="hrApp.jobPosting.location">Location</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('location')} />
-                </th>
-                <th className="hand" onClick={sort('department')}>
-                  <Translate contentKey="hrApp.jobPosting.department">Department</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('department')} />
-                </th>
                 <th className="hand" onClick={sort('status')}>
                   <Translate contentKey="hrApp.jobPosting.status">Status</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('status')} />
@@ -141,6 +133,9 @@ export const JobPosting = () => {
                 <th className="hand" onClick={sort('expireDate')}>
                   <Translate contentKey="hrApp.jobPosting.expireDate">Expire Date</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('expireDate')} />
+                </th>
+                <th>
+                  <Translate contentKey="hrApp.jobPosting.company">Company</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -155,8 +150,6 @@ export const JobPosting = () => {
                   </td>
                   <td>{jobPosting.title}</td>
                   <td>{jobPosting.description}</td>
-                  <td>{jobPosting.location}</td>
-                  <td>{jobPosting.department}</td>
                   <td>
                     <Translate contentKey={`hrApp.JobStatus.${jobPosting.status}`} />
                   </td>
@@ -166,6 +159,7 @@ export const JobPosting = () => {
                   <td>
                     {jobPosting.expireDate ? <TextFormat type="date" value={jobPosting.expireDate} format={APP_DATE_FORMAT} /> : null}
                   </td>
+                  <td>{jobPosting.company ? <Link to={`/company/${jobPosting.company.id}`}>{jobPosting.company.id}</Link> : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/job-posting/${jobPosting.id}`} color="info" size="sm" data-cy="entityDetailsButton">

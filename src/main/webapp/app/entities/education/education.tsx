@@ -114,13 +114,15 @@ export const Education = () => {
                 <th className="hand" onClick={sort('id')}>
                   <Translate contentKey="hrApp.education.id">ID</Translate> <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
-                <th className="hand" onClick={sort('schoolName')}>
-                  <Translate contentKey="hrApp.education.schoolName">School Name</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('schoolName')} />
+                <th className="hand" onClick={sort('name')}>
+                  <Translate contentKey="hrApp.education.name">Name</Translate> <FontAwesomeIcon icon={getSortIconByFieldName('name')} />
                 </th>
-                <th className="hand" onClick={sort('department')}>
-                  <Translate contentKey="hrApp.education.department">Department</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('department')} />
+                <th className="hand" onClick={sort('faculty')}>
+                  <Translate contentKey="hrApp.education.faculty">Faculty</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('faculty')} />
+                </th>
+                <th className="hand" onClick={sort('level')}>
+                  <Translate contentKey="hrApp.education.level">Level</Translate> <FontAwesomeIcon icon={getSortIconByFieldName('level')} />
                 </th>
                 <th className="hand" onClick={sort('degree')}>
                   <Translate contentKey="hrApp.education.degree">Degree</Translate>{' '}
@@ -133,10 +135,6 @@ export const Education = () => {
                 <th className="hand" onClick={sort('endDate')}>
                   <Translate contentKey="hrApp.education.endDate">End Date</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('endDate')} />
-                </th>
-                <th className="hand" onClick={sort('description')}>
-                  <Translate contentKey="hrApp.education.description">Description</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('description')} />
                 </th>
                 <th className="hand" onClick={sort('activities')}>
                   <Translate contentKey="hrApp.education.activities">Activities</Translate>{' '}
@@ -171,12 +169,16 @@ export const Education = () => {
                       {education.id}
                     </Button>
                   </td>
-                  <td>{education.schoolName}</td>
-                  <td>{education.department}</td>
+                  <td>{education.name}</td>
+                  <td>{education.faculty}</td>
+                  <td>
+                    <Translate contentKey={`hrApp.EducationLevel.${education.level}`} />
+                  </td>
                   <td>{education.degree}</td>
-                  <td>{education.startDate ? <TextFormat type="date" value={education.startDate} format={APP_DATE_FORMAT} /> : null}</td>
+                  <td>
+                    {education.startDate ? <TextFormat type="date" value={education.startDate} format={APP_LOCAL_DATE_FORMAT} /> : null}
+                  </td>
                   <td>{education.endDate ? <TextFormat type="date" value={education.endDate} format={APP_DATE_FORMAT} /> : null}</td>
-                  <td>{education.description}</td>
                   <td>{education.activities}</td>
                   <td>{education.clubs}</td>
                   <td>{education.createdAt ? <TextFormat type="date" value={education.createdAt} format={APP_DATE_FORMAT} /> : null}</td>

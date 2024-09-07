@@ -14,22 +14,22 @@
             <column name="id" type="bigint" autoIncrement="true" startWith="1500">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="school_name" type="varchar(255)">
+            <column name="name" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="department" type="varchar(255)">
+            <column name="faculty" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="level" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="degree" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="start_date" type="${datetimeType}">
+            <column name="start_date" type="date">
                 <constraints nullable="false" />
             </column>
             <column name="end_date" type="${datetimeType}">
-                <constraints nullable="true" />
-            </column>
-            <column name="description" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="activities" type="varchar(255)">
@@ -52,7 +52,6 @@
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
-        <dropDefaultValue tableName="education" columnName="start_date" columnDataType="${datetimeType}"/>
         <dropDefaultValue tableName="education" columnName="end_date" columnDataType="${datetimeType}"/>
         <dropDefaultValue tableName="education" columnName="created_at" columnDataType="${datetimeType}"/>
         <dropDefaultValue tableName="education" columnName="updated_at" columnDataType="${datetimeType}"/>
@@ -76,12 +75,12 @@
                   tableName="education"
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
-            <column name="school_name" type="string"/>
-            <column name="department" type="string"/>
+            <column name="name" type="string"/>
+            <column name="faculty" type="string"/>
+            <column name="level" type="string"/>
             <column name="degree" type="string"/>
             <column name="start_date" type="date"/>
             <column name="end_date" type="date"/>
-            <column name="description" type="string"/>
             <column name="activities" type="string"/>
             <column name="clubs" type="string"/>
             <column name="created_at" type="date"/>

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Button, Row, Col } from 'reactstrap';
+import { Button, UncontrolledTooltip, Row, Col } from 'reactstrap';
 import { Translate, TextFormat } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -42,6 +42,9 @@ export const QuestionDetail = () => {
             <span id="options">
               <Translate contentKey="hrApp.question.options">Options</Translate>
             </span>
+            <UncontrolledTooltip target="options">
+              <Translate contentKey="hrApp.question.help.options" />
+            </UncontrolledTooltip>
           </dt>
           <dd>{questionEntity.options}</dd>
           <dt>
@@ -54,6 +57,9 @@ export const QuestionDetail = () => {
             <span id="correctAnswer">
               <Translate contentKey="hrApp.question.correctAnswer">Correct Answer</Translate>
             </span>
+            <UncontrolledTooltip target="correctAnswer">
+              <Translate contentKey="hrApp.question.help.correctAnswer" />
+            </UncontrolledTooltip>
           </dt>
           <dd>{questionEntity.correctAnswer}</dd>
           <dt>

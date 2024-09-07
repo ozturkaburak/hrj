@@ -10,34 +10,19 @@ public class EducationTestSamples {
     private static final AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     public static Education getEducationSample1() {
-        return new Education()
-            .id(1L)
-            .schoolName("schoolName1")
-            .department("department1")
-            .degree("degree1")
-            .description("description1")
-            .activities("activities1")
-            .clubs("clubs1");
+        return new Education().id(1L).name("name1").faculty("faculty1").degree("degree1").activities("activities1").clubs("clubs1");
     }
 
     public static Education getEducationSample2() {
-        return new Education()
-            .id(2L)
-            .schoolName("schoolName2")
-            .department("department2")
-            .degree("degree2")
-            .description("description2")
-            .activities("activities2")
-            .clubs("clubs2");
+        return new Education().id(2L).name("name2").faculty("faculty2").degree("degree2").activities("activities2").clubs("clubs2");
     }
 
     public static Education getEducationRandomSampleGenerator() {
         return new Education()
             .id(longCount.incrementAndGet())
-            .schoolName(UUID.randomUUID().toString())
-            .department(UUID.randomUUID().toString())
+            .name(UUID.randomUUID().toString())
+            .faculty(UUID.randomUUID().toString())
             .degree(UUID.randomUUID().toString())
-            .description(UUID.randomUUID().toString())
             .activities(UUID.randomUUID().toString())
             .clubs(UUID.randomUUID().toString());
     }

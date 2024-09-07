@@ -14,13 +14,13 @@
             <column name="id" type="bigint" autoIncrement="true" startWith="1500">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="file" type="${blobType}">
+            <column name="url" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="file_content_type" type="varchar(255)">
+            <column name="type" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="file_type" type="varchar(255)">
+            <column name="extension" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
             <column name="upload_date" type="${datetimeType}">
@@ -51,9 +51,9 @@
                   tableName="upload"
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
-            <column name="file" type="blob"/>
-            <column name="file_content_type" type="string"/>
-            <column name="file_type" type="string"/>
+            <column name="url" type="string"/>
+            <column name="type" type="string"/>
+            <column name="extension" type="string"/>
             <column name="upload_date" type="date"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>

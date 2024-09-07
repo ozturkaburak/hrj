@@ -13,6 +13,7 @@ public class AssignmentSqlHelper {
         columns.add(Column.aliased("id", table, columnPrefix + "_id"));
         columns.add(Column.aliased("type", table, columnPrefix + "_type"));
         columns.add(Column.aliased("visible", table, columnPrefix + "_visible"));
+        columns.add(Column.aliased("total_duration_in_mins", table, columnPrefix + "_total_duration_in_mins"));
         columns.add(Column.aliased("hashtags", table, columnPrefix + "_hashtags"));
         columns.add(Column.aliased("created_at", table, columnPrefix + "_created_at"));
         columns.add(Column.aliased("updated_at", table, columnPrefix + "_updated_at"));

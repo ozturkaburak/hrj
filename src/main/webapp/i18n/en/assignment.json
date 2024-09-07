@@ -20,12 +20,18 @@
       "id": "ID",
       "type": "Type",
       "visible": "Visible",
+      "totalDurationInMins": "Total Duration In Mins",
       "hashtags": "Hashtags",
       "createdAt": "Created At",
       "updatedAt": "Updated At",
       "deletedAt": "Deleted At",
       "questions": "Questions",
-      "userAssignment": "User Assignment"
+      "userAssignment": "User Assignment",
+      "help": {
+        "visible": "For ROLE_USER, PAID roles should see everything",
+        "totalDurationInMins": "default value of duration. It can be overriden by Userassignemnt",
+        "hashtags": "seperated by delimeter"
+      }
     }
   }
 }

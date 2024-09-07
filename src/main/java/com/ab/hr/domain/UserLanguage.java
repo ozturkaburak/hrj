@@ -26,9 +26,6 @@ public class UserLanguage implements Serializable {
     @Column("level")
     private LanguageLevel level;
 
-    @Column("native_language")
-    private Boolean nativeLanguage;
-
     @NotNull(message = "must not be null")
     @Column("created_at")
     private Instant createdAt;
@@ -77,19 +74,6 @@ public class UserLanguage implements Serializable {
 
     public void setLevel(LanguageLevel level) {
         this.level = level;
-    }
-
-    public Boolean getNativeLanguage() {
-        return this.nativeLanguage;
-    }
-
-    public UserLanguage nativeLanguage(Boolean nativeLanguage) {
-        this.setNativeLanguage(nativeLanguage);
-        return this;
-    }
-
-    public void setNativeLanguage(Boolean nativeLanguage) {
-        this.nativeLanguage = nativeLanguage;
     }
 
     public Instant getCreatedAt() {
@@ -200,7 +184,6 @@ public class UserLanguage implements Serializable {
         return "UserLanguage{" +
             "id=" + getId() +
             ", level='" + getLevel() + "'" +
-            ", nativeLanguage='" + getNativeLanguage() + "'" +
             ", createdAt='" + getCreatedAt() + "'" +
             ", updatedAt='" + getUpdatedAt() + "'" +
             ", deletedAt='" + getDeletedAt() + "'" +

@@ -157,9 +157,11 @@ export const Certificate = () => {
                   </td>
                   <td>{certificate.name}</td>
                   <td>
-                    {certificate.startDate ? <TextFormat type="date" value={certificate.startDate} format={APP_DATE_FORMAT} /> : null}
+                    {certificate.startDate ? <TextFormat type="date" value={certificate.startDate} format={APP_LOCAL_DATE_FORMAT} /> : null}
                   </td>
-                  <td>{certificate.endDate ? <TextFormat type="date" value={certificate.endDate} format={APP_DATE_FORMAT} /> : null}</td>
+                  <td>
+                    {certificate.endDate ? <TextFormat type="date" value={certificate.endDate} format={APP_LOCAL_DATE_FORMAT} /> : null}
+                  </td>
                   <td>{certificate.description}</td>
                   <td>
                     {certificate.createdAt ? <TextFormat type="date" value={certificate.createdAt} format={APP_DATE_FORMAT} /> : null}

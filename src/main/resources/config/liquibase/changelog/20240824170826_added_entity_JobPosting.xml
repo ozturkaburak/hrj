@@ -20,20 +20,17 @@
             <column name="description" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="location" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="department" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <column name="status" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="created_date" type="${datetimeType}">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
             <column name="expire_date" type="${datetimeType}">
                 <constraints nullable="true" />
+            </column>
+            <column name="company_id" type="bigint">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_job_posting__company_id" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
@@ -60,8 +57,6 @@
             <column name="id" type="numeric"/>
             <column name="title" type="string"/>
             <column name="description" type="string"/>
-            <column name="location" type="string"/>
-            <column name="department" type="string"/>
             <column name="status" type="string"/>
             <column name="created_date" type="date"/>
             <column name="expire_date" type="date"/>

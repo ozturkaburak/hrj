@@ -1,5 +1,6 @@
 package com.ab.hr.domain;
 
+import static com.ab.hr.domain.CompanyTestSamples.*;
 import static com.ab.hr.domain.ExperienceTestSamples.*;
 import static com.ab.hr.domain.SkillTestSamples.*;
 import static com.ab.hr.domain.UserProfileTestSamples.*;
@@ -24,6 +25,18 @@ class ExperienceTest {
 
         experience2 = getExperienceSample2();
         assertThat(experience1).isNotEqualTo(experience2);
+    }
+
+    @Test
+    void companyTest() {
+        Experience experience = getExperienceRandomSampleGenerator();
+        Company companyBack = getCompanyRandomSampleGenerator();
+
+        experience.setCompany(companyBack);
+        assertThat(experience.getCompany()).isEqualTo(companyBack);
+
+        experience.company(null);
+        assertThat(experience.getCompany()).isNull();
     }
 
     @Test

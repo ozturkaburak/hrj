@@ -41,12 +41,6 @@ class JobPostingResourceIT {
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
-    private static final String DEFAULT_LOCATION = "AAAAAAAAAA";
-    private static final String UPDATED_LOCATION = "BBBBBBBBBB";
-
-    private static final String DEFAULT_DEPARTMENT = "AAAAAAAAAA";
-    private static final String UPDATED_DEPARTMENT = "BBBBBBBBBB";
-
     private static final JobStatus DEFAULT_STATUS = JobStatus.OPEN;
     private static final JobStatus UPDATED_STATUS = JobStatus.CLOSED;
 
@@ -91,8 +85,6 @@ class JobPostingResourceIT {
         JobPosting jobPosting = new JobPosting()
             .title(DEFAULT_TITLE)
             .description(DEFAULT_DESCRIPTION)
-            .location(DEFAULT_LOCATION)
-            .department(DEFAULT_DEPARTMENT)
             .status(DEFAULT_STATUS)
             .createdDate(DEFAULT_CREATED_DATE)
             .expireDate(DEFAULT_EXPIRE_DATE);
@@ -109,8 +101,6 @@ class JobPostingResourceIT {
         JobPosting jobPosting = new JobPosting()
             .title(UPDATED_TITLE)
             .description(UPDATED_DESCRIPTION)
-            .location(UPDATED_LOCATION)
-            .department(UPDATED_DEPARTMENT)
             .status(UPDATED_STATUS)
             .createdDate(UPDATED_CREATED_DATE)
             .expireDate(UPDATED_EXPIRE_DATE);
@@ -229,6 +219,27 @@ class JobPostingResourceIT {
     }
 
     @Test
+    void checkCreatedDateIsRequired() throws Exception {
+        long databaseSizeBeforeTest = getRepositoryCount();
+        // set the field null
+        jobPosting.setCreatedDate(null);
+
+        // Create the JobPosting, which fails.
+        JobPostingDTO jobPostingDTO = jobPostingMapper.toDto(jobPosting);
+
+        webTestClient
+            .post()
+            .uri(ENTITY_API_URL)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(om.writeValueAsBytes(jobPostingDTO))
+            .exchange()
+            .expectStatus()
+            .isBadRequest();
+
+        assertSameRepositoryCount(databaseSizeBeforeTest);
+    }
+
+    @Test
     void getAllJobPostings() {
         // Initialize the database
         insertedJobPosting = jobPostingRepository.save(jobPosting).block();
@@ -250,10 +261,6 @@ class JobPostingResourceIT {
             .value(hasItem(DEFAULT_TITLE))
             .jsonPath("$.[*].description")
             .value(hasItem(DEFAULT_DESCRIPTION))
-            .jsonPath("$.[*].location")
-            .value(hasItem(DEFAULT_LOCATION))
-            .jsonPath("$.[*].department")
-            .value(hasItem(DEFAULT_DEPARTMENT))
             .jsonPath("$.[*].status")
             .value(hasItem(DEFAULT_STATUS.toString()))
             .jsonPath("$.[*].createdDate")
@@ -284,10 +291,6 @@ class JobPostingResourceIT {
             .value(is(DEFAULT_TITLE))
             .jsonPath("$.description")
             .value(is(DEFAULT_DESCRIPTION))
-            .jsonPath("$.location")
-            .value(is(DEFAULT_LOCATION))
-            .jsonPath("$.department")
-            .value(is(DEFAULT_DEPARTMENT))
             .jsonPath("$.status")
             .value(is(DEFAULT_STATUS.toString()))
             .jsonPath("$.createdDate")
@@ -320,8 +323,6 @@ class JobPostingResourceIT {
         updatedJobPosting
             .title(UPDATED_TITLE)
             .description(UPDATED_DESCRIPTION)
-            .location(UPDATED_LOCATION)
-            .department(UPDATED_DEPARTMENT)
             .status(UPDATED_STATUS)
             .createdDate(UPDATED_CREATED_DATE)
             .expireDate(UPDATED_EXPIRE_DATE);
@@ -418,7 +419,7 @@ class JobPostingResourceIT {
         JobPosting partialUpdatedJobPosting = new JobPosting();
         partialUpdatedJobPosting.setId(jobPosting.getId());
 
-        partialUpdatedJobPosting.title(UPDATED_TITLE).description(UPDATED_DESCRIPTION).location(UPDATED_LOCATION);
+        partialUpdatedJobPosting.title(UPDATED_TITLE).expireDate(UPDATED_EXPIRE_DATE);
 
         webTestClient
             .patch()
@@ -452,8 +453,6 @@ class JobPostingResourceIT {
         partialUpdatedJobPosting
             .title(UPDATED_TITLE)
             .description(UPDATED_DESCRIPTION)
-            .location(UPDATED_LOCATION)
-            .department(UPDATED_DEPARTMENT)
             .status(UPDATED_STATUS)
             .createdDate(UPDATED_CREATED_DATE)
             .expireDate(UPDATED_EXPIRE_DATE);

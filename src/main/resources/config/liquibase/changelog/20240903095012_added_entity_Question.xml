@@ -17,13 +17,13 @@
             <column name="content" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="options" type="varchar(255)">
+            <column name="options" type="varchar(255)" remarks="Options of the question. it will be seperated by delimeter">
                 <constraints nullable="true" />
             </column>
             <column name="type" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="correct_answer" type="varchar(255)">
+            <column name="correct_answer" type="varchar(255)" remarks="Correct answers of the question. Either multiple/signle option(s) or a text. Will be empty for video">
                 <constraints nullable="true" />
             </column>
             <column name="created_at" type="${datetimeType}">

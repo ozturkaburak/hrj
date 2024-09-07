@@ -132,14 +132,6 @@ export const UserLanguageUpdate = () => {
                 ))}
               </ValidatedField>
               <ValidatedField
-                label={translate('hrApp.userLanguage.nativeLanguage')}
-                id="user-language-nativeLanguage"
-                name="nativeLanguage"
-                data-cy="nativeLanguage"
-                check
-                type="checkbox"
-              />
-              <ValidatedField
                 label={translate('hrApp.userLanguage.createdAt')}
                 id="user-language-createdAt"
                 name="createdAt"

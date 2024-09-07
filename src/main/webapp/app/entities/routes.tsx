@@ -28,6 +28,7 @@ import UserAssignment from './user-assignment';
 import Assignment from './assignment';
 import Question from './question';
 import Answer from './answer';
+import Company from './company';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 export default () => {
@@ -56,6 +57,7 @@ export default () => {
         <Route path="assignment/*" element={<Assignment />} />
         <Route path="question/*" element={<Question />} />
         <Route path="answer/*" element={<Answer />} />
+        <Route path="company/*" element={<Company />} />
         {/* jhipster-needle-add-route-path - JHipster will add routes here */}
       </ErrorBoundaryRoutes>
     </div>

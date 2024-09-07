@@ -39,12 +39,6 @@ export const ExperienceDetail = () => {
           </dt>
           <dd>{experienceEntity.title}</dd>
           <dt>
-            <span id="companyName">
-              <Translate contentKey="hrApp.experience.companyName">Company Name</Translate>
-            </span>
-          </dt>
-          <dd>{experienceEntity.companyName}</dd>
-          <dt>
             <span id="workType">
               <Translate contentKey="hrApp.experience.workType">Work Type</Translate>
             </span>
@@ -57,25 +51,23 @@ export const ExperienceDetail = () => {
           </dt>
           <dd>{experienceEntity.contractType}</dd>
           <dt>
-            <span id="officeLocation">
-              <Translate contentKey="hrApp.experience.officeLocation">Office Location</Translate>
-            </span>
-          </dt>
-          <dd>{experienceEntity.officeLocation}</dd>
-          <dt>
             <span id="startDate">
               <Translate contentKey="hrApp.experience.startDate">Start Date</Translate>
             </span>
           </dt>
           <dd>
-            {experienceEntity.startDate ? <TextFormat value={experienceEntity.startDate} type="date" format={APP_DATE_FORMAT} /> : null}
+            {experienceEntity.startDate ? (
+              <TextFormat value={experienceEntity.startDate} type="date" format={APP_LOCAL_DATE_FORMAT} />
+            ) : null}
           </dd>
           <dt>
             <span id="endDate">
               <Translate contentKey="hrApp.experience.endDate">End Date</Translate>
             </span>
           </dt>
-          <dd>{experienceEntity.endDate ? <TextFormat value={experienceEntity.endDate} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
+          <dd>
+            {experienceEntity.endDate ? <TextFormat value={experienceEntity.endDate} type="date" format={APP_LOCAL_DATE_FORMAT} /> : null}
+          </dd>
           <dt>
             <span id="description">
               <Translate contentKey="hrApp.experience.description">Description</Translate>
@@ -106,6 +98,10 @@ export const ExperienceDetail = () => {
           <dd>
             {experienceEntity.deletedAt ? <TextFormat value={experienceEntity.deletedAt} type="date" format={APP_DATE_FORMAT} /> : null}
           </dd>
+          <dt>
+            <Translate contentKey="hrApp.experience.company">Company</Translate>
+          </dt>
+          <dd>{experienceEntity.company ? experienceEntity.company.id : ''}</dd>
           <dt>
             <Translate contentKey="hrApp.experience.userProfile">User Profile</Translate>
           </dt>

@@ -114,6 +114,26 @@ export const UserAssignment = () => {
                 <th className="hand" onClick={sort('id')}>
                   <Translate contentKey="hrApp.userAssignment.id">ID</Translate> <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
+                <th className="hand" onClick={sort('orderOfQuestions')}>
+                  <Translate contentKey="hrApp.userAssignment.orderOfQuestions">Order Of Questions</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('orderOfQuestions')} />
+                </th>
+                <th className="hand" onClick={sort('totalDurationInMins')}>
+                  <Translate contentKey="hrApp.userAssignment.totalDurationInMins">Total Duration In Mins</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('totalDurationInMins')} />
+                </th>
+                <th className="hand" onClick={sort('accessUrl')}>
+                  <Translate contentKey="hrApp.userAssignment.accessUrl">Access Url</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('accessUrl')} />
+                </th>
+                <th className="hand" onClick={sort('accessExpiryDate')}>
+                  <Translate contentKey="hrApp.userAssignment.accessExpiryDate">Access Expiry Date</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('accessExpiryDate')} />
+                </th>
+                <th className="hand" onClick={sort('userAssignmentStatus')}>
+                  <Translate contentKey="hrApp.userAssignment.userAssignmentStatus">User Assignment Status</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('userAssignmentStatus')} />
+                </th>
                 <th className="hand" onClick={sort('assignedAt')}>
                   <Translate contentKey="hrApp.userAssignment.assignedAt">Assigned At</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('assignedAt')} />
@@ -142,6 +162,17 @@ export const UserAssignment = () => {
                     <Button tag={Link} to={`/user-assignment/${userAssignment.id}`} color="link" size="sm">
                       {userAssignment.id}
                     </Button>
+                  </td>
+                  <td>{userAssignment.orderOfQuestions}</td>
+                  <td>{userAssignment.totalDurationInMins}</td>
+                  <td>{userAssignment.accessUrl}</td>
+                  <td>
+                    {userAssignment.accessExpiryDate ? (
+                      <TextFormat type="date" value={userAssignment.accessExpiryDate} format={APP_DATE_FORMAT} />
+                    ) : null}
+                  </td>
+                  <td>
+                    <Translate contentKey={`hrApp.UserAssignmentStatus.${userAssignment.userAssignmentStatus}`} />
                   </td>
                   <td>
                     {userAssignment.assignedAt ? (

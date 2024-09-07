@@ -39,9 +39,6 @@ class UserLanguageResourceIT {
     private static final LanguageLevel DEFAULT_LEVEL = LanguageLevel.BEGINNER;
     private static final LanguageLevel UPDATED_LEVEL = LanguageLevel.INTERMEDIATE;
 
-    private static final Boolean DEFAULT_NATIVE_LANGUAGE = false;
-    private static final Boolean UPDATED_NATIVE_LANGUAGE = true;
-
     private static final Instant DEFAULT_CREATED_AT = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_CREATED_AT = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
@@ -88,7 +85,6 @@ class UserLanguageResourceIT {
     public static UserLanguage createEntity(EntityManager em) {
         UserLanguage userLanguage = new UserLanguage()
             .level(DEFAULT_LEVEL)
-            .nativeLanguage(DEFAULT_NATIVE_LANGUAGE)
             .createdAt(DEFAULT_CREATED_AT)
             .updatedAt(DEFAULT_UPDATED_AT)
             .deletedAt(DEFAULT_DELETED_AT);
@@ -104,7 +100,6 @@ class UserLanguageResourceIT {
     public static UserLanguage createUpdatedEntity(EntityManager em) {
         UserLanguage userLanguage = new UserLanguage()
             .level(UPDATED_LEVEL)
-            .nativeLanguage(UPDATED_NATIVE_LANGUAGE)
             .createdAt(UPDATED_CREATED_AT)
             .updatedAt(UPDATED_UPDATED_AT)
             .deletedAt(UPDATED_DELETED_AT);
@@ -244,8 +239,6 @@ class UserLanguageResourceIT {
             .value(hasItem(userLanguage.getId().intValue()))
             .jsonPath("$.[*].level")
             .value(hasItem(DEFAULT_LEVEL.toString()))
-            .jsonPath("$.[*].nativeLanguage")
-            .value(hasItem(DEFAULT_NATIVE_LANGUAGE.booleanValue()))
             .jsonPath("$.[*].createdAt")
             .value(hasItem(DEFAULT_CREATED_AT.toString()))
             .jsonPath("$.[*].updatedAt")
@@ -274,8 +267,6 @@ class UserLanguageResourceIT {
             .value(is(userLanguage.getId().intValue()))
             .jsonPath("$.level")
             .value(is(DEFAULT_LEVEL.toString()))
-            .jsonPath("$.nativeLanguage")
-            .value(is(DEFAULT_NATIVE_LANGUAGE.booleanValue()))
             .jsonPath("$.createdAt")
             .value(is(DEFAULT_CREATED_AT.toString()))
             .jsonPath("$.updatedAt")
@@ -305,12 +296,7 @@ class UserLanguageResourceIT {
 
         // Update the userLanguage
         UserLanguage updatedUserLanguage = userLanguageRepository.findById(userLanguage.getId()).block();
-        updatedUserLanguage
-            .level(UPDATED_LEVEL)
-            .nativeLanguage(UPDATED_NATIVE_LANGUAGE)
-            .createdAt(UPDATED_CREATED_AT)
-            .updatedAt(UPDATED_UPDATED_AT)
-            .deletedAt(UPDATED_DELETED_AT);
+        updatedUserLanguage.level(UPDATED_LEVEL).createdAt(UPDATED_CREATED_AT).updatedAt(UPDATED_UPDATED_AT).deletedAt(UPDATED_DELETED_AT);
         UserLanguageDTO userLanguageDTO = userLanguageMapper.toDto(updatedUserLanguage);
 
         webTestClient
@@ -404,11 +390,7 @@ class UserLanguageResourceIT {
         UserLanguage partialUpdatedUserLanguage = new UserLanguage();
         partialUpdatedUserLanguage.setId(userLanguage.getId());
 
-        partialUpdatedUserLanguage
-            .level(UPDATED_LEVEL)
-            .nativeLanguage(UPDATED_NATIVE_LANGUAGE)
-            .createdAt(UPDATED_CREATED_AT)
-            .updatedAt(UPDATED_UPDATED_AT);
+        partialUpdatedUserLanguage.level(UPDATED_LEVEL).updatedAt(UPDATED_UPDATED_AT).deletedAt(UPDATED_DELETED_AT);
 
         webTestClient
             .patch()
@@ -441,7 +423,6 @@ class UserLanguageResourceIT {
 
         partialUpdatedUserLanguage
             .level(UPDATED_LEVEL)
-            .nativeLanguage(UPDATED_NATIVE_LANGUAGE)
             .createdAt(UPDATED_CREATED_AT)
             .updatedAt(UPDATED_UPDATED_AT)
             .deletedAt(UPDATED_DELETED_AT);

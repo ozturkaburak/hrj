@@ -14,7 +14,14 @@
       "fieldName": "level",
       "fieldType": "SkillLevel",
       "fieldValidateRules": ["required"],
-      "fieldValues": "EXPERT,BEGINNER"
+      "fieldValues": "NOVICE,BEGINNER,INTERMEDIATE,ADVANCED,EXPERT",
+      "fieldValuesJavadocs": {
+        "ADVANCED": "\n     * ADVANCED: Highly skilled, handles most tasks independently with proficiency.\n",
+        "BEGINNER": "\n     * BEGINNER: Basic understanding but still requires guidance and practice.\n",
+        "EXPERT": "\n     * EXPERT: Mastered the skill, able to teach others and solve complex problems with ease.\n",
+        "INTERMEDIATE": "\n     * INTERMEDIATE: Solid foundation, able to work independently but may need help with complex tasks.\n",
+        "NOVICE": "\n     * NOVICE: New to the skill with little to no experience.\n"
+      }
     },
     {
       "fieldName": "createdAt",

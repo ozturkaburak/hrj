@@ -17,6 +17,7 @@ import userAssignment from 'app/entities/user-assignment/user-assignment.reducer
 import assignment from 'app/entities/assignment/assignment.reducer';
 import question from 'app/entities/question/question.reducer';
 import answer from 'app/entities/answer/answer.reducer';
+import company from 'app/entities/company/company.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 const entitiesReducers = {
@@ -39,6 +40,7 @@ const entitiesReducers = {
   assignment,
   question,
   answer,
+  company,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
 };
 

@@ -1,12 +1,33 @@
 // Define Entities
 
+entity City {
+    name String required,
+    createdAt Instant required,
+    updatedAt Instant,
+    deletedAt Instant
+}
+entity Country {
+    name String required,
+    createdAt Instant required,
+    updatedAt Instant,
+    deletedAt Instant
+}
+
+
+entity Company{
+    name String required,
+    logo String required,
+    createdAt Instant required,
+    updatedAt Instant,
+    deletedAt Instant,
+    active Boolean required
+}
+
 entity JobPosting {
   title String required,
   description String required,
-  location String,
-  department String,
   status JobStatus,
-  createdDate Instant,
+  createdDate Instant required,
   expireDate Instant
 }
 
@@ -16,20 +37,21 @@ entity UserProfile{
   deletedAt Instant
 }
 
+
+
 entity Upload {
-  file Blob required,
-  fileType String required,
-  uploadDate Instant required  
+  url String required,
+  type FileType required,
+  extension FileExtention required,
+  uploadDate Instant required
 }
 
 entity Experience {
     title String required,
-    companyName String required,
-    workType WorkType required, // hybrid/remote/on-site
-    contractType ContractType required, // Full time, part time, B2B, freelancer, intern
-    officeLocation String,
-    startDate Instant required,
-    endDate Instant,
+    workType WorkType required,
+    contractType ContractType required,
+    startDate LocalDate,
+    endDate LocalDate,
     description String,
     createdAt Instant required,
     updatedAt Instant,
@@ -37,12 +59,12 @@ entity Experience {
 }
 
 entity Education {
-    schoolName String required,
-    department String,
+    name String required,
+    faculty String,
+    level EducationLevel,
     degree String,
-    startDate Instant required,
+    startDate LocalDate required,
     endDate Instant,
-    description String,
     activities String, // JSONB or String
     clubs String, // JSONB or String
     createdAt Instant required,
@@ -52,8 +74,8 @@ entity Education {
 
 entity Certificate {
     name String required,
-    startDate Instant,
-    endDate Instant,
+    startDate LocalDate,
+    endDate LocalDate,
     description String,
     createdAt Instant required,
     updatedAt Instant,
@@ -61,7 +83,7 @@ entity Certificate {
 }
 
 entity AboutMe {
-    socialMedia SocialMediaType, // INSTAGRAM, FACEBOOK, TWITTER, GITHUB, GITLAB
+    socialMedia SocialMediaType,
     url String required,
     createdAt Instant required,
     updatedAt Instant,
@@ -93,24 +115,10 @@ entity Contact {
     deletedAt Instant
 }
 
-entity City {
-    name String required,
-    createdAt Instant required,
-    updatedAt Instant,
-    deletedAt Instant
-}
-entity Country {
-    name String required,
-    createdAt Instant required,
-    updatedAt Instant,
-    deletedAt Instant
-}
 
-// end of contact
 
 entity UserLanguage {
-    level LanguageLevel required, // Beginner, Intermediate, Advanced, Native
-    nativeLanguage Boolean,
+    level LanguageLevel required,
     createdAt Instant required,
     updatedAt Instant,
     deletedAt Instant
@@ -127,14 +135,27 @@ entity Language {
 // Assignment and Question Entities
 
 entity UserAssignment {
+    /** Questions will be shown in order by their ids. 102, 300, 200 */
+    orderOfQuestions String required,
+    /** overwritten value of duration. if it's not provided default value will be used*/
+    totalDurationInMins Integer,
+    /** this will be provided by the system when the assignment is assigned to a user. And will be sent to the user by Email, SMS, PN */
+    accessUrl String required,
+      /** Expiry date for the access URL, after which the link is no longer valid */
+    accessExpiryDate Instant,
+    userAssignmentStatus UserAssignmentStatus required,
     assignedAt Instant required,
-    joinedAt Instant,
-    finishedAt Instant
+    joinedAt ZonedDateTime,
+    finishedAt ZonedDateTime
 }
 
 entity Assignment {
     type AssignmentType required,
-    visible Boolean required, // For ROLE_USER, PAID roles should see everything
+    /** For ROLE_USER, PAID roles should see everything */
+    visible Boolean required,
+    /** default value of duration. It can be overriden by Userassignemnt */
+     totalDurationInMins Integer,
+     /** seperated by delimeter*/
     hashtags String,
     createdAt Instant required,
     updatedAt Instant,
@@ -143,17 +164,20 @@ entity Assignment {
 
 entity Question {
     content String required,
-    options String, // Adjust to JSONB in the entity class
-    type QuestionType required, // Multiple Choice, Text, Video
-    correctAnswer String, // Adjust to JSONB in the entity class 
+    /** Options of the question. it will be seperated by delimeter */
+    options String,
+    type QuestionType required,
+    /** Correct answers of the question. Either multiple/signle option(s) or a text. Will be empty for video*/
+    correctAnswer String,
     createdAt Instant required,
     updatedAt Instant,
     deletedAt Instant
 }
 
 entity Answer {
-    content String, // Adjust to JSONB in the entity class
-    answeredAt Instant required
+    /** given answer by a user. It can be either multiple/signle option(s), a text or URL of a video uploaded*/
+    content String required,
+    answeredAt ZonedDateTime required
 }
 
 
@@ -162,10 +186,10 @@ entity Answer {
 
 relationship OneToOne {
     UserProfile{user} to User with builtInEntity
-    
+
     UserLanguage{user} to User with builtInEntity
     UserLanguage{language} to Language
-    
+
     UserSkill{skill} to Skill
     UserSkill{user} to User with builtInEntity
 
@@ -175,9 +199,13 @@ relationship OneToOne {
 
     UserAssignment{user} to User with builtInEntity
     UserAssignment{assignment} to Assignment
-     
+
     Answer{question} to Question
     Answer{user} to User with builtInEntity // Answer knows about User, but User doesn't know about Answer
+
+    JobPosting{company} to Company
+    Company{city} to City
+    Experience{company} to Company
 }
 
 relationship OneToMany {
@@ -209,49 +237,257 @@ paginate * with pagination
 // Define Enums
 
 enum JobStatus {
-  OPEN, CLOSED, FILLED
+    /**
+     * OPEN: The job is currently available and accepting applications.
+     */
+    OPEN,
+
+    /**
+     * CLOSED: The job is no longer available and applications are no longer being accepted.
+     */
+    CLOSED,
+
+    /**
+     * FILLED: The job has been filled by a candidate.
+     */
+    FILLED
 }
 
 enum ApplicationStatus {
-  PENDING, ACCEPTED, REJECTED
-}
+    /**
+     * PENDING: The application is under review and a decision has not yet been made.
+     */
+    PENDING,
 
-enum NotificationType {
-  SYSTEM, USER
-}
+    /**
+     * ACCEPTED: The application has been reviewed and approved.
+     */
+    ACCEPTED,
 
-enum LeaveStatus {
-  PENDING, APPROVED, REJECTED
-}
-
-enum AttendanceStatus {
-  PRESENT, ABSENT, LATE, ON_LEAVE
+    /**
+     * REJECTED: The application has been reviewed and denied.
+     */
+    REJECTED
 }
 
 enum WorkType {
-    HYBRID, REMOTE, ON_SITE
+    /**
+     * HYBRID: A combination of remote and on-site work.
+     */
+    HYBRID,
+
+    /**
+     * REMOTE: Work is done entirely off-site, typically from home or another location.
+     */
+    REMOTE,
+
+    /**
+     * ON_SITE: Work is done at a designated location, such as an office or workplace.
+     */
+    ON_SITE
 }
 
 enum ContractType {
-    FULL_TIME, PART_TIME, B2B, FREELANCER, INTERN
+    /**
+     * CONTRACTOR: A person hired for a specific project or task, not a permanent employee.
+     */
+    CONTRACTOR,
+
+    /**
+     * VOLUNTEER: A person working without pay, usually for a charity or nonprofit.
+     */
+    VOLUNTEER,
+
+    /**
+     * FULL_TIME: Works the standard number of hours, typically 35-40 hours per week.
+     */
+    FULL_TIME,
+
+    /**
+     * PART_TIME: Works fewer hours than full-time, often under 30 hours per week.
+     */
+    PART_TIME,
+
+    /**
+     * FREELANCER: Self-employed, working on a project basis for various clients.
+     */
+    FREELANCER,
+
+    /**
+     * INTERN: Temporary role, usually for students or recent graduates to gain experience.
+     */
+    INTERN
 }
 
 enum SkillLevel {
-    EXPERT, BEGINNER
+    /**
+     * NOVICE: New to the skill with little to no experience.
+     */
+    NOVICE,
+
+    /**
+     * BEGINNER: Basic understanding but still requires guidance and practice.
+     */
+    BEGINNER,
+
+    /**
+     * INTERMEDIATE: Solid foundation, able to work independently but may need help with complex tasks.
+     */
+    INTERMEDIATE,
+
+    /**
+     * ADVANCED: Highly skilled, handles most tasks independently with proficiency.
+     */
+    ADVANCED,
+
+    /**
+     * EXPERT: Mastered the skill, able to teach others and solve complex problems with ease.
+     */
+    EXPERT
 }
 
 enum LanguageLevel {
-    BEGINNER, INTERMEDIATE, ADVANCED, NATIVE
+    /**
+     * BEGINNER: Basic understanding, limited ability to communicate.
+     */
+    BEGINNER,
+
+    /**
+     * INTERMEDIATE: Can hold conversations and manage daily communication.
+     */
+    INTERMEDIATE,
+
+    /**
+     * ADVANCED: Fluent in the language, can handle complex discussions.
+     */
+    ADVANCED,
+
+    /**
+     * NATIVE: Full mastery of the language, like a native speaker.
+     */
+    NATIVE
 }
 
 enum SocialMediaType {
-    INSTAGRAM, FACEBOOK, TWITTER, GITHUB, GITLAB
+    INSTAGRAM, FACEBOOK, TWITTER, GITHUB, GITLAB, LINKEDIN, YOUTUBE, WHATSAPP, TIKTOK, DISCORD, REDDIT, MEDIUM, PINTEREST
 }
 
 enum QuestionType {
-    MULTIPLE_CHOICE, TEXT, VIDEO
+    /**
+     * SINGLE_CHOICE: A question with only one correct answer, where the user selects a single option.
+     */
+    SINGLE_CHOICE,
+
+    /**
+     * MULTIPLE_CHOICE: A question with multiple possible correct answers, where the user can select more than one option.
+     */
+    MULTIPLE_CHOICE,
+
+    /**
+     * TEXT: A question that requires the user to provide a written response.
+     */
+    TEXT,
+
+    /**
+     * VIDEO: A question where the user is required to provide a video response.
+     */
+    VIDEO
 }
 
 enum AssignmentType {
-    TECHNICAL, NONTECHNICAL
+    /**
+     * TECHNICAL: Assignments that focus on technical skills or knowledge, such as programming or engineering tasks.
+     */
+    TECHNICAL,
+
+    /**
+     * NONTECHNICAL: Assignments that focus on non-technical skills or knowledge, such as management, communication, or writing tasks.
+     */
+    NONTECHNICAL
 }
+
+enum FileType {
+    /**
+     * CV: Curriculum Vitae or Resume file.
+     */
+    CV,
+
+    /**
+     * COVER_LETTER: Cover letter accompanying a job application.
+     */
+    COVER_LETTER,
+
+    /**
+     * PORTFOLIO: A file containing work samples, typically for creative fields.
+     */
+    PORTFOLIO,
+
+    /**
+     * CERTIFICATE: A file representing certifications or qualifications.
+     */
+    CERTIFICATE,
+
+    /**
+     * TRANSCRIPT: An academic transcript file showing grades and courses.
+     */
+    TRANSCRIPT,
+
+    /**
+     * RECOMMENDATION_LETTER: A letter of recommendation supporting the application.
+     */
+    RECOMMENDATION_LETTER,
+
+    /**
+     * OTHER: Any other supporting documents that don't fall into the predefined categories.
+     */
+    OTHER
+}
+
+enum FileExtention{
+    PDF, DOC, DOCX
+}
+
+enum EducationLevel {
+    /**
+     * HIGH_SCHOOL: Completion of secondary school education.
+     */
+    HIGH_SCHOOL,
+
+    /**
+     * BACHELOR: A standard undergraduate degree, typically lasting four years.
+     */
+    BACHELOR,
+
+    /**
+     * MASTER: A postgraduate degree requiring one to two years beyond a bachelor's.
+     */
+    MASTER,
+
+    /**
+     * PHD: Doctor of Philosophy, the highest academic degree, usually requiring several years of research.
+     */
+    PHD
+}
+
+enum UserAssignmentStatus {
+    /**
+     * NOT_STARTED: The user has been assigned the task but has not yet begun it.
+     */
+    NOT_STARTED,
+
+    /**
+     * IN_PROGRESS: The user has started working on the assignment but has not completed it.
+     */
+    IN_PROGRESS,
+
+    /**
+     * COMPLETED: The user has successfully completed the assignment.
+     */
+    COMPLETED,
+
+    /**
+     * OVERDUE: The assignment has passed its due date without being completed.
+     */
+    OVERDUE
+}
+

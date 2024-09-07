@@ -37,7 +37,7 @@ public class Skill implements Serializable {
     private Instant deletedAt;
 
     @Transient
-    @JsonIgnoreProperties(value = { "skills", "userProfile" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "company", "skills", "userProfile" }, allowSetters = true)
     private Experience experience;
 
     @Transient

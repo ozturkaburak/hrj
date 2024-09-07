@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Button, Row, Col } from 'reactstrap';
+import { Button, UncontrolledTooltip, Row, Col } from 'reactstrap';
 import { Translate, TextFormat } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -36,6 +36,9 @@ export const AnswerDetail = () => {
             <span id="content">
               <Translate contentKey="hrApp.answer.content">Content</Translate>
             </span>
+            <UncontrolledTooltip target="content">
+              <Translate contentKey="hrApp.answer.help.content" />
+            </UncontrolledTooltip>
           </dt>
           <dd>{answerEntity.content}</dd>
           <dt>

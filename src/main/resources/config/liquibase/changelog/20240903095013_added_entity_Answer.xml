@@ -14,8 +14,8 @@
             <column name="id" type="bigint" autoIncrement="true" startWith="1500">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="content" type="varchar(255)">
-                <constraints nullable="true" />
+            <column name="content" type="varchar(255)" remarks="given answer by a user. It can be either multiple/signle option(s), a text or URL of a video uploaded">
+                <constraints nullable="false" />
             </column>
             <column name="answered_at" type="${datetimeType}">
                 <constraints nullable="false" />

@@ -14,6 +14,21 @@
             <column name="id" type="bigint" autoIncrement="true" startWith="1500">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="order_of_questions" type="varchar(255)" remarks="Questions will be shown in order by their ids. 102, 300, 200">
+                <constraints nullable="false" />
+            </column>
+            <column name="total_duration_in_mins" type="integer" remarks="overwritten value of duration. if it&apos;s not provided default value will be used">
+                <constraints nullable="true" />
+            </column>
+            <column name="access_url" type="varchar(255)" remarks="this will be provided by the system when the assignment is assigned to a user. And will be sent to the user by Email, SMS, PN">
+                <constraints nullable="false" />
+            </column>
+            <column name="access_expiry_date" type="${datetimeType}" remarks="Expiry date for the access URL, after which the link is no longer valid">
+                <constraints nullable="true" />
+            </column>
+            <column name="user_assignment_status" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
             <column name="assigned_at" type="${datetimeType}">
                 <constraints nullable="false" />
             </column>
@@ -31,6 +46,7 @@
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
+        <dropDefaultValue tableName="user_assignment" columnName="access_expiry_date" columnDataType="${datetimeType}"/>
         <dropDefaultValue tableName="user_assignment" columnName="assigned_at" columnDataType="${datetimeType}"/>
         <dropDefaultValue tableName="user_assignment" columnName="joined_at" columnDataType="${datetimeType}"/>
         <dropDefaultValue tableName="user_assignment" columnName="finished_at" columnDataType="${datetimeType}"/>
@@ -53,6 +69,11 @@
                   tableName="user_assignment"
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
+            <column name="order_of_questions" type="string"/>
+            <column name="total_duration_in_mins" type="numeric"/>
+            <column name="access_url" type="string"/>
+            <column name="access_expiry_date" type="date"/>
+            <column name="user_assignment_status" type="string"/>
             <column name="assigned_at" type="date"/>
             <column name="joined_at" type="date"/>
             <column name="finished_at" type="date"/>

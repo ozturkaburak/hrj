@@ -26,7 +26,8 @@
         "userAssignment": "User Assignment",
         "assignment": "Assignment",
         "question": "Question",
-        "answer": "Answer"
+        "answer": "Answer",
+        "company": "Company"
       },
       "account": {
         "main": "Account",
