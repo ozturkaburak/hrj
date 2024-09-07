@@ -1,0 +1,10 @@
+{
+  "hrApp": {
+    "FileExtention": {
+      "null": "",
+      "PDF": "PDF",
+      "DOC": "DOC",
+      "DOCX": "DOCX"
+    }
+  }
+}

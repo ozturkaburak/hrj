@@ -1,0 +1,14 @@
+{
+  "hrApp": {
+    "FileType": {
+      "null": "",
+      "CV": "CV",
+      "COVER_LETTER": "COVER_LETTER",
+      "PORTFOLIO": "PORTFOLIO",
+      "CERTIFICATE": "CERTIFICATE",
+      "TRANSCRIPT": "TRANSCRIPT",
+      "RECOMMENDATION_LETTER": "RECOMMENDATION_LETTER",
+      "OTHER": "OTHER"
+    }
+  }
+}

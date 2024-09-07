@@ -1,0 +1,32 @@
+{
+  "hrApp": {
+    "company": {
+      "home": {
+        "title": "Companies",
+        "refreshListLabel": "Listeyi yenile",
+        "createLabel": "Yeni Company ekle",
+        "createOrEditLabel": "Yeni Company ekle veya guncelle",
+        "notFound": "Companies kaydi bulunamadi"
+      },
+      "created": "{{ param }} ID ile bir Company eklendi",
+      "updated": "{{ param }} nolu Company guncellendi",
+      "deleted": "{{ param }} nolu Company silindi",
+      "delete": {
+        "question": "{{ id }} nolu Company silinecek. Devem etmek istiyor musunuz?"
+      },
+      "detail": {
+        "title": "Company"
+      },
+      "id": "ID",
+      "name": "Name",
+      "logo": "Logo",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "deletedAt": "Deleted At",
+      "active": "Active",
+      "city": "City",
+      "jobPosting": "Job Posting",
+      "experience": "Experience"
+    }
+  }
+}
