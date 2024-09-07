@@ -94,6 +94,16 @@ public class CityService {
     }
 
     /**
+     *  Get all the cities where Company is {@code null}.
+     *  @return the list of entities.
+     */
+    @Transactional(readOnly = true)
+    public Flux<CityDTO> findAllWhereCompanyIsNull() {
+        log.debug("Request to get all cities where Company is null");
+        return cityRepository.findAllWhereCompanyIsNull().map(cityMapper::toDto);
+    }
+
+    /**
      * Returns the number of cities available.
      * @return the number of entities in the database.
      *

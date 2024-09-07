@@ -1,5 +1,6 @@
 package com.ab.hr.domain;
 
+import static com.ab.hr.domain.AssertUtils.zonedDataTimeSameInstant;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class UserAssignmentAsserts {
@@ -47,9 +48,30 @@ public class UserAssignmentAsserts {
     public static void assertUserAssignmentUpdatableFieldsEquals(UserAssignment expected, UserAssignment actual) {
         assertThat(expected)
             .as("Verify UserAssignment relevant properties")
+            .satisfies(e -> assertThat(e.getOrderOfQuestions()).as("check orderOfQuestions").isEqualTo(actual.getOrderOfQuestions()))
+            .satisfies(
+                e -> assertThat(e.getTotalDurationInMins()).as("check totalDurationInMins").isEqualTo(actual.getTotalDurationInMins())
+            )
+            .satisfies(e -> assertThat(e.getAccessUrl()).as("check accessUrl").isEqualTo(actual.getAccessUrl()))
+            .satisfies(e -> assertThat(e.getAccessExpiryDate()).as("check accessExpiryDate").isEqualTo(actual.getAccessExpiryDate()))
+            .satisfies(
+                e -> assertThat(e.getUserAssignmentStatus()).as("check userAssignmentStatus").isEqualTo(actual.getUserAssignmentStatus())
+            )
             .satisfies(e -> assertThat(e.getAssignedAt()).as("check assignedAt").isEqualTo(actual.getAssignedAt()))
-            .satisfies(e -> assertThat(e.getJoinedAt()).as("check joinedAt").isEqualTo(actual.getJoinedAt()))
-            .satisfies(e -> assertThat(e.getFinishedAt()).as("check finishedAt").isEqualTo(actual.getFinishedAt()));
+            .satisfies(
+                e ->
+                    assertThat(e.getJoinedAt())
+                        .as("check joinedAt")
+                        .usingComparator(zonedDataTimeSameInstant)
+                        .isEqualTo(actual.getJoinedAt())
+            )
+            .satisfies(
+                e ->
+                    assertThat(e.getFinishedAt())
+                        .as("check finishedAt")
+                        .usingComparator(zonedDataTimeSameInstant)
+                        .isEqualTo(actual.getFinishedAt())
+            );
     }
 
     /**

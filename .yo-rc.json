@@ -34,13 +34,14 @@
       "UserAssignment",
       "Assignment",
       "Question",
-      "Answer"
+      "Answer",
+      "Company"
     ],
     "feignClient": null,
     "jhipsterVersion": "8.6.0",
     "jwtSecretKey": "MjZjZjE0OWJlMjZmZjI1NWFjODRhMGI5MjRlMjg5OWIzNjkwODBkNDUyMjU0MDVhYzNkZmRiYjc3MDZkZDk4MmU5N2ZjM2ExZDBlZmVhYzRkMDYwMjMwYzllNDJmNTBlNmEyMTY3NmE3MWUwYzk3YjdkMmFiMWIzYTQzNWJiNTY=",
     "languages": ["en", "tr"],
-    "lastLiquibaseTimestamp": 1725357013000,
+    "lastLiquibaseTimestamp": 1725708028000,
     "messageBroker": false,
     "microfrontend": false,
     "microfrontends": [],

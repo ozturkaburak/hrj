@@ -29,10 +29,22 @@ public class Assignment implements Serializable {
     @Column("type")
     private AssignmentType type;
 
+    /**
+     * For ROLE_USER, PAID roles should see everything
+     */
     @NotNull(message = "must not be null")
     @Column("visible")
     private Boolean visible;
 
+    /**
+     * default value of duration. It can be overriden by Userassignemnt
+     */
+    @Column("total_duration_in_mins")
+    private Integer totalDurationInMins;
+
+    /**
+     * seperated by delimeter
+     */
     @Column("hashtags")
     private String hashtags;
 
@@ -92,6 +104,19 @@ public class Assignment implements Serializable {
 
     public void setVisible(Boolean visible) {
         this.visible = visible;
+    }
+
+    public Integer getTotalDurationInMins() {
+        return this.totalDurationInMins;
+    }
+
+    public Assignment totalDurationInMins(Integer totalDurationInMins) {
+        this.setTotalDurationInMins(totalDurationInMins);
+        return this;
+    }
+
+    public void setTotalDurationInMins(Integer totalDurationInMins) {
+        this.totalDurationInMins = totalDurationInMins;
     }
 
     public String getHashtags() {
@@ -214,6 +239,7 @@ public class Assignment implements Serializable {
             "id=" + getId() +
             ", type='" + getType() + "'" +
             ", visible='" + getVisible() + "'" +
+            ", totalDurationInMins=" + getTotalDurationInMins() +
             ", hashtags='" + getHashtags() + "'" +
             ", createdAt='" + getCreatedAt() + "'" +
             ", updatedAt='" + getUpdatedAt() + "'" +

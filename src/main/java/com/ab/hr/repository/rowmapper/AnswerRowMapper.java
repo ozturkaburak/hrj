@@ -2,7 +2,7 @@ package com.ab.hr.repository.rowmapper;
 
 import com.ab.hr.domain.Answer;
 import io.r2dbc.spi.Row;
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.function.BiFunction;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +27,7 @@ public class AnswerRowMapper implements BiFunction<Row, String, Answer> {
         Answer entity = new Answer();
         entity.setId(converter.fromRow(row, prefix + "_id", Long.class));
         entity.setContent(converter.fromRow(row, prefix + "_content", String.class));
-        entity.setAnsweredAt(converter.fromRow(row, prefix + "_answered_at", Instant.class));
+        entity.setAnsweredAt(converter.fromRow(row, prefix + "_answered_at", ZonedDateTime.class));
         entity.setQuestionId(converter.fromRow(row, prefix + "_question_id", Long.class));
         entity.setUserId(converter.fromRow(row, prefix + "_user_id", Long.class));
         return entity;

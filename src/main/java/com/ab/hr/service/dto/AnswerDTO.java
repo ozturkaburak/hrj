@@ -1,8 +1,9 @@
 package com.ab.hr.service.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 /**
@@ -13,10 +14,15 @@ public class AnswerDTO implements Serializable {
 
     private Long id;
 
+    @NotNull(message = "must not be null")
+    @Schema(
+        description = "given answer by a user. It can be either multiple/signle option(s), a text or URL of a video uploaded",
+        requiredMode = Schema.RequiredMode.REQUIRED
+    )
     private String content;
 
     @NotNull(message = "must not be null")
-    private Instant answeredAt;
+    private ZonedDateTime answeredAt;
 
     private QuestionDTO question;
 
@@ -38,11 +44,11 @@ public class AnswerDTO implements Serializable {
         this.content = content;
     }
 
-    public Instant getAnsweredAt() {
+    public ZonedDateTime getAnsweredAt() {
         return answeredAt;
     }
 
-    public void setAnsweredAt(Instant answeredAt) {
+    public void setAnsweredAt(ZonedDateTime answeredAt) {
         this.answeredAt = answeredAt;
     }
 

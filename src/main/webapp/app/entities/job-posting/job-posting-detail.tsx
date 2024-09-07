@@ -45,18 +45,6 @@ export const JobPostingDetail = () => {
           </dt>
           <dd>{jobPostingEntity.description}</dd>
           <dt>
-            <span id="location">
-              <Translate contentKey="hrApp.jobPosting.location">Location</Translate>
-            </span>
-          </dt>
-          <dd>{jobPostingEntity.location}</dd>
-          <dt>
-            <span id="department">
-              <Translate contentKey="hrApp.jobPosting.department">Department</Translate>
-            </span>
-          </dt>
-          <dd>{jobPostingEntity.department}</dd>
-          <dt>
             <span id="status">
               <Translate contentKey="hrApp.jobPosting.status">Status</Translate>
             </span>
@@ -78,6 +66,10 @@ export const JobPostingDetail = () => {
           <dd>
             {jobPostingEntity.expireDate ? <TextFormat value={jobPostingEntity.expireDate} type="date" format={APP_DATE_FORMAT} /> : null}
           </dd>
+          <dt>
+            <Translate contentKey="hrApp.jobPosting.company">Company</Translate>
+          </dt>
+          <dd>{jobPostingEntity.company ? jobPostingEntity.company.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/job-posting" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

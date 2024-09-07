@@ -12,6 +12,7 @@
       "fieldValidateRules": ["required"]
     },
     {
+      "documentation": "Options of the question. it will be seperated by delimeter",
       "fieldName": "options",
       "fieldType": "String"
     },
@@ -19,9 +20,16 @@
       "fieldName": "type",
       "fieldType": "QuestionType",
       "fieldValidateRules": ["required"],
-      "fieldValues": "MULTIPLE_CHOICE,TEXT,VIDEO"
+      "fieldValues": "SINGLE_CHOICE,MULTIPLE_CHOICE,TEXT,VIDEO",
+      "fieldValuesJavadocs": {
+        "MULTIPLE_CHOICE": "\n     * MULTIPLE_CHOICE: A question with multiple possible correct answers, where the user can select more than one option.\n",
+        "SINGLE_CHOICE": "\n     * SINGLE_CHOICE: A question with only one correct answer, where the user selects a single option.\n",
+        "TEXT": "\n     * TEXT: A question that requires the user to provide a written response.\n",
+        "VIDEO": "\n     * VIDEO: A question where the user is required to provide a video response.\n"
+      }
     },
     {
+      "documentation": "Correct answers of the question. Either multiple/signle option(s) or a text. Will be empty for video",
       "fieldName": "correctAnswer",
       "fieldType": "String"
     },

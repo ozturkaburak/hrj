@@ -1,6 +1,7 @@
 package com.ab.hr.service.dto;
 
 import com.ab.hr.domain.enumeration.QuestionType;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.Instant;
@@ -19,11 +20,13 @@ public class QuestionDTO implements Serializable {
     @NotNull(message = "must not be null")
     private String content;
 
+    @Schema(description = "Options of the question. it will be seperated by delimeter")
     private String options;
 
     @NotNull(message = "must not be null")
     private QuestionType type;
 
+    @Schema(description = "Correct answers of the question. Either multiple/signle option(s) or a text. Will be empty for video")
     private String correctAnswer;
 
     @NotNull(message = "must not be null")

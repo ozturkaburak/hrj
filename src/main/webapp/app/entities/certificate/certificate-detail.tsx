@@ -44,7 +44,9 @@ export const CertificateDetail = () => {
             </span>
           </dt>
           <dd>
-            {certificateEntity.startDate ? <TextFormat value={certificateEntity.startDate} type="date" format={APP_DATE_FORMAT} /> : null}
+            {certificateEntity.startDate ? (
+              <TextFormat value={certificateEntity.startDate} type="date" format={APP_LOCAL_DATE_FORMAT} />
+            ) : null}
           </dd>
           <dt>
             <span id="endDate">
@@ -52,7 +54,7 @@ export const CertificateDetail = () => {
             </span>
           </dt>
           <dd>
-            {certificateEntity.endDate ? <TextFormat value={certificateEntity.endDate} type="date" format={APP_DATE_FORMAT} /> : null}
+            {certificateEntity.endDate ? <TextFormat value={certificateEntity.endDate} type="date" format={APP_LOCAL_DATE_FORMAT} /> : null}
           </dd>
           <dt>
             <span id="description">

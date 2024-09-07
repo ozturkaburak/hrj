@@ -29,11 +29,10 @@ public class JobPostingRowMapper implements BiFunction<Row, String, JobPosting> 
         entity.setId(converter.fromRow(row, prefix + "_id", Long.class));
         entity.setTitle(converter.fromRow(row, prefix + "_title", String.class));
         entity.setDescription(converter.fromRow(row, prefix + "_description", String.class));
-        entity.setLocation(converter.fromRow(row, prefix + "_location", String.class));
-        entity.setDepartment(converter.fromRow(row, prefix + "_department", String.class));
         entity.setStatus(converter.fromRow(row, prefix + "_status", JobStatus.class));
         entity.setCreatedDate(converter.fromRow(row, prefix + "_created_date", Instant.class));
         entity.setExpireDate(converter.fromRow(row, prefix + "_expire_date", Instant.class));
+        entity.setCompanyId(converter.fromRow(row, prefix + "_company_id", Long.class));
         return entity;
     }
 }

@@ -2,6 +2,7 @@ package com.ab.hr.repository;
 
 import com.ab.hr.domain.JobPosting;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
@@ -14,6 +15,12 @@ import reactor.core.publisher.Mono;
 @Repository
 public interface JobPostingRepository extends ReactiveCrudRepository<JobPosting, Long>, JobPostingRepositoryInternal {
     Flux<JobPosting> findAllBy(Pageable pageable);
+
+    @Query("SELECT * FROM job_posting entity WHERE entity.company_id = :id")
+    Flux<JobPosting> findByCompany(Long id);
+
+    @Query("SELECT * FROM job_posting entity WHERE entity.company_id IS NULL")
+    Flux<JobPosting> findAllWhereCompanyIsNull();
 
     @Override
     <S extends JobPosting> Mono<S> save(S entity);

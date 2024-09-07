@@ -29,6 +29,9 @@ public class Question implements Serializable {
     @Column("content")
     private String content;
 
+    /**
+     * Options of the question. it will be seperated by delimeter
+     */
     @Column("options")
     private String options;
 
@@ -36,6 +39,9 @@ public class Question implements Serializable {
     @Column("type")
     private QuestionType type;
 
+    /**
+     * Correct answers of the question. Either multiple/signle option(s) or a text. Will be empty for video
+     */
     @Column("correct_answer")
     private String correctAnswer;
 

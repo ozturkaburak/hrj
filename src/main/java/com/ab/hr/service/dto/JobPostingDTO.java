@@ -20,15 +20,14 @@ public class JobPostingDTO implements Serializable {
     @NotNull(message = "must not be null")
     private String description;
 
-    private String location;
-
-    private String department;
-
     private JobStatus status;
 
+    @NotNull(message = "must not be null")
     private Instant createdDate;
 
     private Instant expireDate;
+
+    private CompanyDTO company;
 
     public Long getId() {
         return id;
@@ -54,22 +53,6 @@ public class JobPostingDTO implements Serializable {
         this.description = description;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
     public JobStatus getStatus() {
         return status;
     }
@@ -92,6 +75,14 @@ public class JobPostingDTO implements Serializable {
 
     public void setExpireDate(Instant expireDate) {
         this.expireDate = expireDate;
+    }
+
+    public CompanyDTO getCompany() {
+        return company;
+    }
+
+    public void setCompany(CompanyDTO company) {
+        this.company = company;
     }
 
     @Override
@@ -122,11 +113,10 @@ public class JobPostingDTO implements Serializable {
             "id=" + getId() +
             ", title='" + getTitle() + "'" +
             ", description='" + getDescription() + "'" +
-            ", location='" + getLocation() + "'" +
-            ", department='" + getDepartment() + "'" +
             ", status='" + getStatus() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +
             ", expireDate='" + getExpireDate() + "'" +
+            ", company=" + getCompany() +
             "}";
     }
 }

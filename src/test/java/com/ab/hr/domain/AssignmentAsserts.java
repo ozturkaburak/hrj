@@ -49,6 +49,9 @@ public class AssignmentAsserts {
             .as("Verify Assignment relevant properties")
             .satisfies(e -> assertThat(e.getType()).as("check type").isEqualTo(actual.getType()))
             .satisfies(e -> assertThat(e.getVisible()).as("check visible").isEqualTo(actual.getVisible()))
+            .satisfies(
+                e -> assertThat(e.getTotalDurationInMins()).as("check totalDurationInMins").isEqualTo(actual.getTotalDurationInMins())
+            )
             .satisfies(e -> assertThat(e.getHashtags()).as("check hashtags").isEqualTo(actual.getHashtags()))
             .satisfies(e -> assertThat(e.getCreatedAt()).as("check createdAt").isEqualTo(actual.getCreatedAt()))
             .satisfies(e -> assertThat(e.getUpdatedAt()).as("check updatedAt").isEqualTo(actual.getUpdatedAt()))

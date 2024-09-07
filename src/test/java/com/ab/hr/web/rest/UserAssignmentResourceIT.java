@@ -2,12 +2,14 @@ package com.ab.hr.web.rest;
 
 import static com.ab.hr.domain.UserAssignmentAsserts.*;
 import static com.ab.hr.web.rest.TestUtil.createUpdateProxyForBean;
+import static com.ab.hr.web.rest.TestUtil.sameInstant;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.is;
 
 import com.ab.hr.IntegrationTest;
 import com.ab.hr.domain.UserAssignment;
+import com.ab.hr.domain.enumeration.UserAssignmentStatus;
 import com.ab.hr.repository.EntityManager;
 import com.ab.hr.repository.UserAssignmentRepository;
 import com.ab.hr.repository.UserRepository;
@@ -15,6 +17,9 @@ import com.ab.hr.service.dto.UserAssignmentDTO;
 import com.ab.hr.service.mapper.UserAssignmentMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
@@ -35,14 +40,29 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 @WithMockUser
 class UserAssignmentResourceIT {
 
+    private static final String DEFAULT_ORDER_OF_QUESTIONS = "AAAAAAAAAA";
+    private static final String UPDATED_ORDER_OF_QUESTIONS = "BBBBBBBBBB";
+
+    private static final Integer DEFAULT_TOTAL_DURATION_IN_MINS = 1;
+    private static final Integer UPDATED_TOTAL_DURATION_IN_MINS = 2;
+
+    private static final String DEFAULT_ACCESS_URL = "AAAAAAAAAA";
+    private static final String UPDATED_ACCESS_URL = "BBBBBBBBBB";
+
+    private static final Instant DEFAULT_ACCESS_EXPIRY_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_ACCESS_EXPIRY_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final UserAssignmentStatus DEFAULT_USER_ASSIGNMENT_STATUS = UserAssignmentStatus.NOT_STARTED;
+    private static final UserAssignmentStatus UPDATED_USER_ASSIGNMENT_STATUS = UserAssignmentStatus.IN_PROGRESS;
+
     private static final Instant DEFAULT_ASSIGNED_AT = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_ASSIGNED_AT = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final Instant DEFAULT_JOINED_AT = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_JOINED_AT = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final ZonedDateTime DEFAULT_JOINED_AT = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_JOINED_AT = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
-    private static final Instant DEFAULT_FINISHED_AT = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_FINISHED_AT = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final ZonedDateTime DEFAULT_FINISHED_AT = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_FINISHED_AT = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
     private static final String ENTITY_API_URL = "/api/user-assignments";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -80,6 +100,11 @@ class UserAssignmentResourceIT {
      */
     public static UserAssignment createEntity(EntityManager em) {
         UserAssignment userAssignment = new UserAssignment()
+            .orderOfQuestions(DEFAULT_ORDER_OF_QUESTIONS)
+            .totalDurationInMins(DEFAULT_TOTAL_DURATION_IN_MINS)
+            .accessUrl(DEFAULT_ACCESS_URL)
+            .accessExpiryDate(DEFAULT_ACCESS_EXPIRY_DATE)
+            .userAssignmentStatus(DEFAULT_USER_ASSIGNMENT_STATUS)
             .assignedAt(DEFAULT_ASSIGNED_AT)
             .joinedAt(DEFAULT_JOINED_AT)
             .finishedAt(DEFAULT_FINISHED_AT);
@@ -94,6 +119,11 @@ class UserAssignmentResourceIT {
      */
     public static UserAssignment createUpdatedEntity(EntityManager em) {
         UserAssignment userAssignment = new UserAssignment()
+            .orderOfQuestions(UPDATED_ORDER_OF_QUESTIONS)
+            .totalDurationInMins(UPDATED_TOTAL_DURATION_IN_MINS)
+            .accessUrl(UPDATED_ACCESS_URL)
+            .accessExpiryDate(UPDATED_ACCESS_EXPIRY_DATE)
+            .userAssignmentStatus(UPDATED_USER_ASSIGNMENT_STATUS)
             .assignedAt(UPDATED_ASSIGNED_AT)
             .joinedAt(UPDATED_JOINED_AT)
             .finishedAt(UPDATED_FINISHED_AT);
@@ -172,6 +202,69 @@ class UserAssignmentResourceIT {
     }
 
     @Test
+    void checkOrderOfQuestionsIsRequired() throws Exception {
+        long databaseSizeBeforeTest = getRepositoryCount();
+        // set the field null
+        userAssignment.setOrderOfQuestions(null);
+
+        // Create the UserAssignment, which fails.
+        UserAssignmentDTO userAssignmentDTO = userAssignmentMapper.toDto(userAssignment);
+
+        webTestClient
+            .post()
+            .uri(ENTITY_API_URL)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(om.writeValueAsBytes(userAssignmentDTO))
+            .exchange()
+            .expectStatus()
+            .isBadRequest();
+
+        assertSameRepositoryCount(databaseSizeBeforeTest);
+    }
+
+    @Test
+    void checkAccessUrlIsRequired() throws Exception {
+        long databaseSizeBeforeTest = getRepositoryCount();
+        // set the field null
+        userAssignment.setAccessUrl(null);
+
+        // Create the UserAssignment, which fails.
+        UserAssignmentDTO userAssignmentDTO = userAssignmentMapper.toDto(userAssignment);
+
+        webTestClient
+            .post()
+            .uri(ENTITY_API_URL)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(om.writeValueAsBytes(userAssignmentDTO))
+            .exchange()
+            .expectStatus()
+            .isBadRequest();
+
+        assertSameRepositoryCount(databaseSizeBeforeTest);
+    }
+
+    @Test
+    void checkUserAssignmentStatusIsRequired() throws Exception {
+        long databaseSizeBeforeTest = getRepositoryCount();
+        // set the field null
+        userAssignment.setUserAssignmentStatus(null);
+
+        // Create the UserAssignment, which fails.
+        UserAssignmentDTO userAssignmentDTO = userAssignmentMapper.toDto(userAssignment);
+
+        webTestClient
+            .post()
+            .uri(ENTITY_API_URL)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(om.writeValueAsBytes(userAssignmentDTO))
+            .exchange()
+            .expectStatus()
+            .isBadRequest();
+
+        assertSameRepositoryCount(databaseSizeBeforeTest);
+    }
+
+    @Test
     void checkAssignedAtIsRequired() throws Exception {
         long databaseSizeBeforeTest = getRepositoryCount();
         // set the field null
@@ -210,12 +303,22 @@ class UserAssignmentResourceIT {
             .expectBody()
             .jsonPath("$.[*].id")
             .value(hasItem(userAssignment.getId().intValue()))
+            .jsonPath("$.[*].orderOfQuestions")
+            .value(hasItem(DEFAULT_ORDER_OF_QUESTIONS))
+            .jsonPath("$.[*].totalDurationInMins")
+            .value(hasItem(DEFAULT_TOTAL_DURATION_IN_MINS))
+            .jsonPath("$.[*].accessUrl")
+            .value(hasItem(DEFAULT_ACCESS_URL))
+            .jsonPath("$.[*].accessExpiryDate")
+            .value(hasItem(DEFAULT_ACCESS_EXPIRY_DATE.toString()))
+            .jsonPath("$.[*].userAssignmentStatus")
+            .value(hasItem(DEFAULT_USER_ASSIGNMENT_STATUS.toString()))
             .jsonPath("$.[*].assignedAt")
             .value(hasItem(DEFAULT_ASSIGNED_AT.toString()))
             .jsonPath("$.[*].joinedAt")
-            .value(hasItem(DEFAULT_JOINED_AT.toString()))
+            .value(hasItem(sameInstant(DEFAULT_JOINED_AT)))
             .jsonPath("$.[*].finishedAt")
-            .value(hasItem(DEFAULT_FINISHED_AT.toString()));
+            .value(hasItem(sameInstant(DEFAULT_FINISHED_AT)));
     }
 
     @Test
@@ -236,12 +339,22 @@ class UserAssignmentResourceIT {
             .expectBody()
             .jsonPath("$.id")
             .value(is(userAssignment.getId().intValue()))
+            .jsonPath("$.orderOfQuestions")
+            .value(is(DEFAULT_ORDER_OF_QUESTIONS))
+            .jsonPath("$.totalDurationInMins")
+            .value(is(DEFAULT_TOTAL_DURATION_IN_MINS))
+            .jsonPath("$.accessUrl")
+            .value(is(DEFAULT_ACCESS_URL))
+            .jsonPath("$.accessExpiryDate")
+            .value(is(DEFAULT_ACCESS_EXPIRY_DATE.toString()))
+            .jsonPath("$.userAssignmentStatus")
+            .value(is(DEFAULT_USER_ASSIGNMENT_STATUS.toString()))
             .jsonPath("$.assignedAt")
             .value(is(DEFAULT_ASSIGNED_AT.toString()))
             .jsonPath("$.joinedAt")
-            .value(is(DEFAULT_JOINED_AT.toString()))
+            .value(is(sameInstant(DEFAULT_JOINED_AT)))
             .jsonPath("$.finishedAt")
-            .value(is(DEFAULT_FINISHED_AT.toString()));
+            .value(is(sameInstant(DEFAULT_FINISHED_AT)));
     }
 
     @Test
@@ -265,7 +378,15 @@ class UserAssignmentResourceIT {
 
         // Update the userAssignment
         UserAssignment updatedUserAssignment = userAssignmentRepository.findById(userAssignment.getId()).block();
-        updatedUserAssignment.assignedAt(UPDATED_ASSIGNED_AT).joinedAt(UPDATED_JOINED_AT).finishedAt(UPDATED_FINISHED_AT);
+        updatedUserAssignment
+            .orderOfQuestions(UPDATED_ORDER_OF_QUESTIONS)
+            .totalDurationInMins(UPDATED_TOTAL_DURATION_IN_MINS)
+            .accessUrl(UPDATED_ACCESS_URL)
+            .accessExpiryDate(UPDATED_ACCESS_EXPIRY_DATE)
+            .userAssignmentStatus(UPDATED_USER_ASSIGNMENT_STATUS)
+            .assignedAt(UPDATED_ASSIGNED_AT)
+            .joinedAt(UPDATED_JOINED_AT)
+            .finishedAt(UPDATED_FINISHED_AT);
         UserAssignmentDTO userAssignmentDTO = userAssignmentMapper.toDto(updatedUserAssignment);
 
         webTestClient
@@ -359,7 +480,13 @@ class UserAssignmentResourceIT {
         UserAssignment partialUpdatedUserAssignment = new UserAssignment();
         partialUpdatedUserAssignment.setId(userAssignment.getId());
 
-        partialUpdatedUserAssignment.assignedAt(UPDATED_ASSIGNED_AT).joinedAt(UPDATED_JOINED_AT);
+        partialUpdatedUserAssignment
+            .totalDurationInMins(UPDATED_TOTAL_DURATION_IN_MINS)
+            .accessUrl(UPDATED_ACCESS_URL)
+            .accessExpiryDate(UPDATED_ACCESS_EXPIRY_DATE)
+            .userAssignmentStatus(UPDATED_USER_ASSIGNMENT_STATUS)
+            .assignedAt(UPDATED_ASSIGNED_AT)
+            .joinedAt(UPDATED_JOINED_AT);
 
         webTestClient
             .patch()
@@ -390,7 +517,15 @@ class UserAssignmentResourceIT {
         UserAssignment partialUpdatedUserAssignment = new UserAssignment();
         partialUpdatedUserAssignment.setId(userAssignment.getId());
 
-        partialUpdatedUserAssignment.assignedAt(UPDATED_ASSIGNED_AT).joinedAt(UPDATED_JOINED_AT).finishedAt(UPDATED_FINISHED_AT);
+        partialUpdatedUserAssignment
+            .orderOfQuestions(UPDATED_ORDER_OF_QUESTIONS)
+            .totalDurationInMins(UPDATED_TOTAL_DURATION_IN_MINS)
+            .accessUrl(UPDATED_ACCESS_URL)
+            .accessExpiryDate(UPDATED_ACCESS_EXPIRY_DATE)
+            .userAssignmentStatus(UPDATED_USER_ASSIGNMENT_STATUS)
+            .assignedAt(UPDATED_ASSIGNED_AT)
+            .joinedAt(UPDATED_JOINED_AT)
+            .finishedAt(UPDATED_FINISHED_AT);
 
         webTestClient
             .patch()

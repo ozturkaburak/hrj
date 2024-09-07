@@ -1,5 +1,7 @@
 package com.ab.hr.domain;
 
+import com.ab.hr.domain.enumeration.FileExtention;
+import com.ab.hr.domain.enumeration.FileType;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
@@ -22,16 +24,17 @@ public class Upload implements Serializable {
     @Column("id")
     private Long id;
 
-    @Column("file")
-    private byte[] file;
-
-    @NotNull
-    @Column("file_content_type")
-    private String fileContentType;
+    @NotNull(message = "must not be null")
+    @Column("url")
+    private String url;
 
     @NotNull(message = "must not be null")
-    @Column("file_type")
-    private String fileType;
+    @Column("type")
+    private FileType type;
+
+    @NotNull(message = "must not be null")
+    @Column("extension")
+    private FileExtention extension;
 
     @NotNull(message = "must not be null")
     @Column("upload_date")
@@ -59,43 +62,43 @@ public class Upload implements Serializable {
         this.id = id;
     }
 
-    public byte[] getFile() {
-        return this.file;
+    public String getUrl() {
+        return this.url;
     }
 
-    public Upload file(byte[] file) {
-        this.setFile(file);
+    public Upload url(String url) {
+        this.setUrl(url);
         return this;
     }
 
-    public void setFile(byte[] file) {
-        this.file = file;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public String getFileContentType() {
-        return this.fileContentType;
+    public FileType getType() {
+        return this.type;
     }
 
-    public Upload fileContentType(String fileContentType) {
-        this.fileContentType = fileContentType;
+    public Upload type(FileType type) {
+        this.setType(type);
         return this;
     }
 
-    public void setFileContentType(String fileContentType) {
-        this.fileContentType = fileContentType;
+    public void setType(FileType type) {
+        this.type = type;
     }
 
-    public String getFileType() {
-        return this.fileType;
+    public FileExtention getExtension() {
+        return this.extension;
     }
 
-    public Upload fileType(String fileType) {
-        this.setFileType(fileType);
+    public Upload extension(FileExtention extension) {
+        this.setExtension(extension);
         return this;
     }
 
-    public void setFileType(String fileType) {
-        this.fileType = fileType;
+    public void setExtension(FileExtention extension) {
+        this.extension = extension;
     }
 
     public Instant getUploadDate() {
@@ -157,9 +160,9 @@ public class Upload implements Serializable {
     public String toString() {
         return "Upload{" +
             "id=" + getId() +
-            ", file='" + getFile() + "'" +
-            ", fileContentType='" + getFileContentType() + "'" +
-            ", fileType='" + getFileType() + "'" +
+            ", url='" + getUrl() + "'" +
+            ", type='" + getType() + "'" +
+            ", extension='" + getExtension() + "'" +
             ", uploadDate='" + getUploadDate() + "'" +
             "}";
     }

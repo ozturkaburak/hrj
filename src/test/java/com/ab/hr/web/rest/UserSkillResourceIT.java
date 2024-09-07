@@ -39,7 +39,7 @@ class UserSkillResourceIT {
     private static final Integer DEFAULT_YEAR = 1;
     private static final Integer UPDATED_YEAR = 2;
 
-    private static final SkillLevel DEFAULT_LEVEL = SkillLevel.EXPERT;
+    private static final SkillLevel DEFAULT_LEVEL = SkillLevel.NOVICE;
     private static final SkillLevel UPDATED_LEVEL = SkillLevel.BEGINNER;
 
     private static final Instant DEFAULT_CREATED_AT = Instant.ofEpochMilli(0L);
@@ -404,7 +404,7 @@ class UserSkillResourceIT {
         UserSkill partialUpdatedUserSkill = new UserSkill();
         partialUpdatedUserSkill.setId(userSkill.getId());
 
-        partialUpdatedUserSkill.year(UPDATED_YEAR).level(UPDATED_LEVEL).deletedAt(UPDATED_DELETED_AT);
+        partialUpdatedUserSkill.updatedAt(UPDATED_UPDATED_AT).deletedAt(UPDATED_DELETED_AT);
 
         webTestClient
             .patch()

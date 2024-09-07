@@ -1,5 +1,6 @@
 package com.ab.hr.domain;
 
+import static com.ab.hr.domain.CompanyTestSamples.*;
 import static com.ab.hr.domain.JobPostingTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,5 +21,17 @@ class JobPostingTest {
 
         jobPosting2 = getJobPostingSample2();
         assertThat(jobPosting1).isNotEqualTo(jobPosting2);
+    }
+
+    @Test
+    void companyTest() {
+        JobPosting jobPosting = getJobPostingRandomSampleGenerator();
+        Company companyBack = getCompanyRandomSampleGenerator();
+
+        jobPosting.setCompany(companyBack);
+        assertThat(jobPosting.getCompany()).isEqualTo(companyBack);
+
+        jobPosting.company(null);
+        assertThat(jobPosting.getCompany()).isNull();
     }
 }

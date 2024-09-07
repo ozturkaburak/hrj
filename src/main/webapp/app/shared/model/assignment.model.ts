@@ -6,6 +6,7 @@ export interface IAssignment {
   id?: number;
   type?: keyof typeof AssignmentType;
   visible?: boolean;
+  totalDurationInMins?: number | null;
   hashtags?: string | null;
   createdAt?: dayjs.Dayjs;
   updatedAt?: dayjs.Dayjs | null;

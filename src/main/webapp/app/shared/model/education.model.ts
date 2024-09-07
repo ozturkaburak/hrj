@@ -1,14 +1,15 @@
 import dayjs from 'dayjs';
 import { IUserProfile } from 'app/shared/model/user-profile.model';
+import { EducationLevel } from 'app/shared/model/enumerations/education-level.model';
 
 export interface IEducation {
   id?: number;
-  schoolName?: string;
-  department?: string | null;
+  name?: string;
+  faculty?: string | null;
+  level?: keyof typeof EducationLevel | null;
   degree?: string | null;
   startDate?: dayjs.Dayjs;
   endDate?: dayjs.Dayjs | null;
-  description?: string | null;
   activities?: string | null;
   clubs?: string | null;
   createdAt?: dayjs.Dayjs;

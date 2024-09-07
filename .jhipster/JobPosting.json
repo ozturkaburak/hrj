@@ -17,21 +17,19 @@
       "fieldValidateRules": ["required"]
     },
     {
-      "fieldName": "location",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "department",
-      "fieldType": "String"
-    },
-    {
       "fieldName": "status",
       "fieldType": "JobStatus",
-      "fieldValues": "OPEN,CLOSED,FILLED"
+      "fieldValues": "OPEN,CLOSED,FILLED",
+      "fieldValuesJavadocs": {
+        "CLOSED": "\n     * CLOSED: The job is no longer available and applications are no longer being accepted.\n",
+        "FILLED": "\n     * FILLED: The job has been filled by a candidate.\n",
+        "OPEN": "\n     * OPEN: The job is currently available and accepting applications.\n"
+      }
     },
     {
       "fieldName": "createdDate",
-      "fieldType": "Instant"
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "expireDate",
@@ -40,7 +38,14 @@
   ],
   "name": "JobPosting",
   "pagination": "pagination",
-  "relationships": [],
+  "relationships": [
+    {
+      "otherEntityName": "company",
+      "relationshipName": "company",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
   "searchEngine": "no",
   "service": "serviceClass"
 }

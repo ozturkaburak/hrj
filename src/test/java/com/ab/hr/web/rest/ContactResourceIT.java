@@ -382,7 +382,11 @@ class ContactResourceIT {
         Contact partialUpdatedContact = new Contact();
         partialUpdatedContact.setId(contact.getId());
 
-        partialUpdatedContact.secondaryEmail(UPDATED_SECONDARY_EMAIL).phoneNumber(UPDATED_PHONE_NUMBER).createdAt(UPDATED_CREATED_AT);
+        partialUpdatedContact
+            .secondaryEmail(UPDATED_SECONDARY_EMAIL)
+            .phoneNumber(UPDATED_PHONE_NUMBER)
+            .createdAt(UPDATED_CREATED_AT)
+            .deletedAt(UPDATED_DELETED_AT);
 
         webTestClient
             .patch()

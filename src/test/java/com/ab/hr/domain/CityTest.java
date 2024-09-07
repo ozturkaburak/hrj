@@ -1,6 +1,7 @@
 package com.ab.hr.domain;
 
 import static com.ab.hr.domain.CityTestSamples.*;
+import static com.ab.hr.domain.CompanyTestSamples.*;
 import static com.ab.hr.domain.ContactTestSamples.*;
 import static com.ab.hr.domain.CountryTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -48,5 +49,19 @@ class CityTest {
         city.contact(null);
         assertThat(city.getContact()).isNull();
         assertThat(contactBack.getCity()).isNull();
+    }
+
+    @Test
+    void companyTest() {
+        City city = getCityRandomSampleGenerator();
+        Company companyBack = getCompanyRandomSampleGenerator();
+
+        city.setCompany(companyBack);
+        assertThat(city.getCompany()).isEqualTo(companyBack);
+        assertThat(companyBack.getCity()).isEqualTo(city);
+
+        city.company(null);
+        assertThat(city.getCompany()).isNull();
+        assertThat(companyBack.getCity()).isNull();
     }
 }

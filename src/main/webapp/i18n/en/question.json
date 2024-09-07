@@ -26,7 +26,11 @@
       "updatedAt": "Updated At",
       "deletedAt": "Deleted At",
       "assignment": "Assignment",
-      "answer": "Answer"
+      "answer": "Answer",
+      "help": {
+        "options": "Options of the question. it will be seperated by delimeter",
+        "correctAnswer": "Correct answers of the question. Either multiple/signle option(s) or a text. Will be empty for video"
+      }
     }
   }
 }

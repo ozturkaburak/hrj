@@ -12,10 +12,8 @@ public class ExperienceSqlHelper {
         List<Expression> columns = new ArrayList<>();
         columns.add(Column.aliased("id", table, columnPrefix + "_id"));
         columns.add(Column.aliased("title", table, columnPrefix + "_title"));
-        columns.add(Column.aliased("company_name", table, columnPrefix + "_company_name"));
         columns.add(Column.aliased("work_type", table, columnPrefix + "_work_type"));
         columns.add(Column.aliased("contract_type", table, columnPrefix + "_contract_type"));
-        columns.add(Column.aliased("office_location", table, columnPrefix + "_office_location"));
         columns.add(Column.aliased("start_date", table, columnPrefix + "_start_date"));
         columns.add(Column.aliased("end_date", table, columnPrefix + "_end_date"));
         columns.add(Column.aliased("description", table, columnPrefix + "_description"));
@@ -23,6 +21,7 @@ public class ExperienceSqlHelper {
         columns.add(Column.aliased("updated_at", table, columnPrefix + "_updated_at"));
         columns.add(Column.aliased("deleted_at", table, columnPrefix + "_deleted_at"));
 
+        columns.add(Column.aliased("company_id", table, columnPrefix + "_company_id"));
         columns.add(Column.aliased("user_profile_id", table, columnPrefix + "_user_profile_id"));
         return columns;
     }

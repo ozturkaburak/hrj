@@ -2,6 +2,7 @@ package com.ab.hr.web.rest;
 
 import static com.ab.hr.domain.AnswerAsserts.*;
 import static com.ab.hr.web.rest.TestUtil.createUpdateProxyForBean;
+import static com.ab.hr.web.rest.TestUtil.sameInstant;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.is;
@@ -15,7 +16,9 @@ import com.ab.hr.service.dto.AnswerDTO;
 import com.ab.hr.service.mapper.AnswerMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.AfterEach;
@@ -38,8 +41,8 @@ class AnswerResourceIT {
     private static final String DEFAULT_CONTENT = "AAAAAAAAAA";
     private static final String UPDATED_CONTENT = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_ANSWERED_AT = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_ANSWERED_AT = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final ZonedDateTime DEFAULT_ANSWERED_AT = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_ANSWERED_AT = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
     private static final String ENTITY_API_URL = "/api/answers";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -163,6 +166,27 @@ class AnswerResourceIT {
     }
 
     @Test
+    void checkContentIsRequired() throws Exception {
+        long databaseSizeBeforeTest = getRepositoryCount();
+        // set the field null
+        answer.setContent(null);
+
+        // Create the Answer, which fails.
+        AnswerDTO answerDTO = answerMapper.toDto(answer);
+
+        webTestClient
+            .post()
+            .uri(ENTITY_API_URL)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(om.writeValueAsBytes(answerDTO))
+            .exchange()
+            .expectStatus()
+            .isBadRequest();
+
+        assertSameRepositoryCount(databaseSizeBeforeTest);
+    }
+
+    @Test
     void checkAnsweredAtIsRequired() throws Exception {
         long databaseSizeBeforeTest = getRepositoryCount();
         // set the field null
@@ -204,7 +228,7 @@ class AnswerResourceIT {
             .jsonPath("$.[*].content")
             .value(hasItem(DEFAULT_CONTENT))
             .jsonPath("$.[*].answeredAt")
-            .value(hasItem(DEFAULT_ANSWERED_AT.toString()));
+            .value(hasItem(sameInstant(DEFAULT_ANSWERED_AT)));
     }
 
     @Test
@@ -228,7 +252,7 @@ class AnswerResourceIT {
             .jsonPath("$.content")
             .value(is(DEFAULT_CONTENT))
             .jsonPath("$.answeredAt")
-            .value(is(DEFAULT_ANSWERED_AT.toString()));
+            .value(is(sameInstant(DEFAULT_ANSWERED_AT)));
     }
 
     @Test
@@ -345,8 +369,6 @@ class AnswerResourceIT {
         // Update the answer using partial update
         Answer partialUpdatedAnswer = new Answer();
         partialUpdatedAnswer.setId(answer.getId());
-
-        partialUpdatedAnswer.content(UPDATED_CONTENT).answeredAt(UPDATED_ANSWERED_AT);
 
         webTestClient
             .patch()

@@ -16,6 +16,12 @@ import reactor.core.publisher.Mono;
 public interface ExperienceRepository extends ReactiveCrudRepository<Experience, Long>, ExperienceRepositoryInternal {
     Flux<Experience> findAllBy(Pageable pageable);
 
+    @Query("SELECT * FROM experience entity WHERE entity.company_id = :id")
+    Flux<Experience> findByCompany(Long id);
+
+    @Query("SELECT * FROM experience entity WHERE entity.company_id IS NULL")
+    Flux<Experience> findAllWhereCompanyIsNull();
+
     @Query("SELECT * FROM experience entity WHERE entity.user_profile_id = :id")
     Flux<Experience> findByUserProfile(Long id);
 

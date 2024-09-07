@@ -19,16 +19,15 @@
       },
       "id": "ID",
       "title": "Title",
-      "companyName": "Company Name",
       "workType": "Work Type",
       "contractType": "Contract Type",
-      "officeLocation": "Office Location",
       "startDate": "Start Date",
       "endDate": "End Date",
       "description": "Description",
       "createdAt": "Created At",
       "updatedAt": "Updated At",
       "deletedAt": "Deleted At",
+      "company": "Company",
       "skills": "Skills",
       "userProfile": "User Profile"
     }

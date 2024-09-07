@@ -180,6 +180,11 @@ public class CityResource {
             log.debug("REST request to get all Citys where contact is null");
             return cityService.findAllWhereContactIsNull().collectList().map(ResponseEntity::ok);
         }
+
+        if ("company-is-null".equals(filter)) {
+            log.debug("REST request to get all Citys where company is null");
+            return cityService.findAllWhereCompanyIsNull().collectList().map(ResponseEntity::ok);
+        }
         log.debug("REST request to get a page of Cities");
         return cityService
             .countAll()

@@ -8,6 +8,8 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
+import { ICompany } from 'app/shared/model/company.model';
+import { getEntities as getCompanies } from 'app/entities/company/company.reducer';
 import { IJobPosting } from 'app/shared/model/job-posting.model';
 import { JobStatus } from 'app/shared/model/enumerations/job-status.model';
 import { getEntity, updateEntity, createEntity, reset } from './job-posting.reducer';
@@ -20,6 +22,7 @@ export const JobPostingUpdate = () => {
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
 
+  const companies = useAppSelector(state => state.hr.company.entities);
   const jobPostingEntity = useAppSelector(state => state.hr.jobPosting.entity);
   const loading = useAppSelector(state => state.hr.jobPosting.loading);
   const updating = useAppSelector(state => state.hr.jobPosting.updating);
@@ -36,6 +39,8 @@ export const JobPostingUpdate = () => {
     } else {
       dispatch(getEntity(id));
     }
+
+    dispatch(getCompanies({}));
   }, []);
 
   useEffect(() => {
@@ -55,6 +60,7 @@ export const JobPostingUpdate = () => {
     const entity = {
       ...jobPostingEntity,
       ...values,
+      company: companies.find(it => it.id.toString() === values.company?.toString()),
     };
 
     if (isNew) {
@@ -75,6 +81,7 @@ export const JobPostingUpdate = () => {
           ...jobPostingEntity,
           createdDate: convertDateTimeFromServer(jobPostingEntity.createdDate),
           expireDate: convertDateTimeFromServer(jobPostingEntity.expireDate),
+          company: jobPostingEntity?.company?.id,
         };
 
   return (
@@ -123,20 +130,6 @@ export const JobPostingUpdate = () => {
                 }}
               />
               <ValidatedField
-                label={translate('hrApp.jobPosting.location')}
-                id="job-posting-location"
-                name="location"
-                data-cy="location"
-                type="text"
-              />
-              <ValidatedField
-                label={translate('hrApp.jobPosting.department')}
-                id="job-posting-department"
-                name="department"
-                data-cy="department"
-                type="text"
-              />
-              <ValidatedField
                 label={translate('hrApp.jobPosting.status')}
                 id="job-posting-status"
                 name="status"
@@ -156,6 +149,9 @@ export const JobPostingUpdate = () => {
                 data-cy="createdDate"
                 type="datetime-local"
                 placeholder="YYYY-MM-DD HH:mm"
+                validate={{
+                  required: { value: true, message: translate('entity.validation.required') },
+                }}
               />
               <ValidatedField
                 label={translate('hrApp.jobPosting.expireDate')}
@@ -165,6 +161,22 @@ export const JobPostingUpdate = () => {
                 type="datetime-local"
                 placeholder="YYYY-MM-DD HH:mm"
               />
+              <ValidatedField
+                id="job-posting-company"
+                name="company"
+                data-cy="company"
+                label={translate('hrApp.jobPosting.company')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {companies
+                  ? companies.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/job-posting" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;

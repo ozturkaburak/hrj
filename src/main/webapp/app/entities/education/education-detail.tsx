@@ -33,17 +33,23 @@ export const EducationDetail = () => {
           </dt>
           <dd>{educationEntity.id}</dd>
           <dt>
-            <span id="schoolName">
-              <Translate contentKey="hrApp.education.schoolName">School Name</Translate>
+            <span id="name">
+              <Translate contentKey="hrApp.education.name">Name</Translate>
             </span>
           </dt>
-          <dd>{educationEntity.schoolName}</dd>
+          <dd>{educationEntity.name}</dd>
           <dt>
-            <span id="department">
-              <Translate contentKey="hrApp.education.department">Department</Translate>
+            <span id="faculty">
+              <Translate contentKey="hrApp.education.faculty">Faculty</Translate>
             </span>
           </dt>
-          <dd>{educationEntity.department}</dd>
+          <dd>{educationEntity.faculty}</dd>
+          <dt>
+            <span id="level">
+              <Translate contentKey="hrApp.education.level">Level</Translate>
+            </span>
+          </dt>
+          <dd>{educationEntity.level}</dd>
           <dt>
             <span id="degree">
               <Translate contentKey="hrApp.education.degree">Degree</Translate>
@@ -56,7 +62,7 @@ export const EducationDetail = () => {
             </span>
           </dt>
           <dd>
-            {educationEntity.startDate ? <TextFormat value={educationEntity.startDate} type="date" format={APP_DATE_FORMAT} /> : null}
+            {educationEntity.startDate ? <TextFormat value={educationEntity.startDate} type="date" format={APP_LOCAL_DATE_FORMAT} /> : null}
           </dd>
           <dt>
             <span id="endDate">
@@ -64,12 +70,6 @@ export const EducationDetail = () => {
             </span>
           </dt>
           <dd>{educationEntity.endDate ? <TextFormat value={educationEntity.endDate} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
-          <dt>
-            <span id="description">
-              <Translate contentKey="hrApp.education.description">Description</Translate>
-            </span>
-          </dt>
-          <dd>{educationEntity.description}</dd>
           <dt>
             <span id="activities">
               <Translate contentKey="hrApp.education.activities">Activities</Translate>

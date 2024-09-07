@@ -13,12 +13,11 @@ public class JobPostingSqlHelper {
         columns.add(Column.aliased("id", table, columnPrefix + "_id"));
         columns.add(Column.aliased("title", table, columnPrefix + "_title"));
         columns.add(Column.aliased("description", table, columnPrefix + "_description"));
-        columns.add(Column.aliased("location", table, columnPrefix + "_location"));
-        columns.add(Column.aliased("department", table, columnPrefix + "_department"));
         columns.add(Column.aliased("status", table, columnPrefix + "_status"));
         columns.add(Column.aliased("created_date", table, columnPrefix + "_created_date"));
         columns.add(Column.aliased("expire_date", table, columnPrefix + "_expire_date"));
 
+        columns.add(Column.aliased("company_id", table, columnPrefix + "_company_id"));
         return columns;
     }
 }

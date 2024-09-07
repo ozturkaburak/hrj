@@ -3,6 +3,7 @@ package com.ab.hr.repository.rowmapper;
 import com.ab.hr.domain.Certificate;
 import io.r2dbc.spi.Row;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.function.BiFunction;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +28,8 @@ public class CertificateRowMapper implements BiFunction<Row, String, Certificate
         Certificate entity = new Certificate();
         entity.setId(converter.fromRow(row, prefix + "_id", Long.class));
         entity.setName(converter.fromRow(row, prefix + "_name", String.class));
-        entity.setStartDate(converter.fromRow(row, prefix + "_start_date", Instant.class));
-        entity.setEndDate(converter.fromRow(row, prefix + "_end_date", Instant.class));
+        entity.setStartDate(converter.fromRow(row, prefix + "_start_date", LocalDate.class));
+        entity.setEndDate(converter.fromRow(row, prefix + "_end_date", LocalDate.class));
         entity.setDescription(converter.fromRow(row, prefix + "_description", String.class));
         entity.setCreatedAt(converter.fromRow(row, prefix + "_created_at", Instant.class));
         entity.setUpdatedAt(converter.fromRow(row, prefix + "_updated_at", Instant.class));

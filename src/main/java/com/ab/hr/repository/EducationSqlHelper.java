@@ -11,12 +11,12 @@ public class EducationSqlHelper {
     public static List<Expression> getColumns(Table table, String columnPrefix) {
         List<Expression> columns = new ArrayList<>();
         columns.add(Column.aliased("id", table, columnPrefix + "_id"));
-        columns.add(Column.aliased("school_name", table, columnPrefix + "_school_name"));
-        columns.add(Column.aliased("department", table, columnPrefix + "_department"));
+        columns.add(Column.aliased("name", table, columnPrefix + "_name"));
+        columns.add(Column.aliased("faculty", table, columnPrefix + "_faculty"));
+        columns.add(Column.aliased("level", table, columnPrefix + "_level"));
         columns.add(Column.aliased("degree", table, columnPrefix + "_degree"));
         columns.add(Column.aliased("start_date", table, columnPrefix + "_start_date"));
         columns.add(Column.aliased("end_date", table, columnPrefix + "_end_date"));
-        columns.add(Column.aliased("description", table, columnPrefix + "_description"));
         columns.add(Column.aliased("activities", table, columnPrefix + "_activities"));
         columns.add(Column.aliased("clubs", table, columnPrefix + "_clubs"));
         columns.add(Column.aliased("created_at", table, columnPrefix + "_created_at"));

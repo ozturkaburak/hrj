@@ -1,5 +1,6 @@
 package com.ab.hr.domain;
 
+import static com.ab.hr.domain.AssertUtils.zonedDataTimeSameInstant;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AnswerAsserts {
@@ -48,7 +49,13 @@ public class AnswerAsserts {
         assertThat(expected)
             .as("Verify Answer relevant properties")
             .satisfies(e -> assertThat(e.getContent()).as("check content").isEqualTo(actual.getContent()))
-            .satisfies(e -> assertThat(e.getAnsweredAt()).as("check answeredAt").isEqualTo(actual.getAnsweredAt()));
+            .satisfies(
+                e ->
+                    assertThat(e.getAnsweredAt())
+                        .as("check answeredAt")
+                        .usingComparator(zonedDataTimeSameInstant)
+                        .isEqualTo(actual.getAnsweredAt())
+            );
     }
 
     /**

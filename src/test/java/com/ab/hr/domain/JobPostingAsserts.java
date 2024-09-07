@@ -49,8 +49,6 @@ public class JobPostingAsserts {
             .as("Verify JobPosting relevant properties")
             .satisfies(e -> assertThat(e.getTitle()).as("check title").isEqualTo(actual.getTitle()))
             .satisfies(e -> assertThat(e.getDescription()).as("check description").isEqualTo(actual.getDescription()))
-            .satisfies(e -> assertThat(e.getLocation()).as("check location").isEqualTo(actual.getLocation()))
-            .satisfies(e -> assertThat(e.getDepartment()).as("check department").isEqualTo(actual.getDepartment()))
             .satisfies(e -> assertThat(e.getStatus()).as("check status").isEqualTo(actual.getStatus()))
             .satisfies(e -> assertThat(e.getCreatedDate()).as("check createdDate").isEqualTo(actual.getCreatedDate()))
             .satisfies(e -> assertThat(e.getExpireDate()).as("check expireDate").isEqualTo(actual.getExpireDate()));
@@ -62,5 +60,9 @@ public class JobPostingAsserts {
      * @param expected the expected entity
      * @param actual the actual entity
      */
-    public static void assertJobPostingUpdatableRelationshipsEquals(JobPosting expected, JobPosting actual) {}
+    public static void assertJobPostingUpdatableRelationshipsEquals(JobPosting expected, JobPosting actual) {
+        assertThat(expected)
+            .as("Verify JobPosting relationships")
+            .satisfies(e -> assertThat(e.getCompany()).as("check company").isEqualTo(actual.getCompany()));
+    }
 }

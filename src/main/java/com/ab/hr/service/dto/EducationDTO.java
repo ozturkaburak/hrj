@@ -1,8 +1,10 @@
 package com.ab.hr.service.dto;
 
+import com.ab.hr.domain.enumeration.EducationLevel;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -14,18 +16,18 @@ public class EducationDTO implements Serializable {
     private Long id;
 
     @NotNull(message = "must not be null")
-    private String schoolName;
+    private String name;
 
-    private String department;
+    private String faculty;
+
+    private EducationLevel level;
 
     private String degree;
 
     @NotNull(message = "must not be null")
-    private Instant startDate;
+    private LocalDate startDate;
 
     private Instant endDate;
-
-    private String description;
 
     private String activities;
 
@@ -48,20 +50,28 @@ public class EducationDTO implements Serializable {
         this.id = id;
     }
 
-    public String getSchoolName() {
-        return schoolName;
+    public String getName() {
+        return name;
     }
 
-    public void setSchoolName(String schoolName) {
-        this.schoolName = schoolName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDepartment() {
-        return department;
+    public String getFaculty() {
+        return faculty;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
+    }
+
+    public EducationLevel getLevel() {
+        return level;
+    }
+
+    public void setLevel(EducationLevel level) {
+        this.level = level;
     }
 
     public String getDegree() {
@@ -72,11 +82,11 @@ public class EducationDTO implements Serializable {
         this.degree = degree;
     }
 
-    public Instant getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Instant startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
@@ -86,14 +96,6 @@ public class EducationDTO implements Serializable {
 
     public void setEndDate(Instant endDate) {
         this.endDate = endDate;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getActivities() {
@@ -170,12 +172,12 @@ public class EducationDTO implements Serializable {
     public String toString() {
         return "EducationDTO{" +
             "id=" + getId() +
-            ", schoolName='" + getSchoolName() + "'" +
-            ", department='" + getDepartment() + "'" +
+            ", name='" + getName() + "'" +
+            ", faculty='" + getFaculty() + "'" +
+            ", level='" + getLevel() + "'" +
             ", degree='" + getDegree() + "'" +
             ", startDate='" + getStartDate() + "'" +
             ", endDate='" + getEndDate() + "'" +
-            ", description='" + getDescription() + "'" +
             ", activities='" + getActivities() + "'" +
             ", clubs='" + getClubs() + "'" +
             ", createdAt='" + getCreatedAt() + "'" +

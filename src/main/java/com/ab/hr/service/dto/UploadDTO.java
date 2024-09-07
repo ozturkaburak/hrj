@@ -1,6 +1,7 @@
 package com.ab.hr.service.dto;
 
-import jakarta.persistence.Lob;
+import com.ab.hr.domain.enumeration.FileExtention;
+import com.ab.hr.domain.enumeration.FileType;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.Instant;
@@ -14,13 +15,14 @@ public class UploadDTO implements Serializable {
 
     private Long id;
 
-    @Lob
-    private byte[] file;
-
-    private String fileContentType;
+    @NotNull(message = "must not be null")
+    private String url;
 
     @NotNull(message = "must not be null")
-    private String fileType;
+    private FileType type;
+
+    @NotNull(message = "must not be null")
+    private FileExtention extension;
 
     @NotNull(message = "must not be null")
     private Instant uploadDate;
@@ -35,28 +37,28 @@ public class UploadDTO implements Serializable {
         this.id = id;
     }
 
-    public byte[] getFile() {
-        return file;
+    public String getUrl() {
+        return url;
     }
 
-    public void setFile(byte[] file) {
-        this.file = file;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public String getFileContentType() {
-        return fileContentType;
+    public FileType getType() {
+        return type;
     }
 
-    public void setFileContentType(String fileContentType) {
-        this.fileContentType = fileContentType;
+    public void setType(FileType type) {
+        this.type = type;
     }
 
-    public String getFileType() {
-        return fileType;
+    public FileExtention getExtension() {
+        return extension;
     }
 
-    public void setFileType(String fileType) {
-        this.fileType = fileType;
+    public void setExtension(FileExtention extension) {
+        this.extension = extension;
     }
 
     public Instant getUploadDate() {
@@ -101,8 +103,9 @@ public class UploadDTO implements Serializable {
     public String toString() {
         return "UploadDTO{" +
             "id=" + getId() +
-            ", file='" + getFile() + "'" +
-            ", fileType='" + getFileType() + "'" +
+            ", url='" + getUrl() + "'" +
+            ", type='" + getType() + "'" +
+            ", extension='" + getExtension() + "'" +
             ", uploadDate='" + getUploadDate() + "'" +
             ", userProfile=" + getUserProfile() +
             "}";

@@ -10,14 +10,25 @@
       "fieldName": "type",
       "fieldType": "AssignmentType",
       "fieldValidateRules": ["required"],
-      "fieldValues": "TECHNICAL,NONTECHNICAL"
+      "fieldValues": "TECHNICAL,NONTECHNICAL",
+      "fieldValuesJavadocs": {
+        "NONTECHNICAL": "\n     * NONTECHNICAL: Assignments that focus on non-technical skills or knowledge, such as management, communication, or writing tasks.\n",
+        "TECHNICAL": "\n     * TECHNICAL: Assignments that focus on technical skills or knowledge, such as programming or engineering tasks.\n"
+      }
     },
     {
+      "documentation": "For ROLE_USER, PAID roles should see everything",
       "fieldName": "visible",
       "fieldType": "Boolean",
       "fieldValidateRules": ["required"]
     },
     {
+      "documentation": "default value of duration. It can be overriden by Userassignemnt",
+      "fieldName": "totalDurationInMins",
+      "fieldType": "Integer"
+    },
+    {
+      "documentation": "seperated by delimeter",
       "fieldName": "hashtags",
       "fieldType": "String"
     },

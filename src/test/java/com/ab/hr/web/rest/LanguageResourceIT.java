@@ -383,7 +383,7 @@ class LanguageResourceIT {
         Language partialUpdatedLanguage = new Language();
         partialUpdatedLanguage.setId(language.getId());
 
-        partialUpdatedLanguage.name(UPDATED_NAME);
+        partialUpdatedLanguage.createdAt(UPDATED_CREATED_AT).updatedAt(UPDATED_UPDATED_AT);
 
         webTestClient
             .patch()

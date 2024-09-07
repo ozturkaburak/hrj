@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { Button, Row, Col, FormText } from 'reactstrap';
+import { Button, Row, Col, FormText, UncontrolledTooltip } from 'reactstrap';
 import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -53,6 +53,9 @@ export const AssignmentUpdate = () => {
   const saveEntity = values => {
     if (values.id !== undefined && typeof values.id !== 'number') {
       values.id = Number(values.id);
+    }
+    if (values.totalDurationInMins !== undefined && typeof values.totalDurationInMins !== 'number') {
+      values.totalDurationInMins = Number(values.totalDurationInMins);
     }
     values.createdAt = convertDateTimeToServer(values.createdAt);
     values.updatedAt = convertDateTimeToServer(values.updatedAt);
@@ -127,6 +130,19 @@ export const AssignmentUpdate = () => {
                 check
                 type="checkbox"
               />
+              <UncontrolledTooltip target="visibleLabel">
+                <Translate contentKey="hrApp.assignment.help.visible" />
+              </UncontrolledTooltip>
+              <ValidatedField
+                label={translate('hrApp.assignment.totalDurationInMins')}
+                id="assignment-totalDurationInMins"
+                name="totalDurationInMins"
+                data-cy="totalDurationInMins"
+                type="text"
+              />
+              <UncontrolledTooltip target="totalDurationInMinsLabel">
+                <Translate contentKey="hrApp.assignment.help.totalDurationInMins" />
+              </UncontrolledTooltip>
               <ValidatedField
                 label={translate('hrApp.assignment.hashtags')}
                 id="assignment-hashtags"
@@ -134,6 +150,9 @@ export const AssignmentUpdate = () => {
                 data-cy="hashtags"
                 type="text"
               />
+              <UncontrolledTooltip target="hashtagsLabel">
+                <Translate contentKey="hrApp.assignment.help.hashtags" />
+              </UncontrolledTooltip>
               <ValidatedField
                 label={translate('hrApp.assignment.createdAt')}
                 id="assignment-createdAt"

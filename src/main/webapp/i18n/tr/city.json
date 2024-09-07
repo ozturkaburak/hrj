@@ -23,7 +23,8 @@
       "updatedAt": "Updated At",
       "deletedAt": "Deleted At",
       "country": "Country",
-      "contact": "Contact"
+      "contact": "Contact",
+      "company": "Company"
     }
   }
 }

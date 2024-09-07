@@ -2,7 +2,7 @@ package com.ab.hr.domain;
 
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Column;
@@ -21,12 +21,16 @@ public class Answer implements Serializable {
     @Column("id")
     private Long id;
 
+    /**
+     * given answer by a user. It can be either multiple/signle option(s), a text or URL of a video uploaded
+     */
+    @NotNull(message = "must not be null")
     @Column("content")
     private String content;
 
     @NotNull(message = "must not be null")
     @Column("answered_at")
-    private Instant answeredAt;
+    private ZonedDateTime answeredAt;
 
     @Transient
     private Question question;
@@ -68,16 +72,16 @@ public class Answer implements Serializable {
         this.content = content;
     }
 
-    public Instant getAnsweredAt() {
+    public ZonedDateTime getAnsweredAt() {
         return this.answeredAt;
     }
 
-    public Answer answeredAt(Instant answeredAt) {
+    public Answer answeredAt(ZonedDateTime answeredAt) {
         this.setAnsweredAt(answeredAt);
         return this;
     }
 
-    public void setAnsweredAt(Instant answeredAt) {
+    public void setAnsweredAt(ZonedDateTime answeredAt) {
         this.answeredAt = answeredAt;
     }
 

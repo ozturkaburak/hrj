@@ -9,7 +9,7 @@
     {
       "fieldName": "socialMedia",
       "fieldType": "SocialMediaType",
-      "fieldValues": "INSTAGRAM,FACEBOOK,TWITTER,GITHUB,GITLAB"
+      "fieldValues": "INSTAGRAM,FACEBOOK,TWITTER,GITHUB,GITLAB,LINKEDIN,YOUTUBE,WHATSAPP,TIKTOK,DISCORD,REDDIT,MEDIUM,PINTEREST"
     },
     {
       "fieldName": "url",

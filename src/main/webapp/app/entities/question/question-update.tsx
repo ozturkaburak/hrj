@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { Button, Row, Col, FormText } from 'reactstrap';
+import { Button, Row, Col, FormText, UncontrolledTooltip } from 'reactstrap';
 import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -79,7 +79,7 @@ export const QuestionUpdate = () => {
           deletedAt: displayDefaultDateTime(),
         }
       : {
-          type: 'MULTIPLE_CHOICE',
+          type: 'SINGLE_CHOICE',
           ...questionEntity,
           createdAt: convertDateTimeFromServer(questionEntity.createdAt),
           updatedAt: convertDateTimeFromServer(questionEntity.updatedAt),
@@ -129,6 +129,9 @@ export const QuestionUpdate = () => {
                 data-cy="options"
                 type="text"
               />
+              <UncontrolledTooltip target="optionsLabel">
+                <Translate contentKey="hrApp.question.help.options" />
+              </UncontrolledTooltip>
               <ValidatedField label={translate('hrApp.question.type')} id="question-type" name="type" data-cy="type" type="select">
                 {questionTypeValues.map(questionType => (
                   <option value={questionType} key={questionType}>
@@ -143,6 +146,9 @@ export const QuestionUpdate = () => {
                 data-cy="correctAnswer"
                 type="text"
               />
+              <UncontrolledTooltip target="correctAnswerLabel">
+                <Translate contentKey="hrApp.question.help.correctAnswer" />
+              </UncontrolledTooltip>
               <ValidatedField
                 label={translate('hrApp.question.createdAt')}
                 id="question-createdAt"

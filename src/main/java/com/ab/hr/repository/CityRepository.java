@@ -25,6 +25,9 @@ public interface CityRepository extends ReactiveCrudRepository<City, Long>, City
     @Query("SELECT * FROM city entity WHERE entity.id not in (select contact_id from contact)")
     Flux<City> findAllWhereContactIsNull();
 
+    @Query("SELECT * FROM city entity WHERE entity.id not in (select company_id from company)")
+    Flux<City> findAllWhereCompanyIsNull();
+
     @Override
     <S extends City> Mono<S> save(S entity);
 

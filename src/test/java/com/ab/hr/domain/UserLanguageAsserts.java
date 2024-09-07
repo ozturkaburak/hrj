@@ -48,7 +48,6 @@ public class UserLanguageAsserts {
         assertThat(expected)
             .as("Verify UserLanguage relevant properties")
             .satisfies(e -> assertThat(e.getLevel()).as("check level").isEqualTo(actual.getLevel()))
-            .satisfies(e -> assertThat(e.getNativeLanguage()).as("check nativeLanguage").isEqualTo(actual.getNativeLanguage()))
             .satisfies(e -> assertThat(e.getCreatedAt()).as("check createdAt").isEqualTo(actual.getCreatedAt()))
             .satisfies(e -> assertThat(e.getUpdatedAt()).as("check updatedAt").isEqualTo(actual.getUpdatedAt()))
             .satisfies(e -> assertThat(e.getDeletedAt()).as("check deletedAt").isEqualTo(actual.getDeletedAt()));

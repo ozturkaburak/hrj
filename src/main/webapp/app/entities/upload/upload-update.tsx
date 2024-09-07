@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
-import { isNumber, Translate, translate, ValidatedField, ValidatedForm, ValidatedBlobField } from 'react-jhipster';
+import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -11,6 +11,8 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { IUserProfile } from 'app/shared/model/user-profile.model';
 import { getEntities as getUserProfiles } from 'app/entities/user-profile/user-profile.reducer';
 import { IUpload } from 'app/shared/model/upload.model';
+import { FileType } from 'app/shared/model/enumerations/file-type.model';
+import { FileExtention } from 'app/shared/model/enumerations/file-extention.model';
 import { getEntity, updateEntity, createEntity, reset } from './upload.reducer';
 
 export const UploadUpdate = () => {
@@ -26,6 +28,8 @@ export const UploadUpdate = () => {
   const loading = useAppSelector(state => state.hr.upload.loading);
   const updating = useAppSelector(state => state.hr.upload.updating);
   const updateSuccess = useAppSelector(state => state.hr.upload.updateSuccess);
+  const fileTypeValues = Object.keys(FileType);
+  const fileExtentionValues = Object.keys(FileExtention);
 
   const handleClose = () => {
     navigate('/upload' + location.search);
@@ -73,6 +77,8 @@ export const UploadUpdate = () => {
           uploadDate: displayDefaultDateTime(),
         }
       : {
+          type: 'CV',
+          extension: 'PDF',
           ...uploadEntity,
           uploadDate: convertDateTimeFromServer(uploadEntity.uploadDate),
           userProfile: uploadEntity?.userProfile?.id,
@@ -103,26 +109,36 @@ export const UploadUpdate = () => {
                   validate={{ required: true }}
                 />
               ) : null}
-              <ValidatedBlobField
-                label={translate('hrApp.upload.file')}
-                id="upload-file"
-                name="file"
-                data-cy="file"
-                openActionLabel={translate('entity.action.open')}
-                validate={{
-                  required: { value: true, message: translate('entity.validation.required') },
-                }}
-              />
               <ValidatedField
-                label={translate('hrApp.upload.fileType')}
-                id="upload-fileType"
-                name="fileType"
-                data-cy="fileType"
+                label={translate('hrApp.upload.url')}
+                id="upload-url"
+                name="url"
+                data-cy="url"
                 type="text"
                 validate={{
                   required: { value: true, message: translate('entity.validation.required') },
                 }}
               />
+              <ValidatedField label={translate('hrApp.upload.type')} id="upload-type" name="type" data-cy="type" type="select">
+                {fileTypeValues.map(fileType => (
+                  <option value={fileType} key={fileType}>
+                    {translate('hrApp.FileType.' + fileType)}
+                  </option>
+                ))}
+              </ValidatedField>
+              <ValidatedField
+                label={translate('hrApp.upload.extension')}
+                id="upload-extension"
+                name="extension"
+                data-cy="extension"
+                type="select"
+              >
+                {fileExtentionValues.map(fileExtention => (
+                  <option value={fileExtention} key={fileExtention}>
+                    {translate('hrApp.FileExtention.' + fileExtention)}
+                  </option>
+                ))}
+              </ValidatedField>
               <ValidatedField
                 label={translate('hrApp.upload.uploadDate')}
                 id="upload-uploadDate"

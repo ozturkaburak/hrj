@@ -7,13 +7,24 @@
   "dto": "mapstruct",
   "fields": [
     {
-      "fieldName": "schoolName",
+      "fieldName": "name",
       "fieldType": "String",
       "fieldValidateRules": ["required"]
     },
     {
-      "fieldName": "department",
+      "fieldName": "faculty",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "level",
+      "fieldType": "EducationLevel",
+      "fieldValues": "HIGH_SCHOOL,BACHELOR,MASTER,PHD",
+      "fieldValuesJavadocs": {
+        "BACHELOR": "\n     * BACHELOR: A standard undergraduate degree, typically lasting four years.\n",
+        "HIGH_SCHOOL": "\n     * HIGH_SCHOOL: Completion of secondary school education.\n",
+        "MASTER": "\n     * MASTER: A postgraduate degree requiring one to two years beyond a bachelor's.\n",
+        "PHD": "\n     * PHD: Doctor of Philosophy, the highest academic degree, usually requiring several years of research.\n"
+      }
     },
     {
       "fieldName": "degree",
@@ -21,16 +32,12 @@
     },
     {
       "fieldName": "startDate",
-      "fieldType": "Instant",
+      "fieldType": "LocalDate",
       "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "endDate",
       "fieldType": "Instant"
-    },
-    {
-      "fieldName": "description",
-      "fieldType": "String"
     },
     {
       "fieldName": "activities",

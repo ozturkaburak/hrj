@@ -48,6 +48,9 @@ class AssignmentResourceIT {
     private static final Boolean DEFAULT_VISIBLE = false;
     private static final Boolean UPDATED_VISIBLE = true;
 
+    private static final Integer DEFAULT_TOTAL_DURATION_IN_MINS = 1;
+    private static final Integer UPDATED_TOTAL_DURATION_IN_MINS = 2;
+
     private static final String DEFAULT_HASHTAGS = "AAAAAAAAAA";
     private static final String UPDATED_HASHTAGS = "BBBBBBBBBB";
 
@@ -101,6 +104,7 @@ class AssignmentResourceIT {
         Assignment assignment = new Assignment()
             .type(DEFAULT_TYPE)
             .visible(DEFAULT_VISIBLE)
+            .totalDurationInMins(DEFAULT_TOTAL_DURATION_IN_MINS)
             .hashtags(DEFAULT_HASHTAGS)
             .createdAt(DEFAULT_CREATED_AT)
             .updatedAt(DEFAULT_UPDATED_AT)
@@ -118,6 +122,7 @@ class AssignmentResourceIT {
         Assignment assignment = new Assignment()
             .type(UPDATED_TYPE)
             .visible(UPDATED_VISIBLE)
+            .totalDurationInMins(UPDATED_TOTAL_DURATION_IN_MINS)
             .hashtags(UPDATED_HASHTAGS)
             .createdAt(UPDATED_CREATED_AT)
             .updatedAt(UPDATED_UPDATED_AT)
@@ -280,6 +285,8 @@ class AssignmentResourceIT {
             .value(hasItem(DEFAULT_TYPE.toString()))
             .jsonPath("$.[*].visible")
             .value(hasItem(DEFAULT_VISIBLE.booleanValue()))
+            .jsonPath("$.[*].totalDurationInMins")
+            .value(hasItem(DEFAULT_TOTAL_DURATION_IN_MINS))
             .jsonPath("$.[*].hashtags")
             .value(hasItem(DEFAULT_HASHTAGS))
             .jsonPath("$.[*].createdAt")
@@ -329,6 +336,8 @@ class AssignmentResourceIT {
             .value(is(DEFAULT_TYPE.toString()))
             .jsonPath("$.visible")
             .value(is(DEFAULT_VISIBLE.booleanValue()))
+            .jsonPath("$.totalDurationInMins")
+            .value(is(DEFAULT_TOTAL_DURATION_IN_MINS))
             .jsonPath("$.hashtags")
             .value(is(DEFAULT_HASHTAGS))
             .jsonPath("$.createdAt")
@@ -363,6 +372,7 @@ class AssignmentResourceIT {
         updatedAssignment
             .type(UPDATED_TYPE)
             .visible(UPDATED_VISIBLE)
+            .totalDurationInMins(UPDATED_TOTAL_DURATION_IN_MINS)
             .hashtags(UPDATED_HASHTAGS)
             .createdAt(UPDATED_CREATED_AT)
             .updatedAt(UPDATED_UPDATED_AT)
@@ -460,7 +470,10 @@ class AssignmentResourceIT {
         Assignment partialUpdatedAssignment = new Assignment();
         partialUpdatedAssignment.setId(assignment.getId());
 
-        partialUpdatedAssignment.type(UPDATED_TYPE).visible(UPDATED_VISIBLE).createdAt(UPDATED_CREATED_AT).deletedAt(UPDATED_DELETED_AT);
+        partialUpdatedAssignment
+            .totalDurationInMins(UPDATED_TOTAL_DURATION_IN_MINS)
+            .createdAt(UPDATED_CREATED_AT)
+            .updatedAt(UPDATED_UPDATED_AT);
 
         webTestClient
             .patch()
@@ -494,6 +507,7 @@ class AssignmentResourceIT {
         partialUpdatedAssignment
             .type(UPDATED_TYPE)
             .visible(UPDATED_VISIBLE)
+            .totalDurationInMins(UPDATED_TOTAL_DURATION_IN_MINS)
             .hashtags(UPDATED_HASHTAGS)
             .createdAt(UPDATED_CREATED_AT)
             .updatedAt(UPDATED_UPDATED_AT)

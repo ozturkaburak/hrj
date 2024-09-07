@@ -1,8 +1,10 @@
 package com.ab.hr.repository.rowmapper;
 
 import com.ab.hr.domain.Education;
+import com.ab.hr.domain.enumeration.EducationLevel;
 import io.r2dbc.spi.Row;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.function.BiFunction;
 import org.springframework.stereotype.Service;
 
@@ -26,12 +28,12 @@ public class EducationRowMapper implements BiFunction<Row, String, Education> {
     public Education apply(Row row, String prefix) {
         Education entity = new Education();
         entity.setId(converter.fromRow(row, prefix + "_id", Long.class));
-        entity.setSchoolName(converter.fromRow(row, prefix + "_school_name", String.class));
-        entity.setDepartment(converter.fromRow(row, prefix + "_department", String.class));
+        entity.setName(converter.fromRow(row, prefix + "_name", String.class));
+        entity.setFaculty(converter.fromRow(row, prefix + "_faculty", String.class));
+        entity.setLevel(converter.fromRow(row, prefix + "_level", EducationLevel.class));
         entity.setDegree(converter.fromRow(row, prefix + "_degree", String.class));
-        entity.setStartDate(converter.fromRow(row, prefix + "_start_date", Instant.class));
+        entity.setStartDate(converter.fromRow(row, prefix + "_start_date", LocalDate.class));
         entity.setEndDate(converter.fromRow(row, prefix + "_end_date", Instant.class));
-        entity.setDescription(converter.fromRow(row, prefix + "_description", String.class));
         entity.setActivities(converter.fromRow(row, prefix + "_activities", String.class));
         entity.setClubs(converter.fromRow(row, prefix + "_clubs", String.class));
         entity.setCreatedAt(converter.fromRow(row, prefix + "_created_at", Instant.class));

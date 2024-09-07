@@ -118,10 +118,6 @@ export const UserLanguage = () => {
                   <Translate contentKey="hrApp.userLanguage.level">Level</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('level')} />
                 </th>
-                <th className="hand" onClick={sort('nativeLanguage')}>
-                  <Translate contentKey="hrApp.userLanguage.nativeLanguage">Native Language</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('nativeLanguage')} />
-                </th>
                 <th className="hand" onClick={sort('createdAt')}>
                   <Translate contentKey="hrApp.userLanguage.createdAt">Created At</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('createdAt')} />
@@ -154,7 +150,6 @@ export const UserLanguage = () => {
                   <td>
                     <Translate contentKey={`hrApp.LanguageLevel.${userLanguage.level}`} />
                   </td>
-                  <td>{userLanguage.nativeLanguage ? 'true' : 'false'}</td>
                   <td>
                     {userLanguage.createdAt ? <TextFormat type="date" value={userLanguage.createdAt} format={APP_DATE_FORMAT} /> : null}
                   </td>

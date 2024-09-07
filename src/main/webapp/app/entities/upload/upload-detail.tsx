@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
-import { Translate, openFile, byteSize, TextFormat } from 'react-jhipster';
+import { Translate, TextFormat } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
@@ -33,30 +33,23 @@ export const UploadDetail = () => {
           </dt>
           <dd>{uploadEntity.id}</dd>
           <dt>
-            <span id="file">
-              <Translate contentKey="hrApp.upload.file">File</Translate>
+            <span id="url">
+              <Translate contentKey="hrApp.upload.url">Url</Translate>
             </span>
           </dt>
-          <dd>
-            {uploadEntity.file ? (
-              <div>
-                {uploadEntity.fileContentType ? (
-                  <a onClick={openFile(uploadEntity.fileContentType, uploadEntity.file)}>
-                    <Translate contentKey="entity.action.open">Open</Translate>&nbsp;
-                  </a>
-                ) : null}
-                <span>
-                  {uploadEntity.fileContentType}, {byteSize(uploadEntity.file)}
-                </span>
-              </div>
-            ) : null}
-          </dd>
+          <dd>{uploadEntity.url}</dd>
           <dt>
-            <span id="fileType">
-              <Translate contentKey="hrApp.upload.fileType">File Type</Translate>
+            <span id="type">
+              <Translate contentKey="hrApp.upload.type">Type</Translate>
             </span>
           </dt>
-          <dd>{uploadEntity.fileType}</dd>
+          <dd>{uploadEntity.type}</dd>
+          <dt>
+            <span id="extension">
+              <Translate contentKey="hrApp.upload.extension">Extension</Translate>
+            </span>
+          </dt>
+          <dd>{uploadEntity.extension}</dd>
           <dt>
             <span id="uploadDate">
               <Translate contentKey="hrApp.upload.uploadDate">Upload Date</Translate>

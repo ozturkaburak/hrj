@@ -1,6 +1,7 @@
 package com.ab.hr.service.dto;
 
 import com.ab.hr.domain.enumeration.AssignmentType;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.Instant;
@@ -20,8 +21,13 @@ public class AssignmentDTO implements Serializable {
     private AssignmentType type;
 
     @NotNull(message = "must not be null")
+    @Schema(description = "For ROLE_USER, PAID roles should see everything", requiredMode = Schema.RequiredMode.REQUIRED)
     private Boolean visible;
 
+    @Schema(description = "default value of duration. It can be overriden by Userassignemnt")
+    private Integer totalDurationInMins;
+
+    @Schema(description = "seperated by delimeter")
     private String hashtags;
 
     @NotNull(message = "must not be null")
@@ -55,6 +61,14 @@ public class AssignmentDTO implements Serializable {
 
     public void setVisible(Boolean visible) {
         this.visible = visible;
+    }
+
+    public Integer getTotalDurationInMins() {
+        return totalDurationInMins;
+    }
+
+    public void setTotalDurationInMins(Integer totalDurationInMins) {
+        this.totalDurationInMins = totalDurationInMins;
     }
 
     public String getHashtags() {
@@ -125,6 +139,7 @@ public class AssignmentDTO implements Serializable {
             "id=" + getId() +
             ", type='" + getType() + "'" +
             ", visible='" + getVisible() + "'" +
+            ", totalDurationInMins=" + getTotalDurationInMins() +
             ", hashtags='" + getHashtags() + "'" +
             ", createdAt='" + getCreatedAt() + "'" +
             ", updatedAt='" + getUpdatedAt() + "'" +

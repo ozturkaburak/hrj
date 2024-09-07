@@ -4,7 +4,7 @@ import { IUser } from 'app/shared/model/user.model';
 
 export interface IAnswer {
   id?: number;
-  content?: string | null;
+  content?: string;
   answeredAt?: dayjs.Dayjs;
   question?: IQuestion | null;
   user?: IUser | null;

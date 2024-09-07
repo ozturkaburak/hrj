@@ -47,9 +47,9 @@ public class UploadAsserts {
     public static void assertUploadUpdatableFieldsEquals(Upload expected, Upload actual) {
         assertThat(expected)
             .as("Verify Upload relevant properties")
-            .satisfies(e -> assertThat(e.getFile()).as("check file").isEqualTo(actual.getFile()))
-            .satisfies(e -> assertThat(e.getFileContentType()).as("check file contenty type").isEqualTo(actual.getFileContentType()))
-            .satisfies(e -> assertThat(e.getFileType()).as("check fileType").isEqualTo(actual.getFileType()))
+            .satisfies(e -> assertThat(e.getUrl()).as("check url").isEqualTo(actual.getUrl()))
+            .satisfies(e -> assertThat(e.getType()).as("check type").isEqualTo(actual.getType()))
+            .satisfies(e -> assertThat(e.getExtension()).as("check extension").isEqualTo(actual.getExtension()))
             .satisfies(e -> assertThat(e.getUploadDate()).as("check uploadDate").isEqualTo(actual.getUploadDate()));
     }
 

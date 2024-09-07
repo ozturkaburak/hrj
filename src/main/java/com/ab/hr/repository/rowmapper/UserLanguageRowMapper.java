@@ -28,7 +28,6 @@ public class UserLanguageRowMapper implements BiFunction<Row, String, UserLangua
         UserLanguage entity = new UserLanguage();
         entity.setId(converter.fromRow(row, prefix + "_id", Long.class));
         entity.setLevel(converter.fromRow(row, prefix + "_level", LanguageLevel.class));
-        entity.setNativeLanguage(converter.fromRow(row, prefix + "_native_language", Boolean.class));
         entity.setCreatedAt(converter.fromRow(row, prefix + "_created_at", Instant.class));
         entity.setUpdatedAt(converter.fromRow(row, prefix + "_updated_at", Instant.class));
         entity.setDeletedAt(converter.fromRow(row, prefix + "_deleted_at", Instant.class));

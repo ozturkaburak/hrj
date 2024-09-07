@@ -118,10 +118,6 @@ export const Experience = () => {
                   <Translate contentKey="hrApp.experience.title">Title</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('title')} />
                 </th>
-                <th className="hand" onClick={sort('companyName')}>
-                  <Translate contentKey="hrApp.experience.companyName">Company Name</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('companyName')} />
-                </th>
                 <th className="hand" onClick={sort('workType')}>
                   <Translate contentKey="hrApp.experience.workType">Work Type</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('workType')} />
@@ -129,10 +125,6 @@ export const Experience = () => {
                 <th className="hand" onClick={sort('contractType')}>
                   <Translate contentKey="hrApp.experience.contractType">Contract Type</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('contractType')} />
-                </th>
-                <th className="hand" onClick={sort('officeLocation')}>
-                  <Translate contentKey="hrApp.experience.officeLocation">Office Location</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('officeLocation')} />
                 </th>
                 <th className="hand" onClick={sort('startDate')}>
                   <Translate contentKey="hrApp.experience.startDate">Start Date</Translate>{' '}
@@ -159,6 +151,9 @@ export const Experience = () => {
                   <FontAwesomeIcon icon={getSortIconByFieldName('deletedAt')} />
                 </th>
                 <th>
+                  <Translate contentKey="hrApp.experience.company">Company</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
                   <Translate contentKey="hrApp.experience.userProfile">User Profile</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
@@ -173,20 +168,23 @@ export const Experience = () => {
                     </Button>
                   </td>
                   <td>{experience.title}</td>
-                  <td>{experience.companyName}</td>
                   <td>
                     <Translate contentKey={`hrApp.WorkType.${experience.workType}`} />
                   </td>
                   <td>
                     <Translate contentKey={`hrApp.ContractType.${experience.contractType}`} />
                   </td>
-                  <td>{experience.officeLocation}</td>
-                  <td>{experience.startDate ? <TextFormat type="date" value={experience.startDate} format={APP_DATE_FORMAT} /> : null}</td>
-                  <td>{experience.endDate ? <TextFormat type="date" value={experience.endDate} format={APP_DATE_FORMAT} /> : null}</td>
+                  <td>
+                    {experience.startDate ? <TextFormat type="date" value={experience.startDate} format={APP_LOCAL_DATE_FORMAT} /> : null}
+                  </td>
+                  <td>
+                    {experience.endDate ? <TextFormat type="date" value={experience.endDate} format={APP_LOCAL_DATE_FORMAT} /> : null}
+                  </td>
                   <td>{experience.description}</td>
                   <td>{experience.createdAt ? <TextFormat type="date" value={experience.createdAt} format={APP_DATE_FORMAT} /> : null}</td>
                   <td>{experience.updatedAt ? <TextFormat type="date" value={experience.updatedAt} format={APP_DATE_FORMAT} /> : null}</td>
                   <td>{experience.deletedAt ? <TextFormat type="date" value={experience.deletedAt} format={APP_DATE_FORMAT} /> : null}</td>
+                  <td>{experience.company ? <Link to={`/company/${experience.company.id}`}>{experience.company.id}</Link> : ''}</td>
                   <td>
                     {experience.userProfile ? (
                       <Link to={`/user-profile/${experience.userProfile.id}`}>{experience.userProfile.id}</Link>
